@@ -135,7 +135,7 @@ public class FrCadGravida extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(102, 102, 255));
 
-        jButton5.setText("SALVAR");
+        jButton5.setText("CRIAR");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);

@@ -97,15 +97,15 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnCriarAtendente" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton6" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnEditarAtendente" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton9" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnApagarAtendente" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnSalvarAtendente" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="btnLimparAtendente" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -115,11 +115,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton7" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton9" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCriarAtendente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnEditarAtendente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnApagarAtendente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnSalvarAtendente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnLimparAtendente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="20" max="32767" attributes="0"/>
                   </Group>
@@ -127,30 +127,30 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButton5">
+            <Component class="javax.swing.JButton" name="btnCriarAtendente">
               <Properties>
-                <Property name="text" type="java.lang.String" value="SALVAR"/>
+                <Property name="text" type="java.lang.String" value="CRIAR"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCriarAtendenteActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton6">
+            <Component class="javax.swing.JButton" name="btnEditarAtendente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="EDITAR"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton7">
+            <Component class="javax.swing.JButton" name="btnApagarAtendente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="APAGAR"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton8">
+            <Component class="javax.swing.JButton" name="btnSalvarAtendente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="SALVAR"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton9">
+            <Component class="javax.swing.JButton" name="btnLimparAtendente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="LIMPAR"/>
               </Properties>
@@ -182,7 +182,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                      <Component id="jTextField1" min="-2" pref="153" max="-2" attributes="0"/>
+                      <Component id="txtTurnoDeTrabalho" min="-2" pref="153" max="-2" attributes="0"/>
                       <EmptySpace pref="51" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -193,7 +193,7 @@
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTurnoDeTrabalho" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -206,7 +206,7 @@
                 <Property name="text" type="java.lang.String" value="TURNO DE TRABALHO:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="txtTurnoDeTrabalho">
             </Component>
           </SubComponents>
         </Container>

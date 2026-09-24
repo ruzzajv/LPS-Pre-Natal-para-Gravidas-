@@ -30,7 +30,7 @@ public class FrCadGerente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        checkAcessoTotal = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,10 +43,10 @@ public class FrCadGerente extends javax.swing.JFrame {
 
         jLabel2.setText("DEFINIR PERMISSOES");
 
-        jCheckBox1.setText("ACESSO TOTAL ");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        checkAcessoTotal.setText("ACESSO TOTAL ");
+        checkAcessoTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                checkAcessoTotalActionPerformed(evt);
             }
         });
 
@@ -58,7 +58,7 @@ public class FrCadGerente extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(91, 91, 91)
-                .addComponent(jCheckBox1)
+                .addComponent(checkAcessoTotal)
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -66,7 +66,7 @@ public class FrCadGerente extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
+                    .addComponent(checkAcessoTotal)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
@@ -111,9 +111,9 @@ public class FrCadGerente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void checkAcessoTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAcessoTotalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_checkAcessoTotalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,7 +151,7 @@ public class FrCadGerente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox checkAcessoTotal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
