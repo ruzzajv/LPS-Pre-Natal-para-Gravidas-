@@ -31,7 +31,7 @@ public class FrComunidade extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        VerComunidade = new javax.swing.JTextPane();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -41,7 +41,7 @@ public class FrComunidade extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
-        jScrollPane3.setViewportView(jTextPane1);
+        jScrollPane3.setViewportView(VerComunidade);
 
         jLabel5.setFont(new java.awt.Font("Noto Sans", 3, 14)); // NOI18N
         jLabel5.setText("VEJA O QUE NOSSOS MEDICOS TEM DE DICAS SOBRE GRAVIDEZ");
@@ -131,12 +131,12 @@ public class FrComunidade extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextPane VerComunidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }

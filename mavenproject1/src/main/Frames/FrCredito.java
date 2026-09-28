@@ -31,18 +31,18 @@ public class FrPix extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
-        jCheckBox9 = new javax.swing.JCheckBox();
-        jCheckBox10 = new javax.swing.JCheckBox();
+        txtValor = new javax.swing.JTextField();
+        BtnEnviar = new javax.swing.JButton();
+        CheckBox1 = new javax.swing.JCheckBox();
+        CheckBox2 = new javax.swing.JCheckBox();
+        CheckBox3 = new javax.swing.JCheckBox();
+        CheckBox4 = new javax.swing.JCheckBox();
+        CheckBox5 = new javax.swing.JCheckBox();
+        CheckBox6 = new javax.swing.JCheckBox();
+        CheckBox7 = new javax.swing.JCheckBox();
+        CheckBox8 = new javax.swing.JCheckBox();
+        CheckBox9 = new javax.swing.JCheckBox();
+        CheckBox10 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,31 +55,32 @@ public class FrPix extends javax.swing.JFrame {
 
         jLabel2.setText("INSIRA O VALOR: ");
 
-        jTextField1.addActionListener();
+        txtValor.addActionListener(this::txtValorActionPerformed);
 
-        jButton1.setText("Enviar");
-        jButton1.addActionListener();
+        BtnEnviar.setText("ENVIAR");
+        BtnEnviar.addActionListener(this::BtnEnviarActionPerformed);
 
-        jCheckBox1.setText("1 VEZ");
-        jCheckBox1.addActionListener();
+        CheckBox1.setText("1 VEZ");
+        CheckBox1.addActionListener(this::CheckBox1ActionPerformed);
 
-        jCheckBox2.setText("2 VEZES");
+        CheckBox2.setText("2 VEZES");
+        CheckBox2.addActionListener(this::CheckBox2ActionPerformed);
 
-        jCheckBox3.setText("3 VEZES");
+        CheckBox3.setText("3 VEZES");
 
-        jCheckBox4.setText("4 VEZES");
+        CheckBox4.setText("4 VEZES");
 
-        jCheckBox5.setText("5 VEZES");
+        CheckBox5.setText("5 VEZES");
 
-        jCheckBox6.setText("6 VEZES");
+        CheckBox6.setText("6 VEZES");
 
-        jCheckBox7.setText("7 VEZES");
+        CheckBox7.setText("7 VEZES");
 
-        jCheckBox8.setText("8 VEZES");
+        CheckBox8.setText("8 VEZES");
 
-        jCheckBox9.setText("9 VEZES");
+        CheckBox9.setText("9 VEZES");
 
-        jCheckBox10.setText("10 VEZES");
+        CheckBox10.setText("10 VEZES");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -90,24 +91,24 @@ public class FrPix extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox10)
-                            .addComponent(jCheckBox9)
+                            .addComponent(CheckBox10)
+                            .addComponent(CheckBox9)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel2)
-                                    .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox3, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox4, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox5, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox6, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox7, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox8, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(CheckBox1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CheckBox2, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CheckBox3, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CheckBox4, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CheckBox5, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CheckBox6, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CheckBox7, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CheckBox8, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(62, 62, 62)
-                        .addComponent(jButton1)))
+                        .addComponent(BtnEnviar)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -116,29 +117,29 @@ public class FrPix extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
-                .addComponent(jCheckBox1)
+                .addComponent(CheckBox1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox2)
+                .addComponent(CheckBox2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox3)
+                .addComponent(CheckBox3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox4)
+                .addComponent(CheckBox4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox5)
+                .addComponent(CheckBox5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox6)
+                .addComponent(CheckBox6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox7)
+                .addComponent(CheckBox7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox8)
+                .addComponent(CheckBox8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox9)
+                .addComponent(CheckBox9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox10)
+                .addComponent(CheckBox10)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(BtnEnviar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -179,17 +180,21 @@ public class FrPix extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtValorActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BtnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEnviarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BtnEnviarActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void CheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBox1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_CheckBox1ActionPerformed
+
+    private void CheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CheckBox2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,21 +222,21 @@ public class FrPix extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox10;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
+    private javax.swing.JButton BtnEnviar;
+    private javax.swing.JCheckBox CheckBox1;
+    private javax.swing.JCheckBox CheckBox10;
+    private javax.swing.JCheckBox CheckBox2;
+    private javax.swing.JCheckBox CheckBox3;
+    private javax.swing.JCheckBox CheckBox4;
+    private javax.swing.JCheckBox CheckBox5;
+    private javax.swing.JCheckBox CheckBox6;
+    private javax.swing.JCheckBox CheckBox7;
+    private javax.swing.JCheckBox CheckBox8;
+    private javax.swing.JCheckBox CheckBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }

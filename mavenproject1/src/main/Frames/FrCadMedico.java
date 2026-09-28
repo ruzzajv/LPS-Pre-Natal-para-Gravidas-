@@ -29,17 +29,17 @@ public class FrCadMedico extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        btnCriarMedico = new javax.swing.JButton();
+        btnEditarMedico = new javax.swing.JButton();
+        btnApagarMedico = new javax.swing.JButton();
+        btnSalvarMedico = new javax.swing.JButton();
+        btnLimparMedico = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtCRM = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtEspecialidade = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,16 +47,16 @@ public class FrCadMedico extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(102, 102, 255));
 
-        jButton5.setText("SALVAR");
-        jButton5.addActionListener(this::jButton5ActionPerformed);
+        btnCriarMedico.setText("CRIAR");
+        btnCriarMedico.addActionListener(this::btnCriarMedicoActionPerformed);
 
-        jButton6.setText("EDITAR");
+        btnEditarMedico.setText("EDITAR");
 
-        jButton7.setText("APAGAR");
+        btnApagarMedico.setText("APAGAR");
 
-        jButton8.setText("SALVAR");
+        btnSalvarMedico.setText("SALVAR");
 
-        jButton9.setText("LIMPAR");
+        btnLimparMedico.setText("LIMPAR");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -64,15 +64,15 @@ public class FrCadMedico extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addComponent(btnCriarMedico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
+                .addComponent(btnEditarMedico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton7)
+                .addComponent(btnApagarMedico)
                 .addGap(18, 18, 18)
-                .addComponent(jButton8)
+                .addComponent(btnSalvarMedico)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton9)
+                .addComponent(btnLimparMedico)
                 .addGap(100, 100, 100))
         );
         jPanel4Layout.setVerticalGroup(
@@ -80,11 +80,11 @@ public class FrCadMedico extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9))
+                    .addComponent(btnCriarMedico)
+                    .addComponent(btnEditarMedico)
+                    .addComponent(btnApagarMedico)
+                    .addComponent(btnSalvarMedico)
+                    .addComponent(btnLimparMedico))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -109,8 +109,8 @@ public class FrCadMedico extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
+                    .addComponent(txtCRM)
+                    .addComponent(txtEspecialidade, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -119,11 +119,11 @@ public class FrCadMedico extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCRM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEspecialidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -171,9 +171,9 @@ public class FrCadMedico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnCriarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarMedicoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnCriarMedicoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,18 +201,18 @@ public class FrCadMedico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton btnApagarMedico;
+    private javax.swing.JButton btnCriarMedico;
+    private javax.swing.JButton btnEditarMedico;
+    private javax.swing.JButton btnLimparMedico;
+    private javax.swing.JButton btnSalvarMedico;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtCRM;
+    private javax.swing.JTextField txtEspecialidade;
     // End of variables declaration//GEN-END:variables
 }

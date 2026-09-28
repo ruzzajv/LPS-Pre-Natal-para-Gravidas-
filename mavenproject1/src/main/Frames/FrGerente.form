@@ -87,9 +87,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButton2" max="32767" attributes="0"/>
-                          <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButton3" max="32767" attributes="0"/>
+                          <Component id="btnCadastrarAtendente" max="32767" attributes="0"/>
+                          <Component id="btnCadastrarMedico" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnVizualizarExtrato" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="81" max="32767" attributes="0"/>
                   </Group>
@@ -99,28 +99,28 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnCadastrarMedico" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnCadastrarAtendente" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnVizualizarExtrato" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="70" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="btnCadastrarMedico">
               <Properties>
                 <Property name="text" type="java.lang.String" value="CADASTRAR MEDICO"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton2">
+            <Component class="javax.swing.JButton" name="btnCadastrarAtendente">
               <Properties>
                 <Property name="text" type="java.lang.String" value="CADASTRAR ATENDENTE"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton3">
+            <Component class="javax.swing.JButton" name="btnVizualizarExtrato">
               <Properties>
                 <Property name="text" type="java.lang.String" value="VIZUALIZAR EXTRATO"/>
               </Properties>

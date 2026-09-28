@@ -31,8 +31,8 @@ public class FrComunidade extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnEntrarNaAbaDeInformacoes = new javax.swing.JButton();
+        btnEntrarNoForumDeApoioDasGestante = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,9 +44,9 @@ public class FrComunidade extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Bitstream Charter", 3, 18)); // NOI18N
         jLabel2.setText("ESCOLHA UMA AÇÃO");
 
-        jButton1.setText("ENTRAR NA ABA DE INFORMAÇOES ");
+        btnEntrarNaAbaDeInformacoes.setText("ENTRAR NA ABA DE INFORMAÇOES ");
 
-        jButton2.setText("ENTRAR NO FORUM DE APOIO DAS GESTANTES");
+        btnEntrarNoForumDeApoioDasGestante.setText("ENTRAR NO FORUM DE APOIO DAS GESTANTES");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -57,8 +57,8 @@ public class FrComunidade extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)))
+                            .addComponent(btnEntrarNaAbaDeInformacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEntrarNoForumDeApoioDasGestante, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(136, 136, 136)
                         .addComponent(jLabel2))
@@ -75,9 +75,9 @@ public class FrComunidade extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addComponent(jLabel2)
                 .addGap(31, 31, 31)
-                .addComponent(jButton1)
+                .addComponent(btnEntrarNaAbaDeInformacoes)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEntrarNoForumDeApoioDasGestante, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(68, Short.MAX_VALUE))
         );
 
@@ -132,8 +132,8 @@ public class FrComunidade extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnEntrarNaAbaDeInformacoes;
+    private javax.swing.JButton btnEntrarNoForumDeApoioDasGestante;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

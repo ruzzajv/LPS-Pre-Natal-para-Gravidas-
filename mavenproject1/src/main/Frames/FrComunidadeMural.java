@@ -30,20 +30,20 @@ public class FrComunidade extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnCriarMural = new javax.swing.JButton();
+        BtnEditarMural = new javax.swing.JButton();
+        btnApagarMural = new javax.swing.JButton();
+        BtnSalvarMural = new javax.swing.JButton();
+        btnLimparMural = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTitulo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        TxtTextoMural = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtTema = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        painelMural = new javax.swing.JTextPane();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -53,28 +53,28 @@ public class FrComunidade extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
-        jButton1.setText("CRIAR ");
+        btnCriarMural.setText("CRIAR ");
 
-        jButton2.setText("EDITAR");
+        BtnEditarMural.setText("EDITAR");
 
-        jButton3.setText("APAGAR");
-        jButton3.addActionListener();
+        btnApagarMural.setText("APAGAR");
+        btnApagarMural.addActionListener(this::btnApagarMuralActionPerformed);
 
-        jButton4.setText("SALVAR");
+        BtnSalvarMural.setText("SALVAR");
 
-        jButton5.setText("LIMPAR");
+        btnLimparMural.setText("LIMPAR");
 
         jLabel2.setText("TITULO:");
 
         jLabel3.setText("TEXTO:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        TxtTextoMural.setColumns(20);
+        TxtTextoMural.setRows(5);
+        jScrollPane1.setViewportView(TxtTextoMural);
 
         jLabel4.setText("TEMA:");
 
-        jScrollPane3.setViewportView(jTextPane1);
+        jScrollPane3.setViewportView(painelMural);
 
         jLabel5.setFont(new java.awt.Font("Noto Sans", 3, 14)); // NOI18N
         jLabel5.setText("COMPARTILHE SUAS EXPERIENCIAS DA GRAVIDEZ ");
@@ -93,22 +93,22 @@ public class FrComunidade extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1))
+                                .addComponent(txtTitulo))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField2))
+                                .addComponent(txtTema))
                             .addComponent(jScrollPane1)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btnCriarMural)
                                 .addGap(26, 26, 26)
-                                .addComponent(jButton2)
+                                .addComponent(BtnEditarMural)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton3)
+                                .addComponent(btnApagarMural)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                                .addComponent(jButton4)
+                                .addComponent(BtnSalvarMural)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton5))))
+                                .addComponent(btnLimparMural))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(98, 98, 98)
                         .addComponent(jLabel5)))
@@ -121,19 +121,19 @@ public class FrComunidade extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(btnCriarMural)
+                    .addComponent(BtnEditarMural)
+                    .addComponent(btnApagarMural)
+                    .addComponent(BtnSalvarMural)
+                    .addComponent(btnLimparMural))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -186,9 +186,9 @@ public class FrComunidade extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnApagarMuralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarMuralActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnApagarMuralActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,11 +216,12 @@ public class FrComunidade extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton BtnEditarMural;
+    private javax.swing.JButton BtnSalvarMural;
+    private javax.swing.JTextArea TxtTextoMural;
+    private javax.swing.JButton btnApagarMural;
+    private javax.swing.JButton btnCriarMural;
+    private javax.swing.JButton btnLimparMural;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -231,9 +232,8 @@ public class FrComunidade extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextPane painelMural;
+    private javax.swing.JTextField txtTema;
+    private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }

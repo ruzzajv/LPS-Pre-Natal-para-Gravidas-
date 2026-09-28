@@ -30,20 +30,20 @@ public class FrComunidade extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnCiarPost = new javax.swing.JButton();
+        BtnEditarPost = new javax.swing.JButton();
+        BtnApagarPost = new javax.swing.JButton();
+        btnSalvarPost = new javax.swing.JButton();
+        btnLimparPost = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTitulo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtTextoPost = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtTema = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        painelDePosts = new javax.swing.JTextPane();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -53,28 +53,28 @@ public class FrComunidade extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
-        jButton1.setText("CRIAR ");
+        btnCiarPost.setText("CRIAR");
 
-        jButton2.setText("EDITAR");
+        BtnEditarPost.setText("EDITAR");
 
-        jButton3.setText("APAGAR");
-        jButton3.addActionListener();
+        BtnApagarPost.setText("APAGAR");
+        BtnApagarPost.addActionListener(this::BtnApagarPostActionPerformed);
 
-        jButton4.setText("SALVAR");
+        btnSalvarPost.setText("SALVAR");
 
-        jButton5.setText("LIMPAR");
+        btnLimparPost.setText("LIMPAR");
 
         jLabel2.setText("TITULO:");
 
         jLabel3.setText("TEXTO:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtTextoPost.setColumns(20);
+        txtTextoPost.setRows(5);
+        jScrollPane1.setViewportView(txtTextoPost);
 
         jLabel4.setText("TEMA:");
 
-        jScrollPane3.setViewportView(jTextPane1);
+        jScrollPane3.setViewportView(painelDePosts);
 
         jLabel5.setFont(new java.awt.Font("Noto Sans", 3, 14)); // NOI18N
         jLabel5.setText("VEJA NOSSAS INFORMAÇOES UTEIS SOBRE GRAVIDEZ");
@@ -93,22 +93,22 @@ public class FrComunidade extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1))
+                                .addComponent(txtTitulo))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField2))
+                                .addComponent(txtTema))
                             .addComponent(jScrollPane1)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btnCiarPost)
                                 .addGap(26, 26, 26)
-                                .addComponent(jButton2)
+                                .addComponent(BtnEditarPost)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton3)
+                                .addComponent(BtnApagarPost)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                                .addComponent(jButton4)
+                                .addComponent(btnSalvarPost)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton5))))
+                                .addComponent(btnLimparPost))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(82, 82, 82)
                         .addComponent(jLabel5)))
@@ -121,19 +121,19 @@ public class FrComunidade extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(btnCiarPost)
+                    .addComponent(BtnEditarPost)
+                    .addComponent(BtnApagarPost)
+                    .addComponent(btnSalvarPost)
+                    .addComponent(btnLimparPost))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -184,9 +184,9 @@ public class FrComunidade extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void BtnApagarPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnApagarPostActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_BtnApagarPostActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,11 +214,11 @@ public class FrComunidade extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton BtnApagarPost;
+    private javax.swing.JButton BtnEditarPost;
+    private javax.swing.JButton btnCiarPost;
+    private javax.swing.JButton btnLimparPost;
+    private javax.swing.JButton btnSalvarPost;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -229,9 +229,9 @@ public class FrComunidade extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextPane painelDePosts;
+    private javax.swing.JTextField txtTema;
+    private javax.swing.JTextArea txtTextoPost;
+    private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }

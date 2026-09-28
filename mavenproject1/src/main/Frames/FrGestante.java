@@ -29,8 +29,8 @@ public class FrGerente extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnEntrarComunidade = new javax.swing.JButton();
+        btnMarcarConsulta = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -39,10 +39,10 @@ public class FrGerente extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 255));
 
-        jButton1.setText("ENTRAR NA COMUNIDADE");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        btnEntrarComunidade.setText("ENTRAR NA COMUNIDADE");
+        btnEntrarComunidade.addActionListener(this::btnEntrarComunidadeActionPerformed);
 
-        jButton2.setText("MARCAR CONSULTA");
+        btnMarcarConsulta.setText("MARCAR CONSULTA");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -51,17 +51,17 @@ public class FrGerente extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnMarcarConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEntrarComunidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(jButton1)
+                .addComponent(btnEntrarComunidade)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btnMarcarConsulta)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -108,9 +108,9 @@ public class FrGerente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnEntrarComunidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarComunidadeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnEntrarComunidadeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,8 +138,8 @@ public class FrGerente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnEntrarComunidade;
+    private javax.swing.JButton btnMarcarConsulta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
