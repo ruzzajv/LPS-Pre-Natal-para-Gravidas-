@@ -1,3 +1,7 @@
+package views;
+
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -7,14 +11,15 @@
  *
  * @author CAMPUSRP-LAB\09816655608
  */
-public class FrCadMedico extends javax.swing.JFrame {
+public class FrCadAtendente extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrCadMedico.class.getName());
 
     /**
      * Creates new form FrCadMedico
      */
-    public FrCadMedico() {
+    public FrCadAtendente() {
+        
         initComponents();
     }
 
@@ -46,7 +51,7 @@ public class FrCadMedico extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(102, 102, 255));
 
         btnCriarAtendente.setText("CRIAR");
-        btnCriarAtendente.addActionListener();
+        btnCriarAtendente.addActionListener(this::btnCriarAtendenteActionPerformed);
 
         btnEditarAtendente.setText("EDITAR");
 

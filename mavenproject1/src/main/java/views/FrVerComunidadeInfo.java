@@ -7,14 +7,14 @@
  *
  * @author CAMPUSRP-LAB\09816655608
  */
-public class FrComunidade extends javax.swing.JFrame {
+public class FrVerComunidadeInfo extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrComunidade.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrVerComunidadeMural.class.getName());
 
     /**
      * Creates new form FrComunidade
      */
-    public FrComunidade() {
+    public FrVerComunidadeInfo() {
         initComponents();
     }
 
@@ -31,7 +31,7 @@ public class FrComunidade extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        VerMural = new javax.swing.JTextPane();
+        VerComunidade = new javax.swing.JTextPane();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -41,10 +41,10 @@ public class FrComunidade extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
-        jScrollPane3.setViewportView(VerMural);
+        jScrollPane3.setViewportView(VerComunidade);
 
         jLabel5.setFont(new java.awt.Font("Noto Sans", 3, 14)); // NOI18N
-        jLabel5.setText("VEJA OQUE NOSSAS CLIENTES TEM A DIZER SOBRE SUAS EXPERIANCIAS ");
+        jLabel5.setText("VEJA O QUE NOSSOS MEDICOS TEM DE DICAS SOBRE GRAVIDEZ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -74,14 +74,12 @@ public class FrComunidade extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(77, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(101, 101, 101)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,11 +127,11 @@ public class FrComunidade extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FrComunidade().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FrVerComunidadeMural().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextPane VerMural;
+    private javax.swing.JTextPane VerComunidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;

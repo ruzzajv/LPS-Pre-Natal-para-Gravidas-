@@ -1,3 +1,5 @@
+package views;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -45,7 +47,7 @@ public class FrAtendente extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(102, 102, 255));
 
         btnGerarPagamento.setText("GERAR PAGAMENTO");
-        btnGerarPagamento.addActionListener();
+        btnGerarPagamento.addActionListener(this::btnGerarPagamentoActionPerformed);
 
         btnMarcarConsulta.setText("MARCAR CONSULTA");
 
@@ -61,7 +63,7 @@ public class FrAtendente extends javax.swing.JFrame {
         jLabel1.setText("OLÁ...");
 
         btnCadastrarGestante.setText("CADASTRAR GESTANTE");
-        btnCadastrarGestante.addActionListener();
+        btnCadastrarGestante.addActionListener(this::btnCadastrarGestanteActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

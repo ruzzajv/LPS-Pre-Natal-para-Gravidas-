@@ -1,20 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 
 /**
  *
  * @author CAMPUSRP-LAB\09816655608
  */
-public class FrPix extends javax.swing.JFrame {
+public class FrCredito extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrPix.class.getName());
 
     /**
      * Creates new form FrPix
      */
-    public FrPix() {
+    public FrCredito() {
         initComponents();
     }
 

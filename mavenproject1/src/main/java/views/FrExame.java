@@ -8,12 +8,12 @@
  *
  * @author 09816655608
  */
-public class FrCadGerente extends javax.swing.JFrame {
+public class FrExame extends javax.swing.JFrame {
 
     /**
      * Creates new form FrCadGerente
      */
-    public FrCadGerente() {
+    public FrExame() {
         initComponents();
     }
 

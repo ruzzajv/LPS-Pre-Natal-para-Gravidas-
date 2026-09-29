@@ -7,14 +7,14 @@
  *
  * @author CAMPUSRP-LAB\09816655608
  */
-public class FrComunidade extends javax.swing.JFrame {
+public class FrComunidadeInfo extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrComunidade.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrComunidadeInfo.class.getName());
 
     /**
      * Creates new form FrComunidade
      */
-    public FrComunidade() {
+    public FrComunidadeInfo() {
         initComponents();
     }
 
@@ -210,7 +210,7 @@ public class FrComunidade extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FrComunidade().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FrComunidadeInfo().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -7,14 +7,14 @@
  *
  * @author CAMPUSRP-LAB\09816655608
  */
-public class FrPix extends javax.swing.JFrame {
+public class FrDebito extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrPix.class.getName());
 
     /**
      * Creates new form FrPix
      */
-    public FrPix() {
+    public FrDebito() {
         initComponents();
     }
 
