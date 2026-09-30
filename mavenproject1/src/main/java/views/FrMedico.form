@@ -50,7 +50,6 @@
                   <EmptySpace min="0" pref="40" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="btnRegistrarExames" max="32767" attributes="0"/>
-                      <Component id="btnVizualizarExames" max="32767" attributes="0"/>
                       <Component id="btnVizualizarAgenda" max="32767" attributes="0"/>
                       <Component id="btnAcessarPronturarios" alignment="0" pref="171" max="32767" attributes="0"/>
                   </Group>
@@ -76,13 +75,11 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="btnVizualizarAgenda" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnVizualizarExames" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnRegistrarExames" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnAcessarPronturarios" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="91" max="32767" attributes="0"/>
+                  <EmptySpace pref="61" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -104,24 +101,25 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVizualizarAgendaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnVizualizarExames">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="VIZUALIZAR EXAMES "/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="btnRegistrarExames">
           <Properties>
-            <Property name="text" type="java.lang.String" value="REGISTRAR EXAMES"/>
+            <Property name="text" type="java.lang.String" value="PEDIDO DE EXAME"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrarExamesActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnAcessarPronturarios">
           <Properties>
             <Property name="text" type="java.lang.String" value="ACESSAR PRONTUARIOS "/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAcessarPronturariosActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnVoltar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="VOLTAR"/>
+            <Property name="text" type="java.lang.String" value="SAIR"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVoltarActionPerformed"/>

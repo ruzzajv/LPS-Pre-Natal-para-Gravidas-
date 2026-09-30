@@ -11,7 +11,11 @@ package views;
  * @author 09816655608
  */
 public class FrExame extends javax.swing.JFrame {
+        private javax.swing.JFrame telaAnterior;
 
+    public void setTelaAnterior(javax.swing.JFrame tela) {
+        this.telaAnterior = tela;
+    }
     /**
      * Creates new form FrCadGerente
      */

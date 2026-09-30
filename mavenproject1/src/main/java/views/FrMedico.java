@@ -36,7 +36,6 @@ public class FrMedico extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnVizualizarAgenda = new javax.swing.JButton();
-        btnVizualizarExames = new javax.swing.JButton();
         btnRegistrarExames = new javax.swing.JButton();
         btnAcessarPronturarios = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
@@ -51,13 +50,13 @@ public class FrMedico extends javax.swing.JFrame {
         btnVizualizarAgenda.setText("VIZUALIZAR AGENDA");
         btnVizualizarAgenda.addActionListener(this::btnVizualizarAgendaActionPerformed);
 
-        btnVizualizarExames.setText("VIZUALIZAR EXAMES ");
-
-        btnRegistrarExames.setText("REGISTRAR EXAMES");
+        btnRegistrarExames.setText("PEDIDO DE EXAME");
+        btnRegistrarExames.addActionListener(this::btnRegistrarExamesActionPerformed);
 
         btnAcessarPronturarios.setText("ACESSAR PRONTUARIOS ");
+        btnAcessarPronturarios.addActionListener(this::btnAcessarPronturariosActionPerformed);
 
-        btnVoltar.setText("VOLTAR");
+        btnVoltar.setText("SAIR");
         btnVoltar.addActionListener(this::btnVoltarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -68,7 +67,6 @@ public class FrMedico extends javax.swing.JFrame {
                 .addGap(0, 40, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnRegistrarExames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVizualizarExames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnVizualizarAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAcessarPronturarios, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
                 .addGap(40, 40, 40))
@@ -88,13 +86,11 @@ public class FrMedico extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(34, 34, 34)
                 .addComponent(btnVizualizarAgenda)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVizualizarExames)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnRegistrarExames)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnAcessarPronturarios)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -114,17 +110,41 @@ public class FrMedico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVizualizarAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVizualizarAgendaActionPerformed
-        // TODO add your handling code here:
+FrAgenda telaAgenda = new FrAgenda();
+        telaAgenda.setTelaAnterior(this);
+        telaAgenda.setLocationRelativeTo(null);
+        telaAgenda.setVisible(true);
+        this.setVisible(false);        // TODO add your handling code here:
     }//GEN-LAST:event_btnVizualizarAgendaActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-    this.dispose(); // Fecha o Pix
+this.dispose(); // Fecha a tela atual
         
-        // Esta é a parte que falta se o programa está a fechar todo!
         if (this.telaAnterior != null) {
-            this.telaAnterior.setVisible(true);
-        }        // TODO add your handling code here:
+            // Se a tela anterior for o LoginV2, limpamos os campos dela antes de mostrar
+            if (this.telaAnterior instanceof LoginV2) {
+                ((LoginV2) this.telaAnterior).limparCampos();
+            }
+            
+            this.telaAnterior.setVisible(true); // Reexibe o login limpinho
+        }    // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnRegistrarExamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarExamesActionPerformed
+FrExame telaRegistrarExame = new FrExame(); 
+        telaRegistrarExame.setTelaAnterior(this);
+        telaRegistrarExame.setLocationRelativeTo(null);
+        telaRegistrarExame.setVisible(true);
+        this.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarExamesActionPerformed
+
+    private void btnAcessarPronturariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarPronturariosActionPerformed
+FrProntuario telaProntuario = new FrProntuario();
+        telaProntuario.setTelaAnterior(this);
+        telaProntuario.setLocationRelativeTo(null);
+        telaProntuario.setVisible(true);
+        this.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAcessarPronturariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,7 +175,6 @@ public class FrMedico extends javax.swing.JFrame {
     private javax.swing.JButton btnAcessarPronturarios;
     private javax.swing.JButton btnRegistrarExames;
     private javax.swing.JButton btnVizualizarAgenda;
-    private javax.swing.JButton btnVizualizarExames;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

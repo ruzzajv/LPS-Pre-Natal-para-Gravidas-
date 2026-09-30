@@ -5,9 +5,18 @@ package views;
  * @author jruza
  */
 public class LoginV2 extends javax.swing.JFrame {
-    
+        // Método para limpar os campos de texto e senha
+    public void limparCampos() {
+        txtUsuario.setText("");
+        txtSenha.setText("");
+        txtUsuario.requestFocus(); // Deixa o cursor piscando no campo de usuário
+    }
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginV2.class.getName());
+        private javax.swing.JFrame telaAnterior;
 
+    public void setTelaAnterior(javax.swing.JFrame tela) {
+        this.telaAnterior = tela;
+    }
     /**
      * Creates new form LoginV2
      */

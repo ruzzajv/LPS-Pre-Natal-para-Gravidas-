@@ -76,7 +76,7 @@ public class FrGestante extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Bitstream Charter", 3, 24)); // NOI18N
         jLabel1.setText("OLÁ...");
 
-        btnVoltar.setText("VOLTAR");
+        btnVoltar.setText("SAIR");
         btnVoltar.addActionListener(this::btnVoltarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -126,26 +126,34 @@ public class FrGestante extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarComunidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarComunidadeActionPerformed
-    views.FrComunidade telaComunidade = new views.FrComunidade();
-    telaComunidade.setLocationRelativeTo(null); // Centraliza no meio do ecrã
-    telaComunidade.setVisible(true);        
+views.FrComunidade telaComunidade = new views.FrComunidade();
+        telaComunidade.setTelaAnterior(this);
+        telaComunidade.setLocationRelativeTo(null);
+        telaComunidade.setVisible(true);
+        this.setVisible(false);    
 // TODO add your handling code here:
     }//GEN-LAST:event_btnEntrarComunidadeActionPerformed
 
     private void btnMarcarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarcarConsultaActionPerformed
-     views.FrConsulta telaConsulta = new views.FrConsulta();
-    telaConsulta.setLocationRelativeTo(null);
-    telaConsulta.setVisible(true);
+views.FrConsulta telaConsulta = new views.FrConsulta();
+        telaConsulta.setTelaAnterior(this);
+        telaConsulta.setLocationRelativeTo(null);
+        telaConsulta.setVisible(true);
+        this.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMarcarConsultaActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-    this.dispose(); // Fecha o Pix
+this.dispose(); // Fecha a tela atual
         
-        // Esta é a parte que falta se o programa está a fechar todo!
         if (this.telaAnterior != null) {
-            this.telaAnterior.setVisible(true);
-        }        // TODO add your handling code here:
+            // Se a tela anterior for o LoginV2, limpamos os campos dela antes de mostrar
+            if (this.telaAnterior instanceof LoginV2) {
+                ((LoginV2) this.telaAnterior).limparCampos();
+            }
+            
+            this.telaAnterior.setVisible(true); // Reexibe o login limpinho
+        }       // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**

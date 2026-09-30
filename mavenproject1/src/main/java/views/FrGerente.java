@@ -50,10 +50,13 @@ public class FrGerente extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(102, 102, 255));
 
         btnCadastrarMedico.setText("CADASTRAR MEDICO");
+        btnCadastrarMedico.addActionListener(this::btnCadastrarMedicoActionPerformed);
 
         btnCadastrarAtendente.setText("CADASTRAR ATENDENTE");
+        btnCadastrarAtendente.addActionListener(this::btnCadastrarAtendenteActionPerformed);
 
         btnVizualizarExtrato.setText("VIZUALIZAR EXTRATO");
+        btnVizualizarExtrato.addActionListener(this::btnVizualizarExtratoActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -82,7 +85,7 @@ public class FrGerente extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Bitstream Charter", 3, 24)); // NOI18N
         jLabel1.setText("OLÁ...");
 
-        btnVoltar.setText("VOLTAR");
+        btnVoltar.setText("SAIR");
         btnVoltar.addActionListener(this::btnVoltarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -92,13 +95,13 @@ public class FrGerente extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(178, 178, 178)
                         .addComponent(jLabel1))
-                    .addComponent(btnVoltar))
-                .addContainerGap(54, Short.MAX_VALUE))
+                    .addComponent(btnVoltar)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,13 +131,41 @@ public class FrGerente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-    this.dispose(); // Fecha o Pix
+this.dispose(); // Fecha a tela atual
         
-        // Esta é a parte que falta se o programa está a fechar todo!
         if (this.telaAnterior != null) {
-            this.telaAnterior.setVisible(true);
+            // Se a tela anterior for o LoginV2, limpamos os campos dela antes de mostrar
+            if (this.telaAnterior instanceof LoginV2) {
+                ((LoginV2) this.telaAnterior).limparCampos();
+            }
+            
+            this.telaAnterior.setVisible(true); // Reexibe o login limpinho
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnCadastrarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarMedicoActionPerformed
+FrCadMedico telaCadMedico = new FrCadMedico();
+        telaCadMedico.setTelaAnterior(this);
+        telaCadMedico.setLocationRelativeTo(null);
+        telaCadMedico.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCadastrarMedicoActionPerformed
+
+    private void btnCadastrarAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarAtendenteActionPerformed
+FrCadAtendente telaCadAtendente = new FrCadAtendente();
+        telaCadAtendente.setTelaAnterior(this);
+        telaCadAtendente.setLocationRelativeTo(null);
+        telaCadAtendente.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCadastrarAtendenteActionPerformed
+
+    private void btnVizualizarExtratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVizualizarExtratoActionPerformed
+FrExtrato telaExtrato = new FrExtrato();
+        telaExtrato.setTelaAnterior(this);
+        telaExtrato.setLocationRelativeTo(null);
+        telaExtrato.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnVizualizarExtratoActionPerformed
 
     /**
      * @param args the command line arguments

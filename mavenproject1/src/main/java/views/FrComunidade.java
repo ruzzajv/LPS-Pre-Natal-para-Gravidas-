@@ -67,6 +67,7 @@ public class FrComunidade extends javax.swing.JFrame {
         btnVerInformacoes.addActionListener(this::btnVerInformacoesActionPerformed);
 
         btnVerForum.setText("VER FORUM");
+        btnVerForum.addActionListener(this::btnVerForumActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -137,16 +138,20 @@ public class FrComunidade extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarNaAbaDeInformacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarNaAbaDeInformacoesActionPerformed
-        views.FrComunidadeInfo telaInfo = new views.FrComunidadeInfo();
-        telaInfo.setLocationRelativeTo(null); // Centraliza no ecrã
+views.FrComunidadeInfo telaInfo = new views.FrComunidadeInfo();
+        telaInfo.setTelaAnterior(this);
+        telaInfo.setLocationRelativeTo(null);
         telaInfo.setVisible(true);
+        this.setVisible(false);
 // TODO add your handling code here:
     }//GEN-LAST:event_btnEntrarNaAbaDeInformacoesActionPerformed
 
     private void btnEntrarNoForumDeApoioDasGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarNoForumDeApoioDasGestanteActionPerformed
-        views.FrComunidadeMural telaForum = new views.FrComunidadeMural();
+views.FrComunidadeMural telaForum = new views.FrComunidadeMural();
+        telaForum.setTelaAnterior(this);
         telaForum.setLocationRelativeTo(null);
         telaForum.setVisible(true);
+        this.setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEntrarNoForumDeApoioDasGestanteActionPerformed
 
@@ -160,12 +165,21 @@ public class FrComunidade extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnVerInformacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerInformacoesActionPerformed
-        FrVerComunidadeInfo telaVerComunidadeInfo = new FrVerComunidadeInfo();
-// telaVerComunidadeInfo.pack();
+FrVerComunidadeInfo telaVerComunidadeInfo = new FrVerComunidadeInfo();
+        telaVerComunidadeInfo.setTelaAnterior(this);
         telaVerComunidadeInfo.setLocationRelativeTo(null);
         telaVerComunidadeInfo.setVisible(true);
+        this.setVisible(false);
 // TODO add your handling code here:
     }//GEN-LAST:event_btnVerInformacoesActionPerformed
+
+    private void btnVerForumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerForumActionPerformed
+FrVerComunidadeMural telaVerForum = new FrVerComunidadeMural();
+        telaVerForum.setTelaAnterior(this);
+        telaVerForum.setLocationRelativeTo(null);
+        telaVerForum.setVisible(true);
+        this.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerForumActionPerformed
 
     /**
      * @param args the command line arguments

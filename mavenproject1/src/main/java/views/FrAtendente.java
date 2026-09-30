@@ -72,7 +72,7 @@ public class FrAtendente extends javax.swing.JFrame {
         btnCadastrarGestante.setText("CADASTRAR GESTANTE");
         btnCadastrarGestante.addActionListener(this::btnCadastrarGestanteActionPerformed);
 
-        btnVoltar.setText("VOLTAR");
+        btnVoltar.setText("SAIR");
         btnVoltar.addActionListener(this::btnVoltarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -197,10 +197,15 @@ public class FrAtendente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVizualizarExtratoActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        this.dispose();
-
+this.dispose(); // Fecha a tela atual
+        
         if (this.telaAnterior != null) {
-            this.telaAnterior.setVisible(true);
+            // Se a tela anterior for o LoginV2, limpamos os campos dela antes de mostrar
+            if (this.telaAnterior instanceof LoginV2) {
+                ((LoginV2) this.telaAnterior).limparCampos();
+            }
+            
+            this.telaAnterior.setVisible(true); // Reexibe o login limpinho
         }
     }//GEN-LAST:event_btnVoltarActionPerformed
 
