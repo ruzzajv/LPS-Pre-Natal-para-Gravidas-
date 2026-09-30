@@ -36,7 +36,6 @@ public class FrGestante extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         btnEntrarComunidade = new javax.swing.JButton();
-        btnMarcarConsulta = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
 
@@ -49,18 +48,13 @@ public class FrGestante extends javax.swing.JFrame {
         btnEntrarComunidade.setText("ENTRAR NA COMUNIDADE");
         btnEntrarComunidade.addActionListener(this::btnEntrarComunidadeActionPerformed);
 
-        btnMarcarConsulta.setText("MARCAR CONSULTA");
-        btnMarcarConsulta.addActionListener(this::btnMarcarConsultaActionPerformed);
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(70, 70, 70)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnMarcarConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEntrarComunidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnEntrarComunidade)
                 .addContainerGap(81, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -68,9 +62,7 @@ public class FrGestante extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(btnEntrarComunidade)
-                .addGap(18, 18, 18)
-                .addComponent(btnMarcarConsulta)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Bitstream Charter", 3, 24)); // NOI18N
@@ -134,26 +126,13 @@ views.FrComunidade telaComunidade = new views.FrComunidade();
 // TODO add your handling code here:
     }//GEN-LAST:event_btnEntrarComunidadeActionPerformed
 
-    private void btnMarcarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarcarConsultaActionPerformed
-views.FrConsulta telaConsulta = new views.FrConsulta();
-        telaConsulta.setTelaAnterior(this);
-        telaConsulta.setLocationRelativeTo(null);
-        telaConsulta.setVisible(true);
-        this.setVisible(false);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMarcarConsultaActionPerformed
-
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-this.dispose(); // Fecha a tela atual
+this.dispose(); // Fecha a tela atual (ex: Gerente)
         
-        if (this.telaAnterior != null) {
-            // Se a tela anterior for o LoginV2, limpamos os campos dela antes de mostrar
-            if (this.telaAnterior instanceof LoginV2) {
-                ((LoginV2) this.telaAnterior).limparCampos();
-            }
-            
-            this.telaAnterior.setVisible(true); // Reexibe o login limpinho
-        }       // TODO add your handling code here:
+        // Cria uma nova tela de login limpa e a exibe
+        views.LoginV2 telaLogin = new views.LoginV2();
+        telaLogin.setLocationRelativeTo(null);
+        telaLogin.setVisible(true);      // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
@@ -183,7 +162,6 @@ this.dispose(); // Fecha a tela atual
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrarComunidade;
-    private javax.swing.JButton btnMarcarConsulta;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

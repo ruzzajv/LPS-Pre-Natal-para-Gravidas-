@@ -197,16 +197,12 @@ public class FrAtendente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVizualizarExtratoActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-this.dispose(); // Fecha a tela atual
+this.dispose(); // Fecha a tela atual (ex: Gerente)
         
-        if (this.telaAnterior != null) {
-            // Se a tela anterior for o LoginV2, limpamos os campos dela antes de mostrar
-            if (this.telaAnterior instanceof LoginV2) {
-                ((LoginV2) this.telaAnterior).limparCampos();
-            }
-            
-            this.telaAnterior.setVisible(true); // Reexibe o login limpinho
-        }
+        // Cria uma nova tela de login limpa e a exibe
+        views.LoginV2 telaLogin = new views.LoginV2();
+        telaLogin.setLocationRelativeTo(null);
+        telaLogin.setVisible(true);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**

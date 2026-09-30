@@ -95,10 +95,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnMarcarConsulta" max="32767" attributes="0"/>
-                          <Component id="btnEntrarComunidade" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="btnEntrarComunidade" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="81" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -108,9 +105,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="btnEntrarComunidade" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnMarcarConsulta" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <EmptySpace pref="64" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -122,14 +117,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEntrarComunidadeActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnMarcarConsulta">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="MARCAR CONSULTA"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMarcarConsultaActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

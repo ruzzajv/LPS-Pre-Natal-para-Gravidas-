@@ -373,9 +373,11 @@ public class FrConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCriarConsultaActionPerformed
 
     private void btnPedidoExameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidoExameActionPerformed
-        views.FrExame telaExame = new views.FrExame();
+views.FrExame telaExame = new views.FrExame();
+        telaExame.setTelaAnterior(this); // Guarda a tela atual no histórico para o botão voltar funcionar
         telaExame.setLocationRelativeTo(null);
         telaExame.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnPedidoExameActionPerformed
 
     private void btnLimparConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparConsultaActionPerformed

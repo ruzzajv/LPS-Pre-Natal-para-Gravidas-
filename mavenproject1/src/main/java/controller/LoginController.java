@@ -29,7 +29,7 @@ public class LoginController {
     }
 
     private void abrirTela(JFrame novaTela, JFrame telaAtual) {
-        // 1. Informa à nova tela que a tela anterior é o login
+        // Informa à nova tela qual era o login (para o botão voltar funcionar depois)
         if (novaTela instanceof views.FrGerente) {
             ((views.FrGerente) novaTela).setTelaAnterior(telaAtual);
         } else if (novaTela instanceof views.FrAtendente) {
@@ -43,10 +43,9 @@ public class LoginController {
         novaTela.setLocationRelativeTo(null);
         novaTela.setVisible(true);
         
-        // 2. Em vez de destruir a tela de login com dispose(), apenas ocultamos ela
+        // Fecha a tela de login atual completamente para ela sumir da tela
         if (telaAtual != null) {
-            telaAtual.setVisible(false);
+            telaAtual.dispose();
         }
     }
-    
 }
