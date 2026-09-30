@@ -12,7 +12,7 @@ public class LoginController {
 
     public void verificarLogin(String login, String senha, JFrame telaAtual) {
         
-        // Simulação de regras de negócio para roteamento do Checkpoint P3
+       
         if (login.equals("gerente") && senha.equals("123")) {
             abrirTela(new FrGerente(), telaAtual);
             

@@ -35,6 +35,7 @@ public class FrMedico extends javax.swing.JFrame {
         btnVizualizarExames = new javax.swing.JButton();
         btnRegistrarExames = new javax.swing.JButton();
         btnAcessarPronturarios = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,6 +53,8 @@ public class FrMedico extends javax.swing.JFrame {
 
         btnAcessarPronturarios.setText("ACESSAR PRONTUARIOS ");
 
+        btnVoltar.setText("VOLTAR");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -65,14 +68,18 @@ public class FrMedico extends javax.swing.JFrame {
                     .addComponent(btnAcessarPronturarios, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
                 .addGap(40, 40, 40))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(jLabel1))
+                    .addComponent(btnVoltar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addComponent(btnVoltar)
+                .addGap(4, 4, 4)
                 .addComponent(jLabel1)
                 .addGap(34, 34, 34)
                 .addComponent(btnVizualizarAgenda)
@@ -135,6 +142,7 @@ public class FrMedico extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrarExames;
     private javax.swing.JButton btnVizualizarAgenda;
     private javax.swing.JButton btnVizualizarExames;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

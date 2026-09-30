@@ -1,4 +1,5 @@
 package views;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -9,8 +10,14 @@ package views;
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrExtrato extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrExtrato.class.getName());
+
+    private javax.swing.JFrame telaAnterior;
+
+    public void setTelaAnterior(javax.swing.JFrame tela) {
+        this.telaAnterior = tela;
+    }
 
     /**
      * Creates new form FrExtrato
@@ -39,6 +46,7 @@ public class FrExtrato extends javax.swing.JFrame {
         txtLucroMensal = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         btnGerarRelatorio = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -84,12 +92,18 @@ public class FrExtrato extends javax.swing.JFrame {
 
         btnGerarRelatorio.setText("GERAR RELATORIO POR ARQUIVO ");
 
+        btnVoltar.setText("VOLTAR");
+        btnVoltar.addActionListener(this::btnVoltarActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(TabelaDoExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -105,17 +119,16 @@ public class FrExtrato extends javax.swing.JFrame {
                                 .addComponent(jLabel1))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(91, 91, 91)
-                                .addComponent(btnGerarRelatorio)))
-                        .addGap(0, 82, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(TabelaDoExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                                .addComponent(btnGerarRelatorio))
+                            .addComponent(btnVoltar))
+                        .addGap(0, 82, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addComponent(btnVoltar)
+                .addGap(11, 11, 11)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(btnMostrarLucroMensal)
@@ -147,6 +160,15 @@ public class FrExtrato extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+       this.dispose(); // Fecha o Pix
+        
+        // Esta é a parte que falta se o programa está a fechar todo!
+        if (this.telaAnterior != null) {
+            this.telaAnterior.setVisible(true);
+        }
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -176,6 +198,7 @@ public class FrExtrato extends javax.swing.JFrame {
     private javax.swing.JScrollPane TabelaDoExtrato;
     private javax.swing.JButton btnGerarRelatorio;
     private javax.swing.JButton btnMostrarLucroMensal;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

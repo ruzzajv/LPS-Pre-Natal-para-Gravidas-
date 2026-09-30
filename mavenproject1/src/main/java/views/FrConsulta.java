@@ -6,12 +6,17 @@ package views;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author 09816655608
  */
 public class FrConsulta extends javax.swing.JFrame {
+
+    private javax.swing.JFrame telaAnterior;
+
+    public void setTelaAnterior(javax.swing.JFrame tela) {
+        this.telaAnterior = tela;
+    }
 
     /**
      * Creates new form FrCadGravida
@@ -278,7 +283,7 @@ public class FrConsulta extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        btnVoltar.setIcon(new javax.swing.ImageIcon("C:\\Users\\jruza\\OneDrive\\Documentos\\NetBeansProjects\\LPS-Pre-Natal-para-Gravidas-\\mavenproject1\\src\\main\\resources\\imagens\\voltar.png")); // NOI18N
+        btnVoltar.setText("VOLTAR");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVoltarActionPerformed(evt);
@@ -363,24 +368,28 @@ public class FrConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnCriarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarConsultaActionPerformed
-    this.habilitarCampos(true); 
-    this.limparCampos();        
+        this.habilitarCampos(true);
+        this.limparCampos();
     }//GEN-LAST:event_btnCriarConsultaActionPerformed
 
     private void btnPedidoExameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidoExameActionPerformed
-    views.FrExame telaExame = new views.FrExame();
-    telaExame.setLocationRelativeTo(null);
-    telaExame.setVisible(true);        
+        views.FrExame telaExame = new views.FrExame();
+        telaExame.setLocationRelativeTo(null);
+        telaExame.setVisible(true);
     }//GEN-LAST:event_btnPedidoExameActionPerformed
 
     private void btnLimparConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparConsultaActionPerformed
-    this.limparCampos();
-    this.habilitarCampos(false);        
+        this.limparCampos();
+        this.habilitarCampos(false);
     }//GEN-LAST:event_btnLimparConsultaActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-       this.dispose();
-       // TODO add your handling code here:
+      this.dispose(); // Fecha o Pix
+        
+        // Esta é a parte que falta se o programa está a fechar todo!
+        if (this.telaAnterior != null) {
+            this.telaAnterior.setVisible(true);
+        }
     }//GEN-LAST:event_btnVoltarActionPerformed
     public void limparCampos() {
         txtData.setText("");
@@ -399,8 +408,9 @@ public class FrConsulta extends javax.swing.JFrame {
         txtMotivo.setEnabled(flag);
         txtRelatorio.setEnabled(flag);
         txtPrevisaoDoParto.setEnabled(flag);
-        btnGravidezDeRisco.setEnabled(flag); 
+        btnGravidezDeRisco.setEnabled(flag);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -427,15 +437,14 @@ public class FrConsulta extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FrConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FrConsulta().setVisible(true);
             }
         });
-        
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

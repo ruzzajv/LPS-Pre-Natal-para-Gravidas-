@@ -138,9 +138,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnVoltar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\jruza\OneDrive\Documentos\NetBeansProjects\LPS-Pre-Natal-para-Gravidas-\mavenproject1\src\main\resources\imagens\voltar.png"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="VOLTAR"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVoltarActionPerformed"/>

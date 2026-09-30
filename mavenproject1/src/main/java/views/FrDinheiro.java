@@ -4,14 +4,18 @@ package views;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrDinheiro extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrDinheiro.class.getName());
+    private javax.swing.JFrame telaAnterior;
+
+    public void setTelaAnterior(javax.swing.JFrame tela) {
+        this.telaAnterior = tela;
+    }
 
     /**
      * Creates new form FrPix
@@ -62,11 +66,12 @@ public class FrDinheiro extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(txtEnviar)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addComponent(txtEnviar)
+                        .addGap(0, 50, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,7 +85,7 @@ public class FrDinheiro extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        btnVoltar.setIcon(new javax.swing.ImageIcon("C:\\Users\\jruza\\OneDrive\\Documentos\\NetBeansProjects\\LPS-Pre-Natal-para-Gravidas-\\mavenproject1\\src\\main\\resources\\imagens\\voltar.png")); // NOI18N
+        btnVoltar.setText("VOLTAR");
         btnVoltar.addActionListener(this::btnVoltarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -135,8 +140,12 @@ public class FrDinheiro extends javax.swing.JFrame {
     }//GEN-LAST:event_txtValorActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-this.dispose();
-// TODO add your handling code here:
+  this.dispose(); // Fecha o Pix
+        
+        // Esta é a parte que falta se o programa está a fechar todo!
+        if (this.telaAnterior != null) {
+            this.telaAnterior.setVisible(true);
+        }
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**

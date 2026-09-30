@@ -4,14 +4,18 @@ package views;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrAgenda extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrAgenda.class.getName());
+    private javax.swing.JFrame telaAnterior;
+
+    public void setTelaAnterior(javax.swing.JFrame tela) {
+        this.telaAnterior = tela;
+    }
 
     /**
      * Creates new form FrAgenda
@@ -40,6 +44,7 @@ public class FrAgenda extends javax.swing.JFrame {
         btnLimparAgenda = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableAgenda = new javax.swing.JTable();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,6 +128,9 @@ public class FrAgenda extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tableAgenda);
 
+        btnVoltar.setText("VOLTAR");
+        btnVoltar.addActionListener(this::btnVoltarActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -137,11 +145,15 @@ public class FrAgenda extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(btnVoltar)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addComponent(btnVoltar)
+                .addGap(1, 1, 1)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,6 +179,15 @@ public class FrAgenda extends javax.swing.JFrame {
     private void btnCriarAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarAgendaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCriarAgendaActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+    this.dispose(); // Fecha o Pix
+        
+        // Esta é a parte que falta se o programa está a fechar todo!
+        if (this.telaAnterior != null) {
+            this.telaAnterior.setVisible(true);
+        }
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,6 +220,7 @@ public class FrAgenda extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarAgenda;
     private javax.swing.JButton btnLimparAgenda;
     private javax.swing.JButton btnSalvarAgenda;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

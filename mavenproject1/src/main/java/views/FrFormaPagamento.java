@@ -6,14 +6,19 @@ import views.FrDinheiro;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrFormaPagamento extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrFormaPagamento.class.getName());
+    private javax.swing.JFrame telaAnterior;
+
+    // Método para receber a tela anterior
+    public void setTelaAnterior(javax.swing.JFrame tela) {
+        this.telaAnterior = tela;
+    }
 
     /**
      * Creates new form FrCadPagamento
@@ -93,7 +98,7 @@ public class FrFormaPagamento extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Bitstream Charter", 3, 24)); // NOI18N
         jLabel1.setText("FORMAS DE PAGAMENTO ");
 
-        btnVoltar.setIcon(new javax.swing.ImageIcon("C:\\Users\\jruza\\OneDrive\\Documentos\\NetBeansProjects\\LPS-Pre-Natal-para-Gravidas-\\mavenproject1\\src\\main\\resources\\imagens\\voltar.png")); // NOI18N
+        btnVoltar.setText("VOLTAR");
         btnVoltar.addActionListener(this::btnVoltarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -137,39 +142,44 @@ public class FrFormaPagamento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPixActionPerformed
-    FrPix telaPix = new FrPix();
-    telaPix.setLocationRelativeTo(null);
-    telaPix.setVisible(true);
-    this.dispose();
-        // TODO add your handling code here:
+        FrPix telaPix = new FrPix();
+        telaPix.setTelaAnterior(this); // 1. Passa o histórico
+        telaPix.setLocationRelativeTo(null);
+        telaPix.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnPixActionPerformed
 
     private void btnCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreditoActionPerformed
-    FrCredito telaCredito = new FrCredito();
-    telaCredito.setLocationRelativeTo(null);
-    telaCredito.setVisible(true);
-    this.dispose();       
-    // TODO add your handling code here:
+        FrCredito telaCredito = new FrCredito();
+        telaCredito.setTelaAnterior(this);
+        telaCredito.setLocationRelativeTo(null);
+        telaCredito.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnCreditoActionPerformed
 
     private void btnDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDebitoActionPerformed
-    FrDebito telaDebito = new FrDebito();
-    telaDebito.setLocationRelativeTo(null);
-    telaDebito.setVisible(true);
-    this.dispose();
+        FrDebito telaDebito = new FrDebito();
+        telaDebito.setTelaAnterior(this);
+        telaDebito.setLocationRelativeTo(null);
+        telaDebito.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnDebitoActionPerformed
 
     private void btnDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDinheiroActionPerformed
-    FrDinheiro telaDinheiro = new FrDinheiro();
-    telaDinheiro.setLocationRelativeTo(null);
-    telaDinheiro.setVisible(true);
-    this.dispose();
-            // TODO add your handling code here:
+        FrDinheiro telaDinheiro = new FrDinheiro();
+        telaDinheiro.setTelaAnterior(this);
+        telaDinheiro.setLocationRelativeTo(null);
+        telaDinheiro.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnDinheiroActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-this.dispose();
-// TODO add your handling code here:
+        this.dispose(); // Fecha esta tela de Formas de Pagamento
+
+        // Volta para o menu do Atendente que estava guardado no histórico
+        if (this.telaAnterior != null) {
+            this.telaAnterior.setVisible(true);
+        }
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
@@ -208,4 +218,5 @@ this.dispose();
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
+
 }

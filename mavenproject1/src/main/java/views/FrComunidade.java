@@ -1,5 +1,6 @@
 package views;
-        /*
+
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -9,8 +10,13 @@ package views;
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrComunidade extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrComunidade.class.getName());
+    private javax.swing.JFrame telaAnterior;
+
+    public void setTelaAnterior(javax.swing.JFrame tela) {
+        this.telaAnterior = tela;
+    }
 
     /**
      * Creates new form FrComunidade
@@ -35,6 +41,8 @@ public class FrComunidade extends javax.swing.JFrame {
         btnEntrarNaAbaDeInformacoes = new javax.swing.JButton();
         btnEntrarNoForumDeApoioDasGestante = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+        btnVerInformacoes = new javax.swing.JButton();
+        btnVerForum = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,8 +60,13 @@ public class FrComunidade extends javax.swing.JFrame {
         btnEntrarNoForumDeApoioDasGestante.setText("ENTRAR NO FORUM DE APOIO DAS GESTANTES");
         btnEntrarNoForumDeApoioDasGestante.addActionListener(this::btnEntrarNoForumDeApoioDasGestanteActionPerformed);
 
-        btnVoltar.setIcon(new javax.swing.ImageIcon("C:\\Users\\jruza\\OneDrive\\Documentos\\NetBeansProjects\\LPS-Pre-Natal-para-Gravidas-\\mavenproject1\\src\\main\\resources\\imagens\\voltar.png")); // NOI18N
+        btnVoltar.setText("VOLTAR");
         btnVoltar.addActionListener(this::btnVoltarActionPerformed);
+
+        btnVerInformacoes.setText("VER INFORMAÇOES ");
+        btnVerInformacoes.addActionListener(this::btnVerInformacoesActionPerformed);
+
+        btnVerForum.setText("VER FORUM");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -62,17 +75,19 @@ public class FrComunidade extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEntrarNaAbaDeInformacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEntrarNoForumDeApoioDasGestante, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(136, 136, 136)
                         .addComponent(jLabel2))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(jLabel1))
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEntrarNaAbaDeInformacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEntrarNoForumDeApoioDasGestante, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                            .addComponent(btnVerInformacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnVerForum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnVoltar))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -87,7 +102,11 @@ public class FrComunidade extends javax.swing.JFrame {
                 .addComponent(btnEntrarNaAbaDeInformacoes)
                 .addGap(18, 18, 18)
                 .addComponent(btnEntrarNoForumDeApoioDasGestante, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnVerInformacoes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnVerForum)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -98,7 +117,9 @@ public class FrComunidade extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -116,23 +137,35 @@ public class FrComunidade extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarNaAbaDeInformacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarNaAbaDeInformacoesActionPerformed
-    views.FrComunidadeInfo telaInfo = new views.FrComunidadeInfo();
-    telaInfo.setLocationRelativeTo(null); // Centraliza no ecrã
-    telaInfo.setVisible(true);        
+        views.FrComunidadeInfo telaInfo = new views.FrComunidadeInfo();
+        telaInfo.setLocationRelativeTo(null); // Centraliza no ecrã
+        telaInfo.setVisible(true);
 // TODO add your handling code here:
     }//GEN-LAST:event_btnEntrarNaAbaDeInformacoesActionPerformed
 
     private void btnEntrarNoForumDeApoioDasGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarNoForumDeApoioDasGestanteActionPerformed
-    views.FrComunidadeMural telaForum = new views.FrComunidadeMural();
-    telaForum.setLocationRelativeTo(null); 
-    telaForum.setVisible(true);
+        views.FrComunidadeMural telaForum = new views.FrComunidadeMural();
+        telaForum.setLocationRelativeTo(null);
+        telaForum.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEntrarNoForumDeApoioDasGestanteActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        this.dispose();
-        // TODO add your handling code here:
+       this.dispose(); // Fecha o Pix
+        
+        // Esta é a parte que falta se o programa está a fechar todo!
+        if (this.telaAnterior != null) {
+            this.telaAnterior.setVisible(true);
+        }
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnVerInformacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerInformacoesActionPerformed
+        FrVerComunidadeInfo telaVerComunidadeInfo = new FrVerComunidadeInfo();
+// telaVerComunidadeInfo.pack();
+        telaVerComunidadeInfo.setLocationRelativeTo(null);
+        telaVerComunidadeInfo.setVisible(true);
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnVerInformacoesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,6 +195,8 @@ public class FrComunidade extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrarNaAbaDeInformacoes;
     private javax.swing.JButton btnEntrarNoForumDeApoioDasGestante;
+    private javax.swing.JButton btnVerForum;
+    private javax.swing.JButton btnVerInformacoes;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -4,20 +4,25 @@ package views;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrAtendente extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrAtendente.class.getName());
+    private javax.swing.JFrame telaAnterior;
+
+    public void setTelaAnterior(javax.swing.JFrame tela) {
+        this.telaAnterior = tela;
+    }
 
     /**
      * Creates new form FrAtendente
      */
     public FrAtendente() {
         initComponents();
+
     }
 
     /**
@@ -38,6 +43,7 @@ public class FrAtendente extends javax.swing.JFrame {
         btnVizualizarExtrato = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnCadastrarGestante = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -66,30 +72,39 @@ public class FrAtendente extends javax.swing.JFrame {
         btnCadastrarGestante.setText("CADASTRAR GESTANTE");
         btnCadastrarGestante.addActionListener(this::btnCadastrarGestanteActionPerformed);
 
+        btnVoltar.setText("VOLTAR");
+        btnVoltar.addActionListener(this::btnVoltarActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(161, 161, 161)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGerarPagamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnGerenciarComunidade, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                    .addComponent(btnMarcarConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVizualizarExtrato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCadastrarGestante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVerAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnVoltar)
+                        .addGap(84, 84, 84)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnGerarPagamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnGerenciarComunidade, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                            .addComponent(btnMarcarConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnVizualizarExtrato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCadastrarGestante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnVerAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnVoltar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCadastrarGestante, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -123,45 +138,71 @@ public class FrAtendente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGerarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarPagamentoActionPerformed
-    FrFormaPagamento telaPagamento = new FrFormaPagamento();
-    telaPagamento.setLocationRelativeTo(null);
-    telaPagamento.setVisible(true);      
-    // TODO add your handling code here:
+        views.FrFormaPagamento telaNova = new views.FrFormaPagamento();
+
+        // O SEGREDO DO NAVEGADOR ESTÁ AQUI: Passa a tela atual para o histórico da nova
+        telaNova.setTelaAnterior(this);
+
+        telaNova.setLocationRelativeTo(null);
+        telaNova.setVisible(true); // Mostra a nova
+
+        this.setVisible(false);
     }//GEN-LAST:event_btnGerarPagamentoActionPerformed
 
     private void btnCadastrarGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarGestanteActionPerformed
-FrCadGestante telaCadGestante = new FrCadGestante();
-telaCadGestante.setLocationRelativeTo(null);
-telaCadGestante.setVisible(true);        // TODO add your handling code here:
+        FrCadGestante telaCadGestante = new FrCadGestante();
+
+        // 1. Passa o menu atual para o histórico da próxima tela
+        telaCadGestante.setTelaAnterior(this);
+
+        telaCadGestante.pack();
+        telaCadGestante.setLocationRelativeTo(null);
+        telaCadGestante.setResizable(false);
+        telaCadGestante.setVisible(true);
+
+        // 2. Esconde o menu do atendente
+        this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_btnCadastrarGestanteActionPerformed
 
     private void btnGerenciarComunidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarComunidadeActionPerformed
-FrComunidade telaComunidade = new FrComunidade();
-telaComunidade.setLocationRelativeTo(null);
-telaComunidade.setVisible(true);   
-// TODO add your handling code here:
+        FrComunidade telaComunidade = new FrComunidade();
+        telaComunidade.setTelaAnterior(this);
+        telaComunidade.setLocationRelativeTo(null);
+        telaComunidade.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnGerenciarComunidadeActionPerformed
 
     private void btnMarcarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarcarConsultaActionPerformed
-FrConsulta telaConsulta = new FrConsulta();
-telaConsulta.setLocationRelativeTo(null);
-telaConsulta.setVisible(true);
-// TODO add your handling code here:
+        FrConsulta telaConsulta = new FrConsulta();
+        telaConsulta.setTelaAnterior(this);
+        telaConsulta.setLocationRelativeTo(null);
+        telaConsulta.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnMarcarConsultaActionPerformed
 
     private void btnVerAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerAgendaActionPerformed
-FrAgenda telaAgenda = new FrAgenda(); 
-telaAgenda.setLocationRelativeTo(null);
-telaAgenda.setVisible(true);
-// TODO add your handling code here:
+        FrAgenda telaAgenda = new FrAgenda();
+        telaAgenda.setTelaAnterior(this);
+        telaAgenda.setLocationRelativeTo(null);
+        telaAgenda.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnVerAgendaActionPerformed
 
     private void btnVizualizarExtratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVizualizarExtratoActionPerformed
-FrExtrato telaExtrato = new FrExtrato();
-telaExtrato.setLocationRelativeTo(null);
-telaExtrato.setVisible(true);
-// TODO add your handling code here:
+        FrExtrato telaExtrato = new FrExtrato();
+        telaExtrato.setTelaAnterior(this);
+        telaExtrato.setLocationRelativeTo(null);
+        telaExtrato.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnVizualizarExtratoActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        this.dispose();
+
+        if (this.telaAnterior != null) {
+            this.telaAnterior.setVisible(true);
+        }
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,6 +236,7 @@ telaExtrato.setVisible(true);
     private javax.swing.JButton btnMarcarConsulta;
     private javax.swing.JButton btnVerAgenda;
     private javax.swing.JButton btnVizualizarExtrato;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
