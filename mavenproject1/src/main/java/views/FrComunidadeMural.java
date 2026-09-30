@@ -1,3 +1,4 @@
+package views;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -46,6 +47,7 @@ public class FrComunidadeMural extends javax.swing.JFrame {
         painelMural = new javax.swing.JTextPane();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,6 +148,9 @@ public class FrComunidadeMural extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Bitstream Charter", 3, 24)); // NOI18N
         jLabel1.setText("SEJA BEM VINDO A NOSSA COMUNIDADE ");
 
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar.png"))); // NOI18N
+        btnVoltar.addActionListener(this::btnVoltarActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -157,13 +162,15 @@ public class FrComunidadeMural extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(94, 94, 94)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addComponent(btnVoltar))
                 .addContainerGap(128, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addComponent(btnVoltar)
+                .addGap(5, 5, 5)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,6 +196,11 @@ public class FrComunidadeMural extends javax.swing.JFrame {
     private void btnApagarMuralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarMuralActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnApagarMuralActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+    this.dispose();
+    // TODO add your handling code here:
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,6 +234,7 @@ public class FrComunidadeMural extends javax.swing.JFrame {
     private javax.swing.JButton btnApagarMural;
     private javax.swing.JButton btnCriarMural;
     private javax.swing.JButton btnLimparMural;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

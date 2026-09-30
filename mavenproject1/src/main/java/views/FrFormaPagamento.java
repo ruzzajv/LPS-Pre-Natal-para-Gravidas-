@@ -1,3 +1,7 @@
+package views;
+
+import views.FrDinheiro;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -35,6 +39,7 @@ public class FrFormaPagamento extends javax.swing.JFrame {
         btnCredito = new javax.swing.JButton();
         btnDebito = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
 
         jLabel3.setText("jLabel3");
 
@@ -48,6 +53,7 @@ public class FrFormaPagamento extends javax.swing.JFrame {
         btnPix.addActionListener(this::btnPixActionPerformed);
 
         btnDinheiro.setText("DINHEIRO ");
+        btnDinheiro.addActionListener(this::btnDinheiroActionPerformed);
 
         btnCredito.setText("CREDITO");
         btnCredito.addActionListener(this::btnCreditoActionPerformed);
@@ -87,6 +93,9 @@ public class FrFormaPagamento extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Bitstream Charter", 3, 24)); // NOI18N
         jLabel1.setText("FORMAS DE PAGAMENTO ");
 
+        btnVoltar.setIcon(new javax.swing.ImageIcon("C:\\Users\\jruza\\OneDrive\\Documentos\\NetBeansProjects\\LPS-Pre-Natal-para-Gravidas-\\mavenproject1\\src\\main\\resources\\imagens\\voltar.png")); // NOI18N
+        btnVoltar.addActionListener(this::btnVoltarActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -98,13 +107,15 @@ public class FrFormaPagamento extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(101, 101, 101)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnVoltar))
                 .addContainerGap(90, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(btnVoltar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,16 +137,40 @@ public class FrFormaPagamento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPixActionPerformed
+    FrPix telaPix = new FrPix();
+    telaPix.setLocationRelativeTo(null);
+    telaPix.setVisible(true);
+    this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPixActionPerformed
 
     private void btnCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreditoActionPerformed
-        // TODO add your handling code here:
+    FrCredito telaCredito = new FrCredito();
+    telaCredito.setLocationRelativeTo(null);
+    telaCredito.setVisible(true);
+    this.dispose();       
+    // TODO add your handling code here:
     }//GEN-LAST:event_btnCreditoActionPerformed
 
     private void btnDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDebitoActionPerformed
-        // TODO add your handling code here:
+    FrDebito telaDebito = new FrDebito();
+    telaDebito.setLocationRelativeTo(null);
+    telaDebito.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_btnDebitoActionPerformed
+
+    private void btnDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDinheiroActionPerformed
+    FrDinheiro telaDinheiro = new FrDinheiro();
+    telaDinheiro.setLocationRelativeTo(null);
+    telaDinheiro.setVisible(true);
+    this.dispose();
+            // TODO add your handling code here:
+    }//GEN-LAST:event_btnDinheiroActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+this.dispose();
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,6 +202,7 @@ public class FrFormaPagamento extends javax.swing.JFrame {
     private javax.swing.JButton btnDebito;
     private javax.swing.JButton btnDinheiro;
     private javax.swing.JButton btnPix;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

@@ -18,6 +18,8 @@ public class FrConsulta extends javax.swing.JFrame {
      */
     public FrConsulta() {
         initComponents();
+        this.habilitarCampos(false);
+        this.limparCampos();
     }
 
     /**
@@ -57,6 +59,7 @@ public class FrConsulta extends javax.swing.JFrame {
         btnEditarConsulta = new javax.swing.JButton();
         btnApagarConsulta = new javax.swing.JButton();
         btnSalvarConsulta = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
         btnLimparConsulta = new javax.swing.JButton();
 
         jToggleButton1.setText("SIM");
@@ -225,7 +228,7 @@ public class FrConsulta extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(102, 102, 255));
 
-        btnCriarConsulta.setText("SALVAR");
+        btnCriarConsulta.setText("CRIAR");
         btnCriarConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCriarConsultaActionPerformed(evt);
@@ -237,8 +240,6 @@ public class FrConsulta extends javax.swing.JFrame {
         btnApagarConsulta.setText("APAGAR");
 
         btnSalvarConsulta.setText("SALVAR");
-
-        btnLimparConsulta.setText("LIMPAR");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -253,9 +254,7 @@ public class FrConsulta extends javax.swing.JFrame {
                 .addComponent(btnApagarConsulta)
                 .addGap(18, 18, 18)
                 .addComponent(btnSalvarConsulta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLimparConsulta)
-                .addGap(100, 100, 100))
+                .addGap(178, 178, 178))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,10 +264,23 @@ public class FrConsulta extends javax.swing.JFrame {
                     .addComponent(btnCriarConsulta)
                     .addComponent(btnEditarConsulta)
                     .addComponent(btnApagarConsulta)
-                    .addComponent(btnSalvarConsulta)
-                    .addComponent(btnLimparConsulta))
+                    .addComponent(btnSalvarConsulta))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
+
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar.png"))); // NOI18N
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
+        btnLimparConsulta.setText("LIMPAR");
+        btnLimparConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparConsultaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -277,21 +289,35 @@ public class FrConsulta extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLimparConsulta))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(106, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(btnVoltar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnVoltar))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnLimparConsulta)
+                        .addGap(26, 26, 26)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(10, Short.MAX_VALUE))
         );
@@ -342,13 +368,44 @@ public class FrConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnCriarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarConsultaActionPerformed
-        // TODO add your handling code here:
+    this.habilitarCampos(true); 
+    this.limparCampos();        
     }//GEN-LAST:event_btnCriarConsultaActionPerformed
 
     private void btnPedidoExameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidoExameActionPerformed
-        // TODO add your handling code here:
+    views.FrExame telaExame = new views.FrExame();
+    telaExame.setLocationRelativeTo(null);
+    telaExame.setVisible(true);        
     }//GEN-LAST:event_btnPedidoExameActionPerformed
 
+    private void btnLimparConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparConsultaActionPerformed
+    this.limparCampos();
+    this.habilitarCampos(false);        
+    }//GEN-LAST:event_btnLimparConsultaActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+       this.dispose();
+       // TODO add your handling code here:
+    }//GEN-LAST:event_btnVoltarActionPerformed
+    public void limparCampos() {
+        txtData.setText("");
+        txtHora.setText("");
+        txtMedico.setText("");
+        txtMotivo.setText("");
+        txtRelatorio.setText("");
+        txtPrevisaoDoParto.setText("");
+        btnGravidezDeRisco.setSelected(false);
+    }
+
+    public void habilitarCampos(boolean flag) {
+        txtData.setEnabled(flag);
+        txtHora.setEnabled(flag);
+        txtMedico.setEnabled(flag);
+        txtMotivo.setEnabled(flag);
+        txtRelatorio.setEnabled(flag);
+        txtPrevisaoDoParto.setEnabled(flag);
+        btnGravidezDeRisco.setEnabled(flag); 
+    }
     /**
      * @param args the command line arguments
      */
@@ -375,13 +432,15 @@ public class FrConsulta extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FrConsulta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FrConsulta().setVisible(true);
             }
         });
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -392,6 +451,7 @@ public class FrConsulta extends javax.swing.JFrame {
     private javax.swing.JButton btnLimparConsulta;
     private javax.swing.JButton btnPedidoExame;
     private javax.swing.JButton btnSalvarConsulta;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

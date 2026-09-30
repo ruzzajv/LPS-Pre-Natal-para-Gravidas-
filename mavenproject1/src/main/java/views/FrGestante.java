@@ -34,6 +34,7 @@ public class FrGestante extends javax.swing.JFrame {
         btnEntrarComunidade = new javax.swing.JButton();
         btnMarcarConsulta = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,6 +46,7 @@ public class FrGestante extends javax.swing.JFrame {
         btnEntrarComunidade.addActionListener(this::btnEntrarComunidadeActionPerformed);
 
         btnMarcarConsulta.setText("MARCAR CONSULTA");
+        btnMarcarConsulta.addActionListener(this::btnMarcarConsultaActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -70,6 +72,9 @@ public class FrGestante extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Bitstream Charter", 3, 24)); // NOI18N
         jLabel1.setText("OLÁ...");
 
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar.png"))); // NOI18N
+        btnVoltar.addActionListener(this::btnVoltarActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -80,15 +85,21 @@ public class FrGestante extends javax.swing.JFrame {
                         .addGap(59, 59, 59)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(181, 181, 181)
+                        .addComponent(btnVoltar)
+                        .addGap(106, 106, 106)
                         .addComponent(jLabel1)))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnVoltar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(121, 121, 121))
@@ -111,8 +122,23 @@ public class FrGestante extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarComunidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarComunidadeActionPerformed
-        // TODO add your handling code here:
+    views.FrComunidade telaComunidade = new views.FrComunidade();
+    telaComunidade.setLocationRelativeTo(null); // Centraliza no meio do ecrã
+    telaComunidade.setVisible(true);        
+// TODO add your handling code here:
     }//GEN-LAST:event_btnEntrarComunidadeActionPerformed
+
+    private void btnMarcarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarcarConsultaActionPerformed
+     views.FrConsulta telaConsulta = new views.FrConsulta();
+    telaConsulta.setLocationRelativeTo(null);
+    telaConsulta.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMarcarConsultaActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        this.dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,6 +168,7 @@ public class FrGestante extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrarComunidade;
     private javax.swing.JButton btnMarcarConsulta;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

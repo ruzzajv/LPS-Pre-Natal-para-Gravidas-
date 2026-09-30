@@ -125,7 +125,10 @@ public class FrAtendente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGerarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarPagamentoActionPerformed
-        // TODO add your handling code here:
+    FrFormaPagamento telaPagamento = new FrFormaPagamento();
+    telaPagamento.setLocationRelativeTo(null);
+    telaPagamento.setVisible(true);      
+    // TODO add your handling code here:
     }//GEN-LAST:event_btnGerarPagamentoActionPerformed
 
     private void btnCadastrarGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarGestanteActionPerformed

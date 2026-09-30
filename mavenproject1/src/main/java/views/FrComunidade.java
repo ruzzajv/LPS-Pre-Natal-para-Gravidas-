@@ -1,4 +1,5 @@
-/*
+package views;
+        /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -33,6 +34,7 @@ public class FrComunidade extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnEntrarNaAbaDeInformacoes = new javax.swing.JButton();
         btnEntrarNoForumDeApoioDasGestante = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,8 +47,13 @@ public class FrComunidade extends javax.swing.JFrame {
         jLabel2.setText("ESCOLHA UMA AÇÃO");
 
         btnEntrarNaAbaDeInformacoes.setText("ENTRAR NA ABA DE INFORMAÇOES ");
+        btnEntrarNaAbaDeInformacoes.addActionListener(this::btnEntrarNaAbaDeInformacoesActionPerformed);
 
         btnEntrarNoForumDeApoioDasGestante.setText("ENTRAR NO FORUM DE APOIO DAS GESTANTES");
+        btnEntrarNoForumDeApoioDasGestante.addActionListener(this::btnEntrarNoForumDeApoioDasGestanteActionPerformed);
+
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar.png"))); // NOI18N
+        btnVoltar.addActionListener(this::btnVoltarActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -64,13 +71,15 @@ public class FrComunidade extends javax.swing.JFrame {
                         .addComponent(jLabel2))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addComponent(btnVoltar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(44, 44, 44)
                 .addComponent(jLabel2)
@@ -78,7 +87,7 @@ public class FrComunidade extends javax.swing.JFrame {
                 .addComponent(btnEntrarNaAbaDeInformacoes)
                 .addGap(18, 18, 18)
                 .addComponent(btnEntrarNoForumDeApoioDasGestante, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -105,6 +114,25 @@ public class FrComunidade extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEntrarNaAbaDeInformacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarNaAbaDeInformacoesActionPerformed
+    views.FrComunidadeInfo telaInfo = new views.FrComunidadeInfo();
+    telaInfo.setLocationRelativeTo(null); // Centraliza no ecrã
+    telaInfo.setVisible(true);        
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnEntrarNaAbaDeInformacoesActionPerformed
+
+    private void btnEntrarNoForumDeApoioDasGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarNoForumDeApoioDasGestanteActionPerformed
+    views.FrComunidadeMural telaForum = new views.FrComunidadeMural();
+    telaForum.setLocationRelativeTo(null); 
+    telaForum.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEntrarNoForumDeApoioDasGestanteActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        this.dispose();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,6 +162,7 @@ public class FrComunidade extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrarNaAbaDeInformacoes;
     private javax.swing.JButton btnEntrarNoForumDeApoioDasGestante;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
