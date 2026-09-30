@@ -33,7 +33,6 @@ public class FrAtendente extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnGerarPagamento = new javax.swing.JButton();
         btnMarcarConsulta = new javax.swing.JButton();
-        btnCancelarConsulta = new javax.swing.JButton();
         btnVerAgenda = new javax.swing.JButton();
         btnGerenciarComunidade = new javax.swing.JButton();
         btnVizualizarExtrato = new javax.swing.JButton();
@@ -49,15 +48,17 @@ public class FrAtendente extends javax.swing.JFrame {
         btnGerarPagamento.setText("GERAR PAGAMENTO");
         btnGerarPagamento.addActionListener(this::btnGerarPagamentoActionPerformed);
 
-        btnMarcarConsulta.setText("MARCAR CONSULTA");
-
-        btnCancelarConsulta.setText("CANCELAR CONSULTA");
+        btnMarcarConsulta.setText("GERENCIAR CONSULTA");
+        btnMarcarConsulta.addActionListener(this::btnMarcarConsultaActionPerformed);
 
         btnVerAgenda.setText("VER AGENDA");
+        btnVerAgenda.addActionListener(this::btnVerAgendaActionPerformed);
 
         btnGerenciarComunidade.setText("GERENCIAR COMUNIDADE");
+        btnGerenciarComunidade.addActionListener(this::btnGerenciarComunidadeActionPerformed);
 
         btnVizualizarExtrato.setText("VIZUALIZAR EXTRATO");
+        btnVizualizarExtrato.addActionListener(this::btnVizualizarExtratoActionPerformed);
 
         jLabel1.setFont(new java.awt.Font("Bitstream Charter", 3, 24)); // NOI18N
         jLabel1.setText("OLÁ...");
@@ -81,7 +82,6 @@ public class FrAtendente extends javax.swing.JFrame {
                     .addComponent(btnMarcarConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnVizualizarExtrato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCadastrarGestante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCancelarConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnVerAgenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -90,21 +90,19 @@ public class FrAtendente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCadastrarGestante, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGerenciarComunidade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnMarcarConsulta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCancelarConsulta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnVerAgenda)
-                .addGap(11, 11, 11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGerarPagamento)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnVizualizarExtrato)
-                .addGap(20, 20, 20))
+                .addGap(14, 14, 14))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,8 +130,38 @@ public class FrAtendente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGerarPagamentoActionPerformed
 
     private void btnCadastrarGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarGestanteActionPerformed
-        // TODO add your handling code here:
+FrCadGestante telaCadGestante = new FrCadGestante();
+telaCadGestante.setLocationRelativeTo(null);
+telaCadGestante.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_btnCadastrarGestanteActionPerformed
+
+    private void btnGerenciarComunidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarComunidadeActionPerformed
+FrComunidade telaComunidade = new FrComunidade();
+telaComunidade.setLocationRelativeTo(null);
+telaComunidade.setVisible(true);   
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnGerenciarComunidadeActionPerformed
+
+    private void btnMarcarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarcarConsultaActionPerformed
+FrConsulta telaConsulta = new FrConsulta();
+telaConsulta.setLocationRelativeTo(null);
+telaConsulta.setVisible(true);
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnMarcarConsultaActionPerformed
+
+    private void btnVerAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerAgendaActionPerformed
+FrAgenda telaAgenda = new FrAgenda(); 
+telaAgenda.setLocationRelativeTo(null);
+telaAgenda.setVisible(true);
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnVerAgendaActionPerformed
+
+    private void btnVizualizarExtratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVizualizarExtratoActionPerformed
+FrExtrato telaExtrato = new FrExtrato();
+telaExtrato.setLocationRelativeTo(null);
+telaExtrato.setVisible(true);
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnVizualizarExtratoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,7 +190,6 @@ public class FrAtendente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrarGestante;
-    private javax.swing.JButton btnCancelarConsulta;
     private javax.swing.JButton btnGerarPagamento;
     private javax.swing.JButton btnGerenciarComunidade;
     private javax.swing.JButton btnMarcarConsulta;

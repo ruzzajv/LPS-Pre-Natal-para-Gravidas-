@@ -52,7 +52,7 @@ public class FrComunidade extends javax.swing.JFrame {
         btnEntrarNoForumDeApoioDasGestante.setText("ENTRAR NO FORUM DE APOIO DAS GESTANTES");
         btnEntrarNoForumDeApoioDasGestante.addActionListener(this::btnEntrarNoForumDeApoioDasGestanteActionPerformed);
 
-        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/voltar.png"))); // NOI18N
+        btnVoltar.setIcon(new javax.swing.ImageIcon("C:\\Users\\jruza\\OneDrive\\Documentos\\NetBeansProjects\\LPS-Pre-Natal-para-Gravidas-\\mavenproject1\\src\\main\\resources\\imagens\\voltar.png")); // NOI18N
         btnVoltar.addActionListener(this::btnVoltarActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

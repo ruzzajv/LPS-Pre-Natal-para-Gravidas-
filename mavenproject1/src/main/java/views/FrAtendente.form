@@ -67,7 +67,6 @@
                       <Component id="btnMarcarConsulta" max="32767" attributes="0"/>
                       <Component id="btnVizualizarExtrato" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnCadastrarGestante" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnCancelarConsulta" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnVerAgenda" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -79,21 +78,19 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="44" max="-2" attributes="0"/>
-                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="btnCadastrarGestante" min="-2" pref="23" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnGerenciarComunidade" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnMarcarConsulta" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnCancelarConsulta" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnVerAgenda" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnGerarPagamento" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnVizualizarExtrato" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -109,28 +106,35 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnMarcarConsulta">
           <Properties>
-            <Property name="text" type="java.lang.String" value="MARCAR CONSULTA"/>
+            <Property name="text" type="java.lang.String" value="GERENCIAR CONSULTA"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnCancelarConsulta">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="CANCELAR CONSULTA"/>
-          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMarcarConsultaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnVerAgenda">
           <Properties>
             <Property name="text" type="java.lang.String" value="VER AGENDA"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerAgendaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnGerenciarComunidade">
           <Properties>
             <Property name="text" type="java.lang.String" value="GERENCIAR COMUNIDADE"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGerenciarComunidadeActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnVizualizarExtrato">
           <Properties>
             <Property name="text" type="java.lang.String" value="VIZUALIZAR EXTRATO"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVizualizarExtratoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
