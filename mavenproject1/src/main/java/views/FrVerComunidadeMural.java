@@ -9,7 +9,11 @@ package views;
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrVerComunidadeMural extends javax.swing.JFrame {
-    
+        private javax.swing.JFrame telaAnterior;
+
+    public void setTelaAnterior(javax.swing.JFrame tela) {
+        this.telaAnterior = tela;
+    }
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrVerComunidadeMural.class.getName());
 
     /**
@@ -73,6 +77,7 @@ public class FrVerComunidadeMural extends javax.swing.JFrame {
         jLabel1.setText("SEJA BEM VINDO A NOSSA COMUNIDADE ");
 
         btnVoltar.setText("VOLTAR");
+        btnVoltar.addActionListener(this::btnVoltarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,6 +119,15 @@ public class FrVerComunidadeMural extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+    this.dispose(); // Fecha o Pix
+        
+        // Esta é a parte que falta se o programa está a fechar todo!
+        if (this.telaAnterior != null) {
+            this.telaAnterior.setVisible(true);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments

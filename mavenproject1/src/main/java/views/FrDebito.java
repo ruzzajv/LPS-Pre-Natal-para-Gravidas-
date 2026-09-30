@@ -52,6 +52,7 @@ public class FrDebito extends javax.swing.JFrame {
 
         jLabel2.setText("INSIRA O VALOR: ");
 
+        txtValor.setMinimumSize(new java.awt.Dimension(104, 22));
         txtValor.addActionListener(this::txtValorActionPerformed);
 
         btnEnviar.setText("ENVIAR");
@@ -66,7 +67,7 @@ public class FrDebito extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtValor))
+                        .addComponent(txtValor, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(57, 57, 57)
                         .addComponent(btnEnviar)
@@ -102,7 +103,7 @@ public class FrDebito extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
