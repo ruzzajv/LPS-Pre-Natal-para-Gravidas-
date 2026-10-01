@@ -374,7 +374,7 @@ public class FrConsulta extends javax.swing.JFrame {
 
     private void btnPedidoExameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidoExameActionPerformed
 views.FrExame telaExame = new views.FrExame();
-        telaExame.setTelaAnterior(this); // Guarda a tela atual no histórico para o botão voltar funcionar
+        telaExame.setTelaAnterior(this); 
         telaExame.setLocationRelativeTo(null);
         telaExame.setVisible(true);
         this.dispose();
@@ -386,9 +386,8 @@ views.FrExame telaExame = new views.FrExame();
     }//GEN-LAST:event_btnLimparConsultaActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-      this.dispose(); // Fecha o Pix
+      this.dispose(); 
         
-        // Esta é a parte que falta se o programa está a fechar todo!
         if (this.telaAnterior != null) {
             this.telaAnterior.setVisible(true);
         }

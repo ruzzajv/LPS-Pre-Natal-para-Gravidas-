@@ -118,9 +118,9 @@ FrAgenda telaAgenda = new FrAgenda();
     }//GEN-LAST:event_btnVizualizarAgendaActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-this.dispose(); // Fecha a tela atual (ex: Gerente)
+this.dispose();
         
-        // Cria uma nova tela de login limpa e a exibe
+        
         views.LoginV2 telaLogin = new views.LoginV2();
         telaLogin.setLocationRelativeTo(null);
         telaLogin.setVisible(true);    // TODO add your handling code here:

@@ -175,9 +175,8 @@ public class FrExame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTipoActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-this.dispose(); // Fecha a tela de exames atual
+this.dispose(); 
         
-        // Verifica se existe uma tela anterior salva e a reexibe
         if (this.telaAnterior != null) {
             this.telaAnterior.setVisible(true);
         }       // TODO add your handling code here:

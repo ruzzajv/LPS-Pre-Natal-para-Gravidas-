@@ -29,7 +29,6 @@ public class LoginController {
     }
 
     private void abrirTela(JFrame novaTela, JFrame telaAtual) {
-        // Informa à nova tela qual era o login (para o botão voltar funcionar depois)
         if (novaTela instanceof views.FrGerente) {
             ((views.FrGerente) novaTela).setTelaAnterior(telaAtual);
         } else if (novaTela instanceof views.FrAtendente) {
@@ -43,7 +42,6 @@ public class LoginController {
         novaTela.setLocationRelativeTo(null);
         novaTela.setVisible(true);
         
-        // Fecha a tela de login atual completamente para ela sumir da tela
         if (telaAtual != null) {
             telaAtual.dispose();
         }

@@ -134,9 +134,8 @@ public class FrCadGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_checkAcessoTotalActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        this.dispose(); // Fecha o Pix
+        this.dispose(); 
         
-        // Esta é a parte que falta se o programa está a fechar todo!
         if (this.telaAnterior != null) {
             this.telaAnterior.setVisible(true);
         }    // TODO add your handling code here:

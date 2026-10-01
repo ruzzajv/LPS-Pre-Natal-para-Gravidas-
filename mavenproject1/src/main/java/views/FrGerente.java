@@ -131,9 +131,8 @@ public class FrGerente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-this.dispose(); // Fecha a tela atual (ex: Gerente)
+this.dispose(); 
         
-        // Cria uma nova tela de login limpa e a exibe
         views.LoginV2 telaLogin = new views.LoginV2();
         telaLogin.setLocationRelativeTo(null);
         telaLogin.setVisible(true);        // TODO add your handling code here:

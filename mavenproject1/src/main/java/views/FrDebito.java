@@ -145,9 +145,8 @@ public class FrDebito extends javax.swing.JFrame {
     }//GEN-LAST:event_txtValorActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-    this.dispose(); // Fecha o Pix
-        
-        // Esta é a parte que falta se o programa está a fechar todo!
+    this.dispose(); 
+       
         if (this.telaAnterior != null) {
             this.telaAnterior.setVisible(true);
         }

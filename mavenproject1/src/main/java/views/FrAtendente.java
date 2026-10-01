@@ -140,11 +140,10 @@ public class FrAtendente extends javax.swing.JFrame {
     private void btnGerarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarPagamentoActionPerformed
         views.FrFormaPagamento telaNova = new views.FrFormaPagamento();
 
-        // O SEGREDO DO NAVEGADOR ESTÁ AQUI: Passa a tela atual para o histórico da nova
         telaNova.setTelaAnterior(this);
 
         telaNova.setLocationRelativeTo(null);
-        telaNova.setVisible(true); // Mostra a nova
+        telaNova.setVisible(true);
 
         this.setVisible(false);
     }//GEN-LAST:event_btnGerarPagamentoActionPerformed
@@ -152,7 +151,6 @@ public class FrAtendente extends javax.swing.JFrame {
     private void btnCadastrarGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarGestanteActionPerformed
         FrCadGestante telaCadGestante = new FrCadGestante();
 
-        // 1. Passa o menu atual para o histórico da próxima tela
         telaCadGestante.setTelaAnterior(this);
 
         telaCadGestante.pack();
@@ -160,7 +158,6 @@ public class FrAtendente extends javax.swing.JFrame {
         telaCadGestante.setResizable(false);
         telaCadGestante.setVisible(true);
 
-        // 2. Esconde o menu do atendente
         this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_btnCadastrarGestanteActionPerformed
 
@@ -197,9 +194,8 @@ public class FrAtendente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVizualizarExtratoActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-this.dispose(); // Fecha a tela atual (ex: Gerente)
+this.dispose(); 
         
-        // Cria uma nova tela de login limpa e a exibe
         views.LoginV2 telaLogin = new views.LoginV2();
         telaLogin.setLocationRelativeTo(null);
         telaLogin.setVisible(true);

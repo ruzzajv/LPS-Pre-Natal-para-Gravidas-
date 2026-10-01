@@ -207,9 +207,8 @@ public class FrCredito extends javax.swing.JFrame {
     }//GEN-LAST:event_CheckBox2ActionPerformed
 
     private void BTNVOLTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNVOLTARActionPerformed
-        this.dispose(); // Fecha o Pix
+        this.dispose();
         
-        // Esta é a parte que falta se o programa está a fechar todo!
         if (this.telaAnterior != null) {
             this.telaAnterior.setVisible(true);
         }

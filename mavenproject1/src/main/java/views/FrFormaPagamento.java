@@ -15,7 +15,7 @@ public class FrFormaPagamento extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrFormaPagamento.class.getName());
     private javax.swing.JFrame telaAnterior;
 
-    // Método para receber a tela anterior
+    
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
     }
@@ -143,7 +143,7 @@ public class FrFormaPagamento extends javax.swing.JFrame {
 
     private void btnPixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPixActionPerformed
         FrPix telaPix = new FrPix();
-        telaPix.setTelaAnterior(this); // 1. Passa o histórico
+        telaPix.setTelaAnterior(this); 
         telaPix.setLocationRelativeTo(null);
         telaPix.setVisible(true);
         this.setVisible(false);
@@ -174,9 +174,8 @@ public class FrFormaPagamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDinheiroActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        this.dispose(); // Fecha esta tela de Formas de Pagamento
+        this.dispose(); 
 
-        // Volta para o menu do Atendente que estava guardado no histórico
         if (this.telaAnterior != null) {
             this.telaAnterior.setVisible(true);
         }
