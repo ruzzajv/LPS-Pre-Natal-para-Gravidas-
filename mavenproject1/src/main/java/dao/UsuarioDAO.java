@@ -7,25 +7,63 @@ import javax.persistence.Persistence;
 
 public class UsuarioDAO {
 
-    // Use exatamente o mesmo nome da Persistence Unit que está no seu persistence.xml
     private static final String PU = "com.mycompany_mavenproject1_jar_1.0-SNAPSHOTPU";
+    private EntityManagerFactory emf;
+
+    public UsuarioDAO() {
+        this.emf = Persistence.createEntityManagerFactory(PU);
+    }
 
     private EntityManager getEntityManager() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
         return emf.createEntityManager();
     }
 
-    // Método para salvar qualquer usuário (ou herdeiros como Gestante, Medico, etc.) no banco
-    public void cadastrar(Usuario usuario) {
+    public void salvar(Usuario usuario) throws Exception {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(usuario);
             em.getTransaction().commit();
-            System.out.println("Registro salvo com sucesso no banco de dados!");
         } catch (Exception e) {
-            em.getTransaction().rollback();
-            e.printStackTrace();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
+
+    public void editar(Usuario usuario) throws Exception {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(usuario);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
+
+    public void excluir(Long id) throws Exception {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Usuario usuario = em.find(Usuario.class, id);
+            if (usuario != null) {
+                em.remove(usuario);
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
         } finally {
             em.close();
         }

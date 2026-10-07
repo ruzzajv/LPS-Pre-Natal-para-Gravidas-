@@ -1,4 +1,8 @@
 package views;
+
+import controller.UsuarioController;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -43,16 +47,16 @@ public class FrCadUsauario extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
-        txtCPF = new javax.swing.JTextField();
+        txtCpf = new javax.swing.JTextField();
         txtIdade = new javax.swing.JTextField();
         txtLogin = new javax.swing.JTextField();
-        txtSenha = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtContato = new javax.swing.JTextField();
-        btnUsuarioTipoGestante = new javax.swing.JButton();
-        btnUsuarioTipoMedico = new javax.swing.JButton();
-        btnUsuarioTipoAtendente = new javax.swing.JButton();
-        btnUsuarioTipoGerente = new javax.swing.JButton();
+        btnUsuarioTipoGestante = new javax.swing.JRadioButton();
+        btnUsuarioTipoMedico = new javax.swing.JRadioButton();
+        btnUsuarioTipoAtendente = new javax.swing.JRadioButton();
+        btnUsuarioTipoGerente = new javax.swing.JRadioButton();
+        txtSenha = new javax.swing.JPasswordField();
         jPanel4 = new javax.swing.JPanel();
         btnCriarUsuario = new javax.swing.JButton();
         btnEditarUsuario = new javax.swing.JButton();
@@ -93,11 +97,6 @@ public class FrCadUsauario extends javax.swing.JFrame {
         });
 
         btnUsuarioTipoGestante.setText("GESTANTE");
-        btnUsuarioTipoGestante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUsuarioTipoGestanteActionPerformed(evt);
-            }
-        });
 
         btnUsuarioTipoMedico.setText("MEDICO");
 
@@ -123,20 +122,20 @@ public class FrCadUsauario extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnUsuarioTipoGestante)
+                        .addComponent(btnUsuarioTipoGestante, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnUsuarioTipoMedico)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnUsuarioTipoAtendente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnUsuarioTipoGerente))
-                    .addComponent(txtSenha)
+                        .addComponent(btnUsuarioTipoMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnUsuarioTipoAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUsuarioTipoGerente, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtLogin)
                     .addComponent(txtIdade)
-                    .addComponent(txtCPF)
+                    .addComponent(txtCpf)
                     .addComponent(txtNome)
                     .addComponent(txtContato)
-                    .addComponent(txtEmail))
+                    .addComponent(txtEmail)
+                    .addComponent(txtSenha))
                 .addGap(82, 82, 82))
         );
         jPanel3Layout.setVerticalGroup(
@@ -149,7 +148,7 @@ public class FrCadUsauario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -177,7 +176,7 @@ public class FrCadUsauario extends javax.swing.JFrame {
                     .addComponent(btnUsuarioTipoMedico)
                     .addComponent(btnUsuarioTipoAtendente)
                     .addComponent(btnUsuarioTipoGerente))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(102, 102, 255));
@@ -194,6 +193,11 @@ public class FrCadUsauario extends javax.swing.JFrame {
         btnApagarUsuario.setText("APAGAR");
 
         btnSalvarUsuario.setText("SALVAR");
+        btnSalvarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarUsuarioActionPerformed(evt);
+            }
+        });
 
         btnLimparUsuario.setText("LIMPAR");
 
@@ -278,10 +282,6 @@ public class FrCadUsauario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnUsuarioTipoGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioTipoGestanteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUsuarioTipoGestanteActionPerformed
-
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
@@ -297,6 +297,34 @@ public class FrCadUsauario extends javax.swing.JFrame {
             this.telaAnterior.setVisible(true);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnSalvarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarUsuarioActionPerformed
+    try {
+    UsuarioController controller = new UsuarioController();
+    
+    // Pegando o tipo baseado nos Radio Buttons da interface
+    String tipo = "";
+    if (btnUsuarioTipoGestante.isSelected()) tipo = "GESTANTE";
+    else if (btnUsuarioTipoMedico.isSelected()) tipo = "MEDICO";
+    else if (btnUsuarioTipoAtendente.isSelected()) tipo = "ATENDENTE";
+    else if (btnUsuarioTipoGerente.isSelected()) tipo = "GERENTE";
+
+    controller.salvarUsuario(
+        txtNome.getText(),
+        txtCpf.getText(),
+        txtLogin.getText(),
+        new String(txtSenha.getPassword()),
+        txtEmail.getText(),
+        tipo
+    );
+
+    JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
+    
+    
+} catch (Exception ex) {
+    JOptionPane.showMessageDialog(this, "Erro ao salvar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+}   
+    }//GEN-LAST:event_btnSalvarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,10 +367,10 @@ public class FrCadUsauario extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarUsuario;
     private javax.swing.JButton btnLimparUsuario;
     private javax.swing.JButton btnSalvarUsuario;
-    private javax.swing.JButton btnUsuarioTipoAtendente;
-    private javax.swing.JButton btnUsuarioTipoGerente;
-    private javax.swing.JButton btnUsuarioTipoGestante;
-    private javax.swing.JButton btnUsuarioTipoMedico;
+    private javax.swing.JRadioButton btnUsuarioTipoAtendente;
+    private javax.swing.JRadioButton btnUsuarioTipoGerente;
+    private javax.swing.JRadioButton btnUsuarioTipoGestante;
+    private javax.swing.JRadioButton btnUsuarioTipoMedico;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -356,12 +384,12 @@ public class FrCadUsauario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtContato;
+    private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtIdade;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtSenha;
+    private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 }
