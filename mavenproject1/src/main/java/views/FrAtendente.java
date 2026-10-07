@@ -69,7 +69,7 @@ public class FrAtendente extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Bitstream Charter", 3, 24)); // NOI18N
         jLabel1.setText("OLÁ...");
 
-        btnCadastrarGestante.setText("CADASTRAR GESTANTE");
+        btnCadastrarGestante.setText("CADASTRAR USUARIO");
         btnCadastrarGestante.addActionListener(this::btnCadastrarGestanteActionPerformed);
 
         btnVoltar.setText("SAIR");
@@ -149,14 +149,15 @@ public class FrAtendente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGerarPagamentoActionPerformed
 
     private void btnCadastrarGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarGestanteActionPerformed
-        FrCadGestante telaCadGestante = new FrCadGestante();
-
-        telaCadGestante.setTelaAnterior(this);
-
-        telaCadGestante.pack();
-        telaCadGestante.setLocationRelativeTo(null);
-        telaCadGestante.setResizable(false);
-        telaCadGestante.setVisible(true);
+    FrCadUsuario telaCadastro = new FrCadUsuario();
+        
+        
+        telaCadastro.setTelaAnterior(this);
+        telaCadastro.pack();
+        telaCadastro.setLocationRelativeTo(null);
+        telaCadastro.setResizable(false);
+        telaCadastro.setVisible(true);
+        
 
         this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_btnCadastrarGestanteActionPerformed

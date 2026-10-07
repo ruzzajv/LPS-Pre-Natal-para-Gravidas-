@@ -1,5 +1,9 @@
 package views;
 
+import dao.UsuarioDAO;
+import entidades.Gestante;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,19 +13,37 @@ package views;
  *
  * @author 09816655608
  */
+
 public class FrCadGestante extends javax.swing.JFrame {
 
-    private javax.swing.JFrame telaAnterior;
+   private javax.swing.JFrame telaAnterior;
+    
+    // Variáveis para guardar os dados vindos da tela FrCadUsuario
+    private String nomeBase;
+    private String cpfBase;
+    private String loginBase;
+    private String senhaBase;
+    private String emailBase;
+
+    // Novo construtor que recebe os dados da tela anterior
+    public FrCadGestante(String nome, String cpf, String login, String senha, String email) {
+        initComponents();
+        setLocationRelativeTo(null); // Centraliza a tela
+        
+        this.nomeBase = nome;
+        this.cpfBase = cpf;
+        this.loginBase = login;
+        this.senhaBase = senha;
+        this.emailBase = email;
+    }
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
     }
 
-    /**
-     * Creates new form FrCadGravida
-     */
     public FrCadGestante() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -156,6 +178,11 @@ public class FrCadGestante extends javax.swing.JFrame {
         btnApagarGestante.setText("APAGAR");
 
         btnSalvarGestante.setText("SALVAR");
+        btnSalvarGestante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarGestanteActionPerformed(evt);
+            }
+        });
 
         btnLimparGestante.setText("LIMPAR");
 
@@ -253,47 +280,80 @@ public class FrCadGestante extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCriarGestanteActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-     this.dispose(); 
-        
+        this.dispose();
+
         if (this.telaAnterior != null) {
             this.telaAnterior.setVisible(true);
         }
     }//GEN-LAST:event_btnVoltarActionPerformed
 
+    private void btnSalvarGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarGestanteActionPerformed
+        try {
+            Gestante novaGestante = new Gestante();
+
+            // 1. Preenche os dados herdados de Usuario (que vieram da FrCadUsuario)
+            novaGestante.setNome(nomeBase);
+            // novaGestante.setCpf(cpfBase); // Descomente caso a sua entidade Usuario tenha CPF mapeado
+            novaGestante.setLogin(loginBase);
+            novaGestante.setSenha(senhaBase);
+            novaGestante.setEmail(emailBase);
+
+            // 2. Preenche os dados específicos da Gestante (desta tela)
+            // novaGestante.setDiaDescoberta(txtDiaDaDescoberta.getText()); // Ajuste o set se a entidade tiver este campo
+            novaGestante.setSemanasDeGravidez(Integer.parseInt(txtSemanasDeGravidez.getText()));
+            // novaGestante.setPrevisaoParto(txtPrevisaoDoParto.getText()); // Ajuste o set se a entidade tiver este campo
+
+            // Captura o RadioButton de risco
+            // novaGestante.setGravidezDeRisco(BtnGravidezDeRisco.isSelected()); // Ajuste o set se a entidade tiver
+            // 3. Chama o DAO para salvar tudo no banco de dados
+            UsuarioDAO dao = new UsuarioDAO();
+            dao.salvar(novaGestante);
+
+            JOptionPane.showMessageDialog(this, "Gestante cadastrada com sucesso!");
+            this.dispose(); // Fecha a tela após salvar com sucesso
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "O campo 'Semanas de Gravidez' deve ser um número válido!", "Erro de Preenchimento", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+          // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalvarGestanteActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+     */
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrCadGestante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrCadGestante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrCadGestante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrCadGestante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrCadGestante().setVisible(true);
-            }
-        });
+    } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(FrCadGestante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(FrCadGestante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(FrCadGestante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(FrCadGestante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
+    //</editor-fold>
+
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new FrCadGestante().setVisible(true);
+        }
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton BtnGravidezDeRisco;

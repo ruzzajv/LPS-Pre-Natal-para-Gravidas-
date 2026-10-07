@@ -13,6 +13,10 @@ package views;
 public class FrCadGerente extends javax.swing.JFrame {
         private javax.swing.JFrame telaAnterior;
 
+    FrCadGerente(String nome, String cpf, String login, String senha, String email) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
     }

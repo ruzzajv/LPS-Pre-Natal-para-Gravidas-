@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author 09816655608
  */
-public class FrCadUsauario extends javax.swing.JFrame {
+public class FrCadUsuario extends javax.swing.JFrame {
         private javax.swing.JFrame telaAnterior;
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
@@ -22,7 +22,7 @@ public class FrCadUsauario extends javax.swing.JFrame {
     /**
      * Creates new form FrCadUsauario
      */
-    public FrCadUsauario() {
+    public FrCadUsuario() {
         initComponents();
     }
 
@@ -299,31 +299,41 @@ public class FrCadUsauario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnSalvarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarUsuarioActionPerformed
-    try {
-    UsuarioController controller = new UsuarioController();
-    
-    // Pegando o tipo baseado nos Radio Buttons da interface
-    String tipo = "";
-    if (btnUsuarioTipoGestante.isSelected()) tipo = "GESTANTE";
-    else if (btnUsuarioTipoMedico.isSelected()) tipo = "MEDICO";
-    else if (btnUsuarioTipoAtendente.isSelected()) tipo = "ATENDENTE";
-    else if (btnUsuarioTipoGerente.isSelected()) tipo = "GERENTE";
+   // 1. Recolhe os dados básicos digitados na primeira tela
+String nome = txtNome.getText();
+String cpf = txtCpf.getText();
+String login = txtLogin.getText();
+String senha = new String(txtSenha.getPassword());
+String email = txtEmail.getText();
 
-    controller.salvarUsuario(
-        txtNome.getText(),
-        txtCpf.getText(),
-        txtLogin.getText(),
-        new String(txtSenha.getPassword()),
-        txtEmail.getText(),
-        tipo
-    );
-
-    JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
+// 2. Verifica qual botão de rádio está selecionado e abre a tela específica passando os dados
+if (btnUsuarioTipoGestante.isSelected()) {
+    FrCadGestante telaGestante = new FrCadGestante(nome, cpf, login, senha, email);
+    telaGestante.setLocationRelativeTo(null); // Centraliza
+    telaGestante.setVisible(true);
+    this.dispose(); // Fecha a tela atual (FrCadUsuario)
     
+} else if (btnUsuarioTipoMedico.isSelected()) {
+    FrCadMedico telaMedico = new FrCadMedico(nome, cpf, login, senha, email);
+    telaMedico.setLocationRelativeTo(null);
+    telaMedico.setVisible(true);
+    this.dispose();
     
-} catch (Exception ex) {
-    JOptionPane.showMessageDialog(this, "Erro ao salvar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-}   
+} else if (btnUsuarioTipoAtendente.isSelected()) {
+    FrCadAtendente telaAtendente = new FrCadAtendente(nome, cpf, login, senha, email);
+    telaAtendente.setLocationRelativeTo(null);
+    telaAtendente.setVisible(true);
+    this.dispose();
+    
+} else if (btnUsuarioTipoGerente.isSelected()) {
+    FrCadGerente telaGerente = new FrCadGerente(nome, cpf, login, senha, email);
+    telaGerente.setLocationRelativeTo(null);
+    telaGerente.setVisible(true);
+    this.dispose();
+    
+} else {
+    JOptionPane.showMessageDialog(this, "Selecione o tipo de usuário antes de avançar!", "Aviso", JOptionPane.WARNING_MESSAGE);
+}
     }//GEN-LAST:event_btnSalvarUsuarioActionPerformed
 
     /**
@@ -343,20 +353,21 @@ public class FrCadUsauario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrCadUsauario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrCadUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrCadUsauario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrCadUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrCadUsauario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrCadUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrCadUsauario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrCadUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrCadUsauario().setVisible(true);
+                new FrCadUsuario().setVisible(true);
             }
         });
     }
