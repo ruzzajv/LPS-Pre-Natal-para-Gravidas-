@@ -44,7 +44,7 @@ public class LoginController {
             if (usuarioAutenticado != null) {
                 JOptionPane.showMessageDialog(telaLogin, "Login efetuado com sucesso! Bem-vindo(a), " + usuarioAutenticado.getNome());
                 
-                // Fecha a janela de login atual
+              
                 telaLogin.dispose();
 
                 // Redireciona e abre a tela correta conforme o tipo de utilizador
@@ -69,3 +69,4 @@ public class LoginController {
         }
     }
 }
+
