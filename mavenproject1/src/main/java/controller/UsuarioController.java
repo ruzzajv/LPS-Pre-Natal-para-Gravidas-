@@ -43,7 +43,16 @@ public class UsuarioController {
         novoUsuario.setSenha(senha);
         novoUsuario.setEmail(email);
 
-        // Chama o DAO para salvar no banco
+        
         dao.salvar(novoUsuario);
+    }
+    
+ public void excluirPorCpf(String cpf) throws Exception {
+        if (cpf == null || cpf.trim().isEmpty()) {
+            throw new Exception("O CPF não pode estar vazio para a exclusão.");
+        }
+        
+        
+        dao.excluirPorCpf(cpf.trim());
     }
 }

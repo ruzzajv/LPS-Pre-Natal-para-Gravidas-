@@ -1,6 +1,7 @@
 package views;
 
 import controller.UsuarioController;
+import dao.UsuarioDAO;
 import javax.swing.JOptionPane;
 
 
@@ -204,6 +205,11 @@ public class FrCadUsuario extends javax.swing.JFrame {
         btnEditarUsuario.setText("EDITAR");
 
         btnApagarUsuario.setText("APAGAR");
+        btnApagarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApagarUsuarioActionPerformed(evt);
+            }
+        });
 
         btnSalvarUsuario.setText("SALVAR");
         btnSalvarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -354,6 +360,43 @@ if (btnUsuarioTipoGestante.isSelected()) {
     JOptionPane.showMessageDialog(this, "Selecione o tipo de usuário antes de avançar!", "Aviso", JOptionPane.WARNING_MESSAGE);
 }
     }//GEN-LAST:event_btnSalvarUsuarioActionPerformed
+
+    private void btnApagarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarUsuarioActionPerformed
+        String cpfDigitado = JOptionPane.showInputDialog(this, "Digite o CPF do usuário que deseja apagar:", "Excluir Usuário", JOptionPane.QUESTION_MESSAGE);
+    
+    if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
+        try {
+            UsuarioDAO dao = new UsuarioDAO();
+            String nomeEncontrado = dao.buscarNomePorCpf(cpfDigitado.trim());
+            
+            if (nomeEncontrado == null) {
+                JOptionPane.showMessageDialog(this, "Nenhum usuário encontrado com o CPF: " + cpfDigitado, "Aviso", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+           
+            String mensagem = "Deseja realmente excluir este usuário?\n\n" +
+                              "Nome: " + nomeEncontrado + "\n" +
+                              "CPF: " + cpfDigitado.trim();
+                              
+            int resposta = JOptionPane.showConfirmDialog(
+                this, 
+                mensagem, 
+                "Confirmar Exclusão", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.WARNING_MESSAGE
+            );
+            
+            if (resposta == JOptionPane.YES_OPTION) {
+                UsuarioController controller = new UsuarioController();
+                controller.excluirPorCpf(cpfDigitado.trim());
+                
+                JOptionPane.showMessageDialog(this, "Usuário apagado com sucesso!");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao apagar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    }//GEN-LAST:event_btnApagarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

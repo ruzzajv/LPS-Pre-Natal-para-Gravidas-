@@ -68,4 +68,67 @@ public class UsuarioDAO {
             em.close();
         }
     }
+    
+    public Usuario buscarPorCpf(String cpf) {
+        EntityManager em = getEntityManager();
+        try {
+            
+            return em.createQuery("SELECT u FROM Usuario u WHERE u.cpf = :cpf", Usuario.class)
+                     .setParameter("cpf", cpf)
+                     .getSingleResult();
+        } catch (javax.persistence.NoResultException e) {
+            return null; 
+        } finally {
+            em.close();
+        }
+    }
+
+
+ public void excluirPorCpf(String cpf) throws Exception {
+    EntityManager em = getEntityManager();
+    try {
+        em.getTransaction().begin();
+        
+        Object usuario = null;
+       
+        try {
+            usuario = em.createQuery("SELECT u FROM Usuario u WHERE u.cpf = :cpf", Object.class)
+                      .setParameter("cpf", cpf)
+                      .getSingleResult();
+        } catch (javax.persistence.NoResultException e) {
+            usuario = null;
+        }
+
+        if (usuario != null) {
+            em.remove(usuario); 
+            em.getTransaction().commit();
+        } else {
+            throw new Exception("Nenhum usuário encontrado com o CPF informado: " + cpf);
+        }
+    } catch (Exception e) {
+        if (em.getTransaction().isActive()) {
+            em.getTransaction().rollback();
+        }
+        throw e;
+    } finally {
+        em.close();
+    }
+}
+
+public String buscarNomePorCpf(String cpf) {
+    EntityManager em = getEntityManager();
+    try {
+        return em.createQuery("SELECT u.nome FROM Usuario u WHERE u.cpf = :cpf", String.class)
+                 .setParameter("cpf", cpf)
+                 .getSingleResult();
+    } catch (Exception e) {
+        return null;
+    } finally {
+        em.close();
+    }
+}
+
+
+
+
 }
