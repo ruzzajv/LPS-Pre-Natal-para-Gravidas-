@@ -2,24 +2,66 @@ package views;
 
 import controller.UsuarioController;
 import dao.UsuarioDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 
 /**
  *
  * @author 09816655608
  */
 public class FrCadUsuario extends javax.swing.JFrame {
-        private javax.swing.JFrame telaAnterior;
+
+    private javax.swing.JFrame telaAnterior;
+    private Long idUsuarioEdicao = null;
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
+
     }
+
     /**
      * Creates new form FrCadUsauario
      */
     public FrCadUsuario() {
         initComponents();
+    }
+
+    // Limpa todos os campos de texto e senha
+    private void limparFormulario() {
+        txtNome.setText("");
+        txtCpf.setText("");
+        txtIdade.setText("");
+        txtLogin.setText("");
+        txtSenha.setText("");
+        txtEmail.setText("");
+        txtContato.setText("");
+        txtDataNascimento.setText("");
+
+        // Limpa os RadioButtons de tipo
+        btnUsuarioTipoGestante.setSelected(false);
+        btnUsuarioTipoMedico.setSelected(false);
+        btnUsuarioTipoAtendente.setSelected(false);
+        btnUsuarioTipoGerente.setSelected(false);
+
+        idUsuarioEdicao = null;
+        txtCpf.setEnabled(true);
+    }
+
+    // Habilita ou desabilita os campos do formulário
+    private void habilitarFormulario(boolean habilitar) {
+        txtNome.setEnabled(habilitar);
+        txtIdade.setEnabled(habilitar);
+        txtLogin.setEnabled(habilitar);
+        txtSenha.setEnabled(habilitar);
+        txtEmail.setEnabled(habilitar);
+        txtCpf.setEnabled(habilitar);
+        txtContato.setEnabled(habilitar);
+        txtDataNascimento.setEnabled(habilitar);
+        btnUsuarioTipoGestante.setEnabled(habilitar);
+        btnUsuarioTipoMedico.setEnabled(habilitar);
+        btnUsuarioTipoAtendente.setEnabled(habilitar);
+        btnUsuarioTipoGerente.setEnabled(habilitar);
     }
 
     /**
@@ -203,6 +245,11 @@ public class FrCadUsuario extends javax.swing.JFrame {
         });
 
         btnEditarUsuario.setText("EDITAR");
+        btnEditarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarUsuarioActionPerformed(evt);
+            }
+        });
 
         btnApagarUsuario.setText("APAGAR");
         btnApagarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -219,6 +266,11 @@ public class FrCadUsuario extends javax.swing.JFrame {
         });
 
         btnLimparUsuario.setText("LIMPAR");
+        btnLimparUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -306,97 +358,156 @@ public class FrCadUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void btnCriarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarUsuarioActionPerformed
-        // TODO add your handling code here:
+        this.limparFormulario();
+        this.habilitarFormulario(true);        // TODO add your handling code here:
     }//GEN-LAST:event_btnCriarUsuarioActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-    this.dispose(); 
-        
+        this.dispose();
+
         if (this.telaAnterior != null) {
             this.telaAnterior.setVisible(true);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnSalvarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarUsuarioActionPerformed
-   // 1. Recolhe os dados básicos digitados na primeira tela
-String nome = txtNome.getText();
-String cpf = txtCpf.getText();
-String login = txtLogin.getText();
-String senha = new String(txtSenha.getPassword());
-String email = txtEmail.getText();
-String dataNasc = txtDataNascimento.getText();
-String idade = txtIdade.getText();
-String contato = txtContato.getText();
+        UsuarioController controller = new UsuarioController();
+        if (idUsuarioEdicao != null) {
+            try {
+                controller.atualizar(
+                        idUsuarioEdicao,
+                        txtNome.getText(),
+                        txtCpf.getText(),
+                        txtIdade.getText(),
+                        txtLogin.getText(),
+                        new String(txtSenha.getPassword()),
+                        txtEmail.getText(),
+                        txtContato.getText(),
+                        txtDataNascimento.getText()
+                );
+            } catch (Exception ex) {
+                Logger.getLogger(FrCadUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JOptionPane.showMessageDialog(this, "Usuário atualizado com sucesso!");
+            this.limparFormulario();
+            this.habilitarFormulario(false);
+            return; 
+        }
+        String nome = txtNome.getText();
+        String cpf = txtCpf.getText();
+        String login = txtLogin.getText();
+        String senha = new String(txtSenha.getPassword());
+        String email = txtEmail.getText();
+        String dataNasc = txtDataNascimento.getText();
+        String idade = txtIdade.getText();
+        String contato = txtContato.getText();
 
-if (btnUsuarioTipoGestante.isSelected()) {
-    FrCadGestante telaGestante = new FrCadGestante(nome, cpf, login, senha, email, dataNasc, contato, idade);
-    telaGestante.setTelaAnterior(this.telaAnterior);
-    telaGestante.setLocationRelativeTo(null); // Centraliza
-    telaGestante.setVisible(true);
-    this.dispose(); 
-    
-} else if (btnUsuarioTipoMedico.isSelected()) {
-    FrCadMedico telaMedico = new FrCadMedico(nome, cpf, login, senha, email, dataNasc, contato, idade);
-    telaMedico.setTelaAnterior(this.telaAnterior);
-    telaMedico.setLocationRelativeTo(null);
-    telaMedico.setVisible(true);
-    this.dispose();
-    
-} else if (btnUsuarioTipoAtendente.isSelected()) {
-    FrCadAtendente telaAtendente = new FrCadAtendente(nome, cpf, login, senha, email, dataNasc, contato, idade);
-    telaAtendente.setTelaAnterior(this.telaAnterior);
-    telaAtendente.setLocationRelativeTo(null);
-    telaAtendente.setVisible(true);
-    this.dispose();
-    
-} else if (btnUsuarioTipoGerente.isSelected()) {
-    FrCadGerente telaGerente = new FrCadGerente(nome, cpf, login, senha, email, dataNasc, contato, idade);
-    telaGerente.setTelaAnterior(this.telaAnterior);
-    telaGerente.setLocationRelativeTo(null);
-    telaGerente.setVisible(true);
-    this.dispose();
-    
-} else {
-    JOptionPane.showMessageDialog(this, "Selecione o tipo de usuário antes de avançar!", "Aviso", JOptionPane.WARNING_MESSAGE);
-}
+        if (btnUsuarioTipoGestante.isSelected()) {
+            FrCadGestante telaGestante = new FrCadGestante(nome, cpf, login, senha, email, dataNasc, contato, idade);
+            telaGestante.setTelaAnterior(this.telaAnterior);
+            telaGestante.setLocationRelativeTo(null); // Centraliza
+            telaGestante.setVisible(true);
+            this.dispose();
+
+        } else if (btnUsuarioTipoMedico.isSelected()) {
+            FrCadMedico telaMedico = new FrCadMedico(nome, cpf, login, senha, email, dataNasc, contato, idade);
+            telaMedico.setTelaAnterior(this.telaAnterior);
+            telaMedico.setLocationRelativeTo(null);
+            telaMedico.setVisible(true);
+            this.dispose();
+
+        } else if (btnUsuarioTipoAtendente.isSelected()) {
+            FrCadAtendente telaAtendente = new FrCadAtendente(nome, cpf, login, senha, email, dataNasc, contato, idade);
+            telaAtendente.setTelaAnterior(this.telaAnterior);
+            telaAtendente.setLocationRelativeTo(null);
+            telaAtendente.setVisible(true);
+            this.dispose();
+
+        } else if (btnUsuarioTipoGerente.isSelected()) {
+            FrCadGerente telaGerente = new FrCadGerente(nome, cpf, login, senha, email, dataNasc, contato, idade);
+            telaGerente.setTelaAnterior(this.telaAnterior);
+            telaGerente.setLocationRelativeTo(null);
+            telaGerente.setVisible(true);
+            this.dispose();
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione o tipo de usuário antes de avançar!", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnSalvarUsuarioActionPerformed
 
     private void btnApagarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarUsuarioActionPerformed
         String cpfDigitado = JOptionPane.showInputDialog(this, "Digite o CPF do usuário que deseja apagar:", "Excluir Usuário", JOptionPane.QUESTION_MESSAGE);
-    
-    if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
-        try {
-            UsuarioDAO dao = new UsuarioDAO();
-            String nomeEncontrado = dao.buscarNomePorCpf(cpfDigitado.trim());
-            
-            if (nomeEncontrado == null) {
-                JOptionPane.showMessageDialog(this, "Nenhum usuário encontrado com o CPF: " + cpfDigitado, "Aviso", JOptionPane.WARNING_MESSAGE);
-                return;
+
+        if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
+            try {
+                UsuarioDAO dao = new UsuarioDAO();
+                String nomeEncontrado = dao.buscarNomePorCpf(cpfDigitado.trim());
+
+                if (nomeEncontrado == null) {
+                    JOptionPane.showMessageDialog(this, "Nenhum usuário encontrado com o CPF: " + cpfDigitado, "Aviso", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                String mensagem = "Deseja realmente excluir este usuário?\n\n"
+                        + "Nome: " + nomeEncontrado + "\n"
+                        + "CPF: " + cpfDigitado.trim();
+
+                int resposta = JOptionPane.showConfirmDialog(
+                        this,
+                        mensagem,
+                        "Confirmar Exclusão",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                );
+
+                if (resposta == JOptionPane.YES_OPTION) {
+                    UsuarioController controller = new UsuarioController();
+                    controller.excluirPorCpf(cpfDigitado.trim());
+
+                    JOptionPane.showMessageDialog(this, "Usuário apagado com sucesso!");
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao apagar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
-           
-            String mensagem = "Deseja realmente excluir este usuário?\n\n" +
-                              "Nome: " + nomeEncontrado + "\n" +
-                              "CPF: " + cpfDigitado.trim();
-                              
-            int resposta = JOptionPane.showConfirmDialog(
-                this, 
-                mensagem, 
-                "Confirmar Exclusão", 
-                JOptionPane.YES_NO_OPTION, 
-                JOptionPane.WARNING_MESSAGE
-            );
-            
-            if (resposta == JOptionPane.YES_OPTION) {
-                UsuarioController controller = new UsuarioController();
-                controller.excluirPorCpf(cpfDigitado.trim());
-                
-                JOptionPane.showMessageDialog(this, "Usuário apagado com sucesso!");
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao apagar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    }
     }//GEN-LAST:event_btnApagarUsuarioActionPerformed
+
+    private void btnLimparUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparUsuarioActionPerformed
+        this.limparFormulario();
+        this.habilitarFormulario(false);
+    }//GEN-LAST:event_btnLimparUsuarioActionPerformed
+
+    private void btnEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarUsuarioActionPerformed
+        String cpfDigitado = JOptionPane.showInputDialog(this, "Digite o CPF do usuário que deseja editar:", "Buscar para Edição", JOptionPane.QUESTION_MESSAGE);
+
+        if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
+            try {
+                UsuarioController controller = new UsuarioController();
+                // Função correta corrigida aqui:
+                entidades.Usuario usuario = controller.buscarPorCpf(cpfDigitado.trim());
+
+                this.limparFormulario();
+                this.habilitarFormulario(true);
+
+                idUsuarioEdicao = usuario.getId();
+
+                txtNome.setText(usuario.getNome());
+                txtCpf.setText(usuario.getCpf());
+                txtIdade.setText(usuario.getIdade());
+                txtLogin.setText(usuario.getLogin());
+                txtSenha.setText(usuario.getSenha());
+                txtEmail.setText(usuario.getEmail());
+                txtContato.setText(usuario.getContato());
+                txtDataNascimento.setText(usuario.getDataNasc());
+
+                txtCpf.setEnabled(false);
+                JOptionPane.showMessageDialog(this, "Dados carregados para edição!");
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnEditarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

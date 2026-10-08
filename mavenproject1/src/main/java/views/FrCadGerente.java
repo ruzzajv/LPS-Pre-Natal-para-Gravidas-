@@ -27,6 +27,17 @@ public class FrCadGerente extends javax.swing.JFrame {
     private String contato;
     private String idade;
 
+    private String cpfGerenteEdicao = null;
+
+    private void limparFormulario() {
+        checkAcessoTotal.setSelected(false);
+        cpfGerenteEdicao = null;
+    }
+
+    private void habilitarFormulario(boolean habilitar) {
+        checkAcessoTotal.setEnabled(habilitar);
+    }
+
     FrCadGerente(String nome, String cpf, String login, String senha, String email, String dataNasc, String contato, String idade) {
         initComponents();
         setLocationRelativeTo(null);
@@ -130,6 +141,11 @@ public class FrCadGerente extends javax.swing.JFrame {
         });
 
         btnEditarMedico.setText("EDITAR");
+        btnEditarMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarMedicoActionPerformed(evt);
+            }
+        });
 
         btnApagarMedico.setText("APAGAR");
         btnApagarMedico.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +162,11 @@ public class FrCadGerente extends javax.swing.JFrame {
         });
 
         btnLimparMedico.setText("LIMPAR");
+        btnLimparMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparMedicoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -239,65 +260,123 @@ public class FrCadGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnCriarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarMedicoActionPerformed
+       this.limparFormulario();
+        this.habilitarFormulario(true);         
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCriarMedicoActionPerformed
 
     private void btnSalvarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarMedicoActionPerformed
         try {
-        String nivelAcesso = checkAcessoTotal.isSelected() ? "Total" : "Restrito";
+            UsuarioDAO dao = new UsuarioDAO();
 
-       
-        GerenteController controller = new GerenteController();
-        controller.cadastrar(nomeBase, cpfBase, loginBase, senhaBase, emailBase, dataNasc, contato, idade, nivelAcesso);
+            // 1. SE ESTIVER EDITANDO (CPF preenchido pelo botão Editar)
+            if (cpfGerenteEdicao != null) {
+                entidades.Usuario usuario = dao.buscarObjetoPorCpf(cpfGerenteEdicao);
 
-        JOptionPane.showMessageDialog(this, "Gerente cadastrado com sucesso!");
+                if (usuario instanceof entidades.Gerente) {
+                    entidades.Gerente gerente = (entidades.Gerente) usuario;
 
-        this.dispose();
-        if (this.telaAnterior != null) {
-            this.telaAnterior.setVisible(true);
+                    checkAcessoTotal.setSelected("TOTAL".equalsIgnoreCase(gerente.getNivelAcesso()));
+
+                    dao.editar(gerente);
+                    JOptionPane.showMessageDialog(this, "Gerente atualizado com sucesso!");
+                    gerente.setNivelAcesso(checkAcessoTotal.isSelected() ? "TOTAL" : "NORMAL");
+                    this.limparFormulario();
+                    this.habilitarFormulario(false);
+                    return;
+                }
+            }
+
+            String acessoTotal = checkAcessoTotal.isSelected() ? "TOTAL" : "NORMAL";
+
+            GerenteController controller = new GerenteController();
+            controller.cadastrar(
+                    nomeBase, cpfBase, loginBase, senhaBase, emailBase,
+                    dataNasc, contato, idade,
+                    acessoTotal
+            );
+
+            JOptionPane.showMessageDialog(this, "Gerente cadastrado com sucesso!");
+
+            this.dispose();
+            if (this.telaAnterior != null) {
+                this.telaAnterior.setVisible(true);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar/atualizar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(this, "Erro ao salvar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-    }
     }//GEN-LAST:event_btnSalvarMedicoActionPerformed
 
     private void btnApagarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarMedicoActionPerformed
         String cpfDigitado = JOptionPane.showInputDialog(this, "Digite o CPF do usuário que deseja apagar:", "Excluir Usuário", JOptionPane.QUESTION_MESSAGE);
-    
-    if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
-        try {
-            UsuarioDAO dao = new UsuarioDAO();
-            String nomeEncontrado = dao.buscarNomePorCpf(cpfDigitado.trim());
-            
-            if (nomeEncontrado == null) {
-                JOptionPane.showMessageDialog(this, "Nenhum usuário encontrado com o CPF: " + cpfDigitado, "Aviso", JOptionPane.WARNING_MESSAGE);
-                return;
+
+        if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
+            try {
+                UsuarioDAO dao = new UsuarioDAO();
+                String nomeEncontrado = dao.buscarNomePorCpf(cpfDigitado.trim());
+
+                if (nomeEncontrado == null) {
+                    JOptionPane.showMessageDialog(this, "Nenhum usuário encontrado com o CPF: " + cpfDigitado, "Aviso", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                String mensagem = "Deseja realmente excluir este usuário?\n\n"
+                        + "Nome: " + nomeEncontrado + "\n"
+                        + "CPF: " + cpfDigitado.trim();
+
+                int resposta = JOptionPane.showConfirmDialog(
+                        this,
+                        mensagem,
+                        "Confirmar Exclusão",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                );
+
+                if (resposta == JOptionPane.YES_OPTION) {
+                    UsuarioController controller = new UsuarioController();
+                    controller.excluirPorCpf(cpfDigitado.trim());
+
+                    JOptionPane.showMessageDialog(this, "Usuário apagado com sucesso!");
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao apagar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
-           
-            String mensagem = "Deseja realmente excluir este usuário?\n\n" +
-                              "Nome: " + nomeEncontrado + "\n" +
-                              "CPF: " + cpfDigitado.trim();
-                              
-            int resposta = JOptionPane.showConfirmDialog(
-                this, 
-                mensagem, 
-                "Confirmar Exclusão", 
-                JOptionPane.YES_NO_OPTION, 
-                JOptionPane.WARNING_MESSAGE
-            );
-            
-            if (resposta == JOptionPane.YES_OPTION) {
-                UsuarioController controller = new UsuarioController();
-                controller.excluirPorCpf(cpfDigitado.trim());
-                
-                JOptionPane.showMessageDialog(this, "Usuário apagado com sucesso!");
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao apagar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    }
     }//GEN-LAST:event_btnApagarMedicoActionPerformed
+
+    private void btnEditarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarMedicoActionPerformed
+        String cpfDigitado = JOptionPane.showInputDialog(this, "Digite o CPF do gerente para editar:", "Editar Gerente", JOptionPane.QUESTION_MESSAGE);
+
+        if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
+            try {
+                UsuarioDAO dao = new UsuarioDAO();
+                entidades.Usuario usuario = dao.buscarObjetoPorCpf(cpfDigitado.trim());
+
+                if (usuario instanceof entidades.Gerente) {
+                    entidades.Gerente gerente = (entidades.Gerente) usuario;
+
+                    this.limparFormulario();
+                    this.habilitarFormulario(true);
+
+                    cpfGerenteEdicao = gerente.getCpf();
+
+                    
+                   checkAcessoTotal.setSelected("SIM".equalsIgnoreCase(gerente.getNivelAcesso()));
+
+                    JOptionPane.showMessageDialog(this, "Dados do gerente carregados para edição!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nenhum gerente encontrado com este CPF.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao buscar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarMedicoActionPerformed
+
+    private void btnLimparMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparMedicoActionPerformed
+   this.limparFormulario();
+        this.habilitarFormulario(true);           // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimparMedicoActionPerformed
 
     /**
      * @param args the command line arguments

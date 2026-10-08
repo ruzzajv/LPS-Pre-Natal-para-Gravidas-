@@ -69,7 +69,7 @@ public class UsuarioDAO {
         }
     }
     
-    public Usuario buscarPorCpf(String cpf) {
+    public Usuario QueryPorCpf(String cpf) {
         EntityManager em = getEntityManager();
         try {
             
@@ -82,6 +82,7 @@ public class UsuarioDAO {
             em.close();
         }
     }
+
 
 
  public void excluirPorCpf(String cpf) throws Exception {
@@ -130,5 +131,18 @@ public String buscarNomePorCpf(String cpf) {
 
 
 
+
+public Usuario buscarObjetoPorCpf(String cpf) {
+    EntityManager em = getEntityManager();
+    try {
+        return em.createQuery("SELECT u FROM Usuario u WHERE u.cpf = :cpf", Usuario.class)
+                 .setParameter("cpf", cpf)
+                 .getSingleResult();
+    } catch (Exception e) {
+        return null;
+    } finally {
+        em.close();
+    }
+}
 
 }

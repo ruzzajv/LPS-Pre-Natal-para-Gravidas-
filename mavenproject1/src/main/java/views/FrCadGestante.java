@@ -19,7 +19,6 @@ public class FrCadGestante extends javax.swing.JFrame {
 
     private javax.swing.JFrame telaAnterior;
 
-
     private String nomeBase;
     private String cpfBase;
     private String loginBase;
@@ -29,9 +28,26 @@ public class FrCadGestante extends javax.swing.JFrame {
     private String contato;
     private String idade;
 
+    private String cpfGestanteEdicao = null;
+
+    private void limparFormulario() {
+        txtDiaDaDescoberta.setText("");
+        txtSemanasDeGravidez.setText("");
+        txtPrevisaoDoParto.setText("");
+        BtnGravidezDeRisco.setSelected(false);
+        cpfGestanteEdicao = null;
+    }
+
+    private void habilitarFormulario(boolean habilitar) {
+        txtDiaDaDescoberta.setEnabled(habilitar);
+        txtSemanasDeGravidez.setEnabled(habilitar);
+        txtPrevisaoDoParto.setEnabled(habilitar);
+        BtnGravidezDeRisco.setEnabled(habilitar);
+    }
+
     public FrCadGestante(String nome, String cpf, String login, String senha, String email, String dataNasc, String contato, String idade) {
         initComponents();
-        setLocationRelativeTo(null); 
+        setLocationRelativeTo(null);
 
         this.nomeBase = nome;
         this.cpfBase = cpf;
@@ -182,6 +198,11 @@ public class FrCadGestante extends javax.swing.JFrame {
         });
 
         btnEditarGestante.setText("EDITAR");
+        btnEditarGestante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarGestanteActionPerformed(evt);
+            }
+        });
 
         btnApagarGestante.setText("APAGAR");
         btnApagarGestante.addActionListener(new java.awt.event.ActionListener() {
@@ -198,6 +219,11 @@ public class FrCadGestante extends javax.swing.JFrame {
         });
 
         btnLimparGestante.setText("LIMPAR");
+        btnLimparGestante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparGestanteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -294,7 +320,8 @@ public class FrCadGestante extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void btnCriarGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarGestanteActionPerformed
-        // TODO add your handling code here:
+    this.limparFormulario();
+        this.habilitarFormulario(true);     
     }//GEN-LAST:event_btnCriarGestanteActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -306,65 +333,123 @@ public class FrCadGestante extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnSalvarGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarGestanteActionPerformed
-     try {
-        String risco = BtnGravidezDeRisco.isSelected() ? "Sim" : "Não";
+        try {
+            UsuarioDAO dao = new UsuarioDAO();
 
-        GestanteController controller = new GestanteController();
-        controller.cadastrar(
-            nomeBase, cpfBase, loginBase, senhaBase, emailBase, 
-            dataNasc, contato, idade, 
-            txtDiaDaDescoberta.getText(), txtSemanasDeGravidez.getText(), 
-            txtPrevisaoDoParto.getText(), risco
-        );
+            if (cpfGestanteEdicao != null) {
+                entidades.Usuario usuario = dao.buscarObjetoPorCpf(cpfGestanteEdicao);
 
-        JOptionPane.showMessageDialog(this, "Gestante cadastrada com sucesso!");
+                if (usuario instanceof entidades.Gestante) {
+                    entidades.Gestante gestante = (entidades.Gestante) usuario;
 
-        this.dispose();
-        if (this.telaAnterior != null) {
-            this.telaAnterior.setVisible(true);
+                    gestante.setDiaDaDescoberta(txtDiaDaDescoberta.getText());
+                    gestante.setSemanasDeGravidez(txtSemanasDeGravidez.getText());
+                    gestante.setPrevisaoDoParto(txtPrevisaoDoParto.getText());
+                    gestante.setGravidezDeRisco(BtnGravidezDeRisco.isSelected() ? "Sim" : "Não");
+
+                    dao.editar(gestante);
+                    JOptionPane.showMessageDialog(this, "Gestante atualizada com sucesso!");
+
+                    this.limparFormulario();
+                    this.habilitarFormulario(false);
+                    return;
+                }
+            }
+
+            String risco = BtnGravidezDeRisco.isSelected() ? "Sim" : "Não";
+
+            GestanteController controller = new GestanteController();
+            controller.cadastrar(
+                    nomeBase, cpfBase, loginBase, senhaBase, emailBase,
+                    dataNasc, contato, idade,
+                    txtDiaDaDescoberta.getText(), txtSemanasDeGravidez.getText(),
+                    txtPrevisaoDoParto.getText(), risco
+            );
+
+            JOptionPane.showMessageDialog(this, "Gestante cadastrada com sucesso!");
+
+            this.dispose();
+            if (this.telaAnterior != null) {
+                this.telaAnterior.setVisible(true);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar/atualizar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(this, "Erro ao salvar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-    }
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnSalvarGestanteActionPerformed
 
     private void btnApagarGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarGestanteActionPerformed
         String cpfDigitado = JOptionPane.showInputDialog(this, "Digite o CPF do usuário que deseja apagar:", "Excluir Usuário", JOptionPane.QUESTION_MESSAGE);
-    
-    if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
-        try {
-            UsuarioDAO dao = new UsuarioDAO();
-            String nomeEncontrado = dao.buscarNomePorCpf(cpfDigitado.trim());
-            
-            if (nomeEncontrado == null) {
-                JOptionPane.showMessageDialog(this, "Nenhum usuário encontrado com o CPF: " + cpfDigitado, "Aviso", JOptionPane.WARNING_MESSAGE);
-                return;
+
+        if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
+            try {
+                UsuarioDAO dao = new UsuarioDAO();
+                String nomeEncontrado = dao.buscarNomePorCpf(cpfDigitado.trim());
+
+                if (nomeEncontrado == null) {
+                    JOptionPane.showMessageDialog(this, "Nenhum usuário encontrado com o CPF: " + cpfDigitado, "Aviso", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                String mensagem = "Deseja realmente excluir este usuário?\n\n"
+                        + "Nome: " + nomeEncontrado + "\n"
+                        + "CPF: " + cpfDigitado.trim();
+
+                int resposta = JOptionPane.showConfirmDialog(
+                        this,
+                        mensagem,
+                        "Confirmar Exclusão",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                );
+
+                if (resposta == JOptionPane.YES_OPTION) {
+                    UsuarioController controller = new UsuarioController();
+                    controller.excluirPorCpf(cpfDigitado.trim());
+
+                    JOptionPane.showMessageDialog(this, "Usuário apagado com sucesso!");
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao apagar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
-           
-            String mensagem = "Deseja realmente excluir este usuário?\n\n" +
-                              "Nome: " + nomeEncontrado + "\n" +
-                              "CPF: " + cpfDigitado.trim();
-                              
-            int resposta = JOptionPane.showConfirmDialog(
-                this, 
-                mensagem, 
-                "Confirmar Exclusão", 
-                JOptionPane.YES_NO_OPTION, 
-                JOptionPane.WARNING_MESSAGE
-            );
-            
-            if (resposta == JOptionPane.YES_OPTION) {
-                UsuarioController controller = new UsuarioController();
-                controller.excluirPorCpf(cpfDigitado.trim());
-                
-                JOptionPane.showMessageDialog(this, "Usuário apagado com sucesso!");
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao apagar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    }
     }//GEN-LAST:event_btnApagarGestanteActionPerformed
+
+    private void btnEditarGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarGestanteActionPerformed
+        String cpfDigitado = JOptionPane.showInputDialog(this, "Digite o CPF da gestante para editar:", "Editar Gestante", JOptionPane.QUESTION_MESSAGE);
+
+        if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
+            try {
+                UsuarioDAO dao = new UsuarioDAO();
+                entidades.Usuario usuario = dao.buscarObjetoPorCpf(cpfDigitado.trim());
+
+                if (usuario instanceof entidades.Gestante) {
+                    entidades.Gestante gestante = (entidades.Gestante) usuario;
+
+                    this.limparFormulario();
+                    this.habilitarFormulario(true);
+
+                    cpfGestanteEdicao = gestante.getCpf();
+
+                    txtDiaDaDescoberta.setText(gestante.getDiaDaDescoberta());
+                    txtSemanasDeGravidez.setText(gestante.getSemanasDeGravidez());
+                    txtPrevisaoDoParto.setText(gestante.getPrevisaoDoParto());
+                    BtnGravidezDeRisco.setSelected("Sim".equalsIgnoreCase(gestante.getGravidezDeRisco()));
+
+                    JOptionPane.showMessageDialog(this, "Dados da gestante carregados para edição!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nenhuma gestante encontrada com este CPF.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao buscar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarGestanteActionPerformed
+
+    private void btnLimparGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparGestanteActionPerformed
+  this.limparFormulario();
+  // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimparGestanteActionPerformed
 
     /**
      * @param args the command line arguments

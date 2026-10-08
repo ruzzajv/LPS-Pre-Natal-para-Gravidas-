@@ -6,20 +6,27 @@ import dao.UsuarioDAO;
 import entidades.Atendente;
 import javax.swing.JOptionPane;
 
-
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrCadAtendente extends javax.swing.JFrame {
-    
-     private String nomeBase;
+
+    private String cpfAtendenteEdicao = null;
+
+    private void limparFormulario() {
+        txtTurnoDeTrabalho.setText("");
+        cpfAtendenteEdicao = null;
+    }
+
+    private void habilitarFormulario(boolean habilitar) {
+        txtTurnoDeTrabalho.setEnabled(habilitar);
+    }
+    private String nomeBase;
     private String cpfBase;
     private String loginBase;
     private String senhaBase;
@@ -28,33 +35,34 @@ public class FrCadAtendente extends javax.swing.JFrame {
     private String contato;
     private String idade;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrCadMedico.class.getName());
-        private javax.swing.JFrame telaAnterior;
+    private javax.swing.JFrame telaAnterior;
 
     FrCadAtendente(String nome, String cpf, String login, String senha, String email, String dataNasc, String contato, String idade) {
         initComponents();
-        setLocationRelativeTo(null); 
-         
+        setLocationRelativeTo(null);
+
         this.nomeBase = nome;
         this.cpfBase = cpf;
         this.loginBase = login;
         this.senhaBase = senha;
         this.emailBase = email;
-        this.dataNasc= dataNasc;
-        this.contato=contato;
-        this.idade=idade;    
+        this.dataNasc = dataNasc;
+        this.contato = contato;
+        this.idade = idade;
     }
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
     }
+
     /**
      * Creates new form FrCadMedico
      */
     public FrCadAtendente() {
-        
+
         initComponents();
-        setLocationRelativeTo(null); 
-            }
+        setLocationRelativeTo(null);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -96,6 +104,7 @@ public class FrCadAtendente extends javax.swing.JFrame {
         btnSalvarAtendente.addActionListener(this::btnSalvarAtendenteActionPerformed);
 
         btnLimparAtendente.setText("LIMPAR");
+        btnLimparAtendente.addActionListener(this::btnLimparAtendenteActionPerformed);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -213,73 +222,79 @@ public class FrCadAtendente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCriarAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarAtendenteActionPerformed
-        // TODO add your handling code here:
+        this.limparFormulario();
+        this.habilitarFormulario(true);           // TODO add your handling code here:
     }//GEN-LAST:event_btnCriarAtendenteActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-    this.dispose(); 
-        
+        this.dispose();
+
         if (this.telaAnterior != null) {
             this.telaAnterior.setVisible(true);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnSalvarAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAtendenteActionPerformed
-        
-    try {
 
-        AtendenteController controller = new AtendenteController();
-        
-        controller.cadastrar(nomeBase, cpfBase, loginBase, senhaBase, emailBase, dataNasc, contato, idade, txtTurnoDeTrabalho.getText());
+        try {
 
-        JOptionPane.showMessageDialog(this, "Atendente cadastrado com sucesso!");
-       
-        this.dispose();
-        if (this.telaAnterior != null) {
-            this.telaAnterior.setVisible(true);
+            AtendenteController controller = new AtendenteController();
+
+            controller.cadastrar(nomeBase, cpfBase, loginBase, senhaBase, emailBase, dataNasc, contato, idade, txtTurnoDeTrabalho.getText());
+
+            JOptionPane.showMessageDialog(this, "Atendente cadastrado com sucesso!");
+
+            this.dispose();
+            if (this.telaAnterior != null) {
+                this.telaAnterior.setVisible(true);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-    }
 
     }//GEN-LAST:event_btnSalvarAtendenteActionPerformed
 
     private void btnApagarAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarAtendenteActionPerformed
-    String cpfDigitado = JOptionPane.showInputDialog(this, "Digite o CPF do usuário que deseja apagar:", "Excluir Usuário", JOptionPane.QUESTION_MESSAGE);
-    
-    if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
-        try {
-            UsuarioDAO dao = new UsuarioDAO();
-            String nomeEncontrado = dao.buscarNomePorCpf(cpfDigitado.trim());
-            
-            if (nomeEncontrado == null) {
-                JOptionPane.showMessageDialog(this, "Nenhum usuário encontrado com o CPF: " + cpfDigitado, "Aviso", JOptionPane.WARNING_MESSAGE);
-                return;
+        String cpfDigitado = JOptionPane.showInputDialog(this, "Digite o CPF do usuário que deseja apagar:", "Excluir Usuário", JOptionPane.QUESTION_MESSAGE);
+
+        if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
+            try {
+                UsuarioDAO dao = new UsuarioDAO();
+                String nomeEncontrado = dao.buscarNomePorCpf(cpfDigitado.trim());
+
+                if (nomeEncontrado == null) {
+                    JOptionPane.showMessageDialog(this, "Nenhum usuário encontrado com o CPF: " + cpfDigitado, "Aviso", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                String mensagem = "Deseja realmente excluir este usuário?\n\n"
+                        + "Nome: " + nomeEncontrado + "\n"
+                        + "CPF: " + cpfDigitado.trim();
+
+                int resposta = JOptionPane.showConfirmDialog(
+                        this,
+                        mensagem,
+                        "Confirmar Exclusão",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                );
+
+                if (resposta == JOptionPane.YES_OPTION) {
+                    UsuarioController controller = new UsuarioController();
+                    controller.excluirPorCpf(cpfDigitado.trim());
+
+                    JOptionPane.showMessageDialog(this, "Usuário apagado com sucesso!");
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao apagar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
-           
-            String mensagem = "Deseja realmente excluir este usuário?\n\n" +
-                              "Nome: " + nomeEncontrado + "\n" +
-                              "CPF: " + cpfDigitado.trim();
-                              
-            int resposta = JOptionPane.showConfirmDialog(
-                this, 
-                mensagem, 
-                "Confirmar Exclusão", 
-                JOptionPane.YES_NO_OPTION, 
-                JOptionPane.WARNING_MESSAGE
-            );
-            
-            if (resposta == JOptionPane.YES_OPTION) {
-                UsuarioController controller = new UsuarioController();
-                controller.excluirPorCpf(cpfDigitado.trim());
-                
-                JOptionPane.showMessageDialog(this, "Usuário apagado com sucesso!");
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao apagar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    }        
     }//GEN-LAST:event_btnApagarAtendenteActionPerformed
+
+    private void btnLimparAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparAtendenteActionPerformed
+        this.limparFormulario();
+        this.habilitarFormulario(true);             // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimparAtendenteActionPerformed
 
     /**
      * @param args the command line arguments

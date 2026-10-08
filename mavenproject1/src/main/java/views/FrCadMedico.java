@@ -30,6 +30,19 @@ public class FrCadMedico extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrCadMedico.class.getName());
     private javax.swing.JFrame telaAnterior;
 
+    private String cpfMedicoEdicao = null;
+
+    private void limparFormulario() {
+        txtCRM.setText("");
+        txtEspecialidade.setText("");
+        cpfMedicoEdicao = null;
+    }
+
+    private void habilitarFormulario(boolean habilitar) {
+        txtCRM.setEnabled(habilitar);
+        txtEspecialidade.setEnabled(habilitar);
+    }
+
     FrCadMedico(String nome, String cpf, String login, String senha, String email, String dataNasc, String contato, String idade) {
         initComponents();
         setLocationRelativeTo(null);
@@ -91,6 +104,7 @@ public class FrCadMedico extends javax.swing.JFrame {
         btnCriarMedico.addActionListener(this::btnCriarMedicoActionPerformed);
 
         btnEditarMedico.setText("EDITAR");
+        btnEditarMedico.addActionListener(this::btnEditarMedicoActionPerformed);
 
         btnApagarMedico.setText("APAGAR");
         btnApagarMedico.addActionListener(this::btnApagarMedicoActionPerformed);
@@ -232,68 +246,119 @@ public class FrCadMedico extends javax.swing.JFrame {
 
     private void btnSalvarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarMedicoActionPerformed
         try {
-            MedicoController controller = new MedicoController();
+            UsuarioDAO dao = new UsuarioDAO();
 
-            controller.cadastrar(
-                    nomeBase,
-                    cpfBase,
-                    loginBase,
-                    senhaBase,
-                    emailBase,
-                    dataNasc,
-                    contato,
-                    idade,
-                    txtCRM.getText(),
-                    txtEspecialidade.getText()
-            );
+            if (cpfMedicoEdicao != null) {
+                entidades.Usuario usuario = dao.buscarObjetoPorCpf(cpfMedicoEdicao);
+
+                if (usuario instanceof entidades.Medico) {
+                    entidades.Medico medico = (entidades.Medico) usuario;
+
+                    medico.setCrm(txtCRM.getText());
+                    medico.setEspecialidade(txtEspecialidade.getText());
+
+                    dao.editar(medico);
+                    JOptionPane.showMessageDialog(this, "Médico atualizado com sucesso!");
+
+                    this.limparFormulario();
+                    this.habilitarFormulario(false);
+                    return;
+                }
+            }
+
+            Medico novoMedico = new Medico();
+            novoMedico.setNome(nomeBase);
+            novoMedico.setCpf(cpfBase);
+            novoMedico.setLogin(loginBase);
+            novoMedico.setSenha(senhaBase);
+            novoMedico.setEmail(emailBase);
+            novoMedico.setDataNasc(dataNasc);
+            novoMedico.setContato(contato);
+            novoMedico.setIdade(idade);
+
+            novoMedico.setCrm(txtCRM.getText());
+            novoMedico.setEspecialidade(txtEspecialidade.getText());
+
+            dao.salvar(novoMedico);
 
             JOptionPane.showMessageDialog(this, "Médico cadastrado com sucesso!");
-
             this.dispose();
             if (this.telaAnterior != null) {
                 this.telaAnterior.setVisible(true);
             }
+
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao salvar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro ao salvar/atualizar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
+
+
     }//GEN-LAST:event_btnSalvarMedicoActionPerformed
 
     private void btnApagarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarMedicoActionPerformed
-   String cpfDigitado = JOptionPane.showInputDialog(this, "Digite o CPF do usuário que deseja apagar:", "Excluir Usuário", JOptionPane.QUESTION_MESSAGE);
-    
-    if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
-        try {
-            UsuarioDAO dao = new UsuarioDAO();
-            String nomeEncontrado = dao.buscarNomePorCpf(cpfDigitado.trim());
-            
-            if (nomeEncontrado == null) {
-                JOptionPane.showMessageDialog(this, "Nenhum usuário encontrado com o CPF: " + cpfDigitado, "Aviso", JOptionPane.WARNING_MESSAGE);
-                return;
+        String cpfDigitado = JOptionPane.showInputDialog(this, "Digite o CPF do usuário que deseja apagar:", "Excluir Usuário", JOptionPane.QUESTION_MESSAGE);
+
+        if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
+            try {
+                UsuarioDAO dao = new UsuarioDAO();
+                String nomeEncontrado = dao.buscarNomePorCpf(cpfDigitado.trim());
+
+                if (nomeEncontrado == null) {
+                    JOptionPane.showMessageDialog(this, "Nenhum usuário encontrado com o CPF: " + cpfDigitado, "Aviso", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                String mensagem = "Deseja realmente excluir este usuário?\n\n"
+                        + "Nome: " + nomeEncontrado + "\n"
+                        + "CPF: " + cpfDigitado.trim();
+
+                int resposta = JOptionPane.showConfirmDialog(
+                        this,
+                        mensagem,
+                        "Confirmar Exclusão",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE
+                );
+
+                if (resposta == JOptionPane.YES_OPTION) {
+                    UsuarioController controller = new UsuarioController();
+                    controller.excluirPorCpf(cpfDigitado.trim());
+
+                    JOptionPane.showMessageDialog(this, "Usuário apagado com sucesso!");
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao apagar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
-           
-            String mensagem = "Deseja realmente excluir este usuário?\n\n" +
-                              "Nome: " + nomeEncontrado + "\n" +
-                              "CPF: " + cpfDigitado.trim();
-                              
-            int resposta = JOptionPane.showConfirmDialog(
-                this, 
-                mensagem, 
-                "Confirmar Exclusão", 
-                JOptionPane.YES_NO_OPTION, 
-                JOptionPane.WARNING_MESSAGE
-            );
-            
-            if (resposta == JOptionPane.YES_OPTION) {
-                UsuarioController controller = new UsuarioController();
-                controller.excluirPorCpf(cpfDigitado.trim());
-                
-                JOptionPane.showMessageDialog(this, "Usuário apagado com sucesso!");
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao apagar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    }
     }//GEN-LAST:event_btnApagarMedicoActionPerformed
+
+    private void btnEditarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarMedicoActionPerformed
+        String cpfDigitado = JOptionPane.showInputDialog(this, "Digite o CPF do médico para editar:", "Editar Médico", JOptionPane.QUESTION_MESSAGE);
+
+        if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
+            try {
+                UsuarioDAO dao = new UsuarioDAO();
+                entidades.Usuario usuario = dao.buscarObjetoPorCpf(cpfDigitado.trim());
+
+                if (usuario instanceof entidades.Medico) {
+                    entidades.Medico medico = (entidades.Medico) usuario;
+
+                    this.limparFormulario();
+                    this.habilitarFormulario(true);
+
+                    cpfMedicoEdicao = medico.getCpf();
+
+                    txtCRM.setText(medico.getCrm());
+                    txtEspecialidade.setText(medico.getEspecialidade());
+
+                    JOptionPane.showMessageDialog(this, "Dados do médico carregados para edição!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nenhum médico encontrado com este CPF.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao buscar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnEditarMedicoActionPerformed
 
     /**
      * @param args the command line arguments
