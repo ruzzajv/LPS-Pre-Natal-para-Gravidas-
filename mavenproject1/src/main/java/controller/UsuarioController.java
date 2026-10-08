@@ -19,7 +19,7 @@ public class UsuarioController {
         
         Usuario novoUsuario = null;
 
-        // Aplica a herança de acordo com os RadioButtons da tela
+      
         switch (tipoPerfil.toUpperCase()) {
             case "GERENTE":
                 novoUsuario = new Gerente();
@@ -37,7 +37,7 @@ public class UsuarioController {
                 throw new Exception("Tipo de perfil inválido ou não selecionado.");
         }
 
-        // Preenche os dados comuns da entidade Usuario
+        
         novoUsuario.setNome(nome);
         novoUsuario.setLogin(login);
         novoUsuario.setSenha(senha);

@@ -324,24 +324,28 @@ String contato = txtContato.getText();
 
 if (btnUsuarioTipoGestante.isSelected()) {
     FrCadGestante telaGestante = new FrCadGestante(nome, cpf, login, senha, email, dataNasc, contato, idade);
+    telaGestante.setTelaAnterior(this.telaAnterior);
     telaGestante.setLocationRelativeTo(null); // Centraliza
     telaGestante.setVisible(true);
     this.dispose(); 
     
 } else if (btnUsuarioTipoMedico.isSelected()) {
     FrCadMedico telaMedico = new FrCadMedico(nome, cpf, login, senha, email, dataNasc, contato, idade);
+    telaMedico.setTelaAnterior(this.telaAnterior);
     telaMedico.setLocationRelativeTo(null);
     telaMedico.setVisible(true);
     this.dispose();
     
 } else if (btnUsuarioTipoAtendente.isSelected()) {
     FrCadAtendente telaAtendente = new FrCadAtendente(nome, cpf, login, senha, email, dataNasc, contato, idade);
+    telaAtendente.setTelaAnterior(this.telaAnterior);
     telaAtendente.setLocationRelativeTo(null);
     telaAtendente.setVisible(true);
     this.dispose();
     
 } else if (btnUsuarioTipoGerente.isSelected()) {
     FrCadGerente telaGerente = new FrCadGerente(nome, cpf, login, senha, email, dataNasc, contato, idade);
+    telaGerente.setTelaAnterior(this.telaAnterior);
     telaGerente.setLocationRelativeTo(null);
     telaGerente.setVisible(true);
     this.dispose();

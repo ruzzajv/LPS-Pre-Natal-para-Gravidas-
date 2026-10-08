@@ -138,16 +138,11 @@ public class FrGerente extends javax.swing.JFrame {
 
     private void btnCadastrarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarMedicoActionPerformed
         FrCadUsuario telaCadastro = new FrCadUsuario();
-
         telaCadastro.setTelaAnterior(this);
         telaCadastro.pack();
         telaCadastro.setLocationRelativeTo(null);
         telaCadastro.setResizable(false);
         telaCadastro.setVisible(true);
-
-        FrGerente telaGerente = new FrGerente();
-        telaGerente.setTelaAnterior(this.telaAnterior);
-
         this.setVisible(false);
     }//GEN-LAST:event_btnCadastrarMedicoActionPerformed
 
@@ -155,13 +150,11 @@ public class FrGerente extends javax.swing.JFrame {
         FrCadUsuario telaCadastro = new FrCadUsuario();
 
         telaCadastro.setTelaAnterior(this);
+        telaCadastro.setTelaAnterior(this);
         telaCadastro.pack();
         telaCadastro.setLocationRelativeTo(null);
         telaCadastro.setResizable(false);
         telaCadastro.setVisible(true);
-
-        FrGerente telaGerente = new FrGerente();
-        telaGerente.setTelaAnterior(this.telaAnterior);
 
         this.setVisible(false);
     }//GEN-LAST:event_btnCadastrarAtendenteActionPerformed

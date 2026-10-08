@@ -149,18 +149,13 @@ public class FrAtendente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGerarPagamentoActionPerformed
 
     private void btnCadastrarGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarGestanteActionPerformed
-        FrCadUsuario telaCadastro = new FrCadUsuario();
-
-        telaCadastro.setTelaAnterior(this);
-        telaCadastro.pack();
-        telaCadastro.setLocationRelativeTo(null);
-        telaCadastro.setResizable(false);
-        telaCadastro.setVisible(true);
-
-        FrAtendente telaAtendente = new FrAtendente();
-        telaAtendente.setTelaAnterior(this.telaAnterior);
-
-        this.setVisible(false);// TODO add your handling code here:
+    FrCadUsuario telaCadastro = new FrCadUsuario();
+    telaCadastro.setTelaAnterior(this);
+    telaCadastro.pack();
+    telaCadastro.setLocationRelativeTo(null);
+    telaCadastro.setResizable(false);
+    telaCadastro.setVisible(true);
+    this.setVisible(false);
     }//GEN-LAST:event_btnCadastrarGestanteActionPerformed
 
     private void btnGerenciarComunidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarComunidadeActionPerformed
