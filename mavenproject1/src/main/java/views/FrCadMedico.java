@@ -18,7 +18,7 @@ public class FrCadMedico extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrCadMedico.class.getName());
         private javax.swing.JFrame telaAnterior;
 
-    FrCadMedico(String nome, String cpf, String login, String senha, String email) {
+    FrCadMedico(String nome, String cpf, String login, String senha, String email, String dataNasc, String contato, String idade) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

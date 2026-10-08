@@ -24,9 +24,12 @@ public class FrCadGestante extends javax.swing.JFrame {
     private String loginBase;
     private String senhaBase;
     private String emailBase;
+    private String dataNasc;
+    private String contato;
+    private String idade;
 
     // Novo construtor que recebe os dados da tela anterior
-    public FrCadGestante(String nome, String cpf, String login, String senha, String email) {
+    public FrCadGestante(String nome, String cpf, String login, String senha, String email, String dataNasc, String contato, String idade) {
         initComponents();
         setLocationRelativeTo(null); // Centraliza a tela
         
@@ -35,6 +38,9 @@ public class FrCadGestante extends javax.swing.JFrame {
         this.loginBase = login;
         this.senhaBase = senha;
         this.emailBase = email;
+        this.dataNasc= dataNasc;
+        this.contato=contato;
+        this.idade=idade;
     }
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
@@ -291,30 +297,30 @@ public class FrCadGestante extends javax.swing.JFrame {
         try {
             Gestante novaGestante = new Gestante();
 
-            // 1. Preenche os dados herdados de Usuario (que vieram da FrCadUsuario)
             novaGestante.setNome(nomeBase);
-            // novaGestante.setCpf(cpfBase); // Descomente caso a sua entidade Usuario tenha CPF mapeado
+             novaGestante.setCpf(cpfBase); 
             novaGestante.setLogin(loginBase);
             novaGestante.setSenha(senhaBase);
             novaGestante.setEmail(emailBase);
-
-            // 2. Preenche os dados específicos da Gestante (desta tela)
-            // novaGestante.setDiaDescoberta(txtDiaDaDescoberta.getText()); // Ajuste o set se a entidade tiver este campo
-            novaGestante.setSemanasDeGravidez(Integer.parseInt(txtSemanasDeGravidez.getText()));
-            // novaGestante.setPrevisaoParto(txtPrevisaoDoParto.getText()); // Ajuste o set se a entidade tiver este campo
-
-            // Captura o RadioButton de risco
-            // novaGestante.setGravidezDeRisco(BtnGravidezDeRisco.isSelected()); // Ajuste o set se a entidade tiver
-            // 3. Chama o DAO para salvar tudo no banco de dados
+            novaGestante.setDataNasc(dataNasc);
+            novaGestante.setContato(contato);
+            novaGestante.setIdade(idade);
+            novaGestante.setDiaDaDescoberta(txtDiaDaDescoberta.getText());   
+            novaGestante.setSemanasDeGravidez(txtSemanasDeGravidez.getText());            
+            novaGestante.setPrevisaoDoParto(txtPrevisaoDoParto.getText()); 
+            if (BtnGravidezDeRisco.isSelected()) {
+                novaGestante.setGravidezDeRisco("Sim");
+            } else {
+                novaGestante.setGravidezDeRisco("Não");
+            }
             UsuarioDAO dao = new UsuarioDAO();
             dao.salvar(novaGestante);
 
             JOptionPane.showMessageDialog(this, "Gestante cadastrada com sucesso!");
-            this.dispose(); // Fecha a tela após salvar com sucesso
+            new FrAtendente().setVisible(true);
+            this.dispose();
 
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "O campo 'Semanas de Gravidez' deve ser um número válido!", "Erro de Preenchimento", JOptionPane.WARNING_MESSAGE);
-        } catch (Exception ex) {
+        }catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
           // TODO add your handling code here:

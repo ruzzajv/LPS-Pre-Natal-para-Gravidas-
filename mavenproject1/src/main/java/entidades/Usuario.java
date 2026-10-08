@@ -11,6 +11,34 @@ import javax.persistence.*; // Importa todas as anotações do JPA de uma vez
 @Inheritance(strategy = InheritanceType.JOINED) // <-- ADICIONADO AQUI
 public class Usuario implements Serializable {
 
+    /**
+     * @return the dataNasc
+     */
+    public String getDataNasc() {
+        return dataNasc;
+    }
+
+    /**
+     * @param dataNasc the dataNasc to set
+     */
+    public void setDataNasc(String dataNasc) {
+        this.dataNasc = dataNasc;
+    }
+
+    /**
+     * @return the cpf
+     */
+    public String getCpf() {
+        return cpf;
+    }
+
+    /**
+     * @param cpf the cpf to set
+     */
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     private static final long serialVersionUID = 1L;
     
     @Id
@@ -27,14 +55,18 @@ public class Usuario implements Serializable {
     @Column(nullable = false, unique = true)
     protected String email;
 
-    protected int contato;
+    protected String contato;
+    
+    private String cpf;
 
     @Column(nullable = false)
     protected String nome;
 
-    protected int idade;
+    private String dataNasc;
+    
+    protected String idade;
 
-    protected String tipo;
+ 
 
     public String getLogin() {
         return login;
@@ -60,11 +92,11 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public int getContato() {
+    public String getContato() {
         return contato;
     }
 
-    public void setContato(int contato) {
+    public void setContato(String contato) {
         this.contato = contato;
     }
 
@@ -76,21 +108,15 @@ public class Usuario implements Serializable {
         this.nome = nome;
     }
 
-    public int getIdade() {
+    public String getIdade() {
         return idade;
     }
 
-    public void setIdade(int idade) {
+    public void setIdade(String idade) {
         this.idade = idade;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+  
 
     // --- MÉTODOS DO DIAGRAMA ---
     public void realizarLogin() {}

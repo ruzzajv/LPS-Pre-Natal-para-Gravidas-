@@ -7,17 +7,32 @@ import javax.persistence.*;
 @Entity
 public class Gestante extends Usuario implements Serializable {
 
-    @Temporal(TemporalType.DATE)
-    private Date diaDaDescoberta;
+    /**
+     * @return the previsaoDoParto
+     */
+    public String getPrevisaoDoParto() {
+        return previsaoDoParto;
+    }
 
-    private int semanasDeGravidez;
+    /**
+     * @param previsaoDoParto the previsaoDoParto to set
+     */
+    public void setPrevisaoDoParto(String previsaoDoParto) {
+        this.previsaoDoParto = previsaoDoParto;
+    }
 
-    @Temporal(TemporalType.DATE)
-    private Date dataNascimento;
+  
+    private String diaDaDescoberta;
 
-    private Boolean cadAprovado;
+    private String semanasDeGravidez;
+    
+    private String previsaoDoParto;
 
-    private Boolean gravidezDeRisco;
+   
+
+    
+
+    private String gravidezDeRisco;
 
     public Gestante() {
     }
@@ -28,43 +43,30 @@ public class Gestante extends Usuario implements Serializable {
     public void solicitarConsulta() {}
 
    
-    public Date getDiaDaDescoberta() {
+    public String getDiaDaDescoberta() {
         return diaDaDescoberta;
     }
 
-    public void setDiaDaDescoberta(Date diaDaDescoberta) {
+    public void setDiaDaDescoberta(String diaDaDescoberta) {
         this.diaDaDescoberta = diaDaDescoberta;
     }
 
-    public int getSemanasDeGravidez() {
+    public String getSemanasDeGravidez() {
         return semanasDeGravidez;
     }
 
-    public void setSemanasDeGravidez(int semanasDeGravidez) {
+    public void setSemanasDeGravidez(String semanasDeGravidez) {
         this.semanasDeGravidez = semanasDeGravidez;
     }
 
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
 
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
+  
 
-    public Boolean getCadAprovado() {
-        return cadAprovado;
-    }
-
-    public void setCadAprovado(Boolean cadAprovado) {
-        this.cadAprovado = cadAprovado;
-    }
-
-    public Boolean getGravidezDeRisco() {
+    public String getGravidezDeRisco() {
         return gravidezDeRisco;
     }
 
-    public void setGravidezDeRisco(Boolean gravidezDeRisco) {
+    public void setGravidezDeRisco(String gravidezDeRisco) {
         this.gravidezDeRisco = gravidezDeRisco;
     }
 }

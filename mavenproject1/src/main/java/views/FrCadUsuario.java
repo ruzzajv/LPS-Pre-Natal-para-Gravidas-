@@ -57,6 +57,8 @@ public class FrCadUsuario extends javax.swing.JFrame {
         btnUsuarioTipoAtendente = new javax.swing.JRadioButton();
         btnUsuarioTipoGerente = new javax.swing.JRadioButton();
         txtSenha = new javax.swing.JPasswordField();
+        jLabel10 = new javax.swing.JLabel();
+        txtDataNascimento = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         btnCriarUsuario = new javax.swing.JButton();
         btnEditarUsuario = new javax.swing.JButton();
@@ -104,6 +106,8 @@ public class FrCadUsuario extends javax.swing.JFrame {
 
         btnUsuarioTipoGerente.setText("GERENTE");
 
+        jLabel10.setText("DATA DE NASCIMENTO:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -111,32 +115,42 @@ public class FrCadUsuario extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
-                .addGap(45, 45, 45)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnUsuarioTipoGestante, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnUsuarioTipoMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnUsuarioTipoAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnUsuarioTipoGerente, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtLogin)
-                    .addComponent(txtIdade)
-                    .addComponent(txtCpf)
-                    .addComponent(txtNome)
-                    .addComponent(txtContato)
-                    .addComponent(txtEmail)
-                    .addComponent(txtSenha))
-                .addGap(82, 82, 82))
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDataNascimento)
+                        .addGap(82, 82, 82))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addGap(45, 45, 45)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtLogin)
+                                    .addComponent(txtIdade)
+                                    .addComponent(txtCpf)
+                                    .addComponent(txtNome)
+                                    .addComponent(txtContato)
+                                    .addComponent(txtEmail)
+                                    .addComponent(txtSenha))
+                                .addGap(82, 82, 82))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnUsuarioTipoGestante, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnUsuarioTipoMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnUsuarioTipoAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnUsuarioTipoGerente, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,12 +185,16 @@ public class FrCadUsuario extends javax.swing.JFrame {
                     .addComponent(txtContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(btnUsuarioTipoGestante)
                     .addComponent(btnUsuarioTipoMedico)
                     .addComponent(btnUsuarioTipoAtendente)
                     .addComponent(btnUsuarioTipoGerente))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(102, 102, 255));
@@ -206,7 +224,7 @@ public class FrCadUsuario extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(101, Short.MAX_VALUE)
                 .addComponent(btnCriarUsuario)
                 .addGap(31, 31, 31)
                 .addComponent(btnEditarUsuario)
@@ -305,28 +323,30 @@ String cpf = txtCpf.getText();
 String login = txtLogin.getText();
 String senha = new String(txtSenha.getPassword());
 String email = txtEmail.getText();
+String dataNasc = txtDataNascimento.getText();
+String idade = txtIdade.getText();
+String contato = txtContato.getText();
 
-// 2. Verifica qual botão de rádio está selecionado e abre a tela específica passando os dados
 if (btnUsuarioTipoGestante.isSelected()) {
-    FrCadGestante telaGestante = new FrCadGestante(nome, cpf, login, senha, email);
+    FrCadGestante telaGestante = new FrCadGestante(nome, cpf, login, senha, email, dataNasc, contato, idade);
     telaGestante.setLocationRelativeTo(null); // Centraliza
     telaGestante.setVisible(true);
-    this.dispose(); // Fecha a tela atual (FrCadUsuario)
+    this.dispose(); 
     
 } else if (btnUsuarioTipoMedico.isSelected()) {
-    FrCadMedico telaMedico = new FrCadMedico(nome, cpf, login, senha, email);
+    FrCadMedico telaMedico = new FrCadMedico(nome, cpf, login, senha, email, dataNasc, contato, idade);
     telaMedico.setLocationRelativeTo(null);
     telaMedico.setVisible(true);
     this.dispose();
     
 } else if (btnUsuarioTipoAtendente.isSelected()) {
-    FrCadAtendente telaAtendente = new FrCadAtendente(nome, cpf, login, senha, email);
+    FrCadAtendente telaAtendente = new FrCadAtendente(nome, cpf, login, senha, email, dataNasc, contato, idade);
     telaAtendente.setLocationRelativeTo(null);
     telaAtendente.setVisible(true);
     this.dispose();
     
 } else if (btnUsuarioTipoGerente.isSelected()) {
-    FrCadGerente telaGerente = new FrCadGerente(nome, cpf, login, senha, email);
+    FrCadGerente telaGerente = new FrCadGerente(nome, cpf, login, senha, email, dataNasc, contato, idade);
     telaGerente.setLocationRelativeTo(null);
     telaGerente.setVisible(true);
     this.dispose();
@@ -384,6 +404,7 @@ if (btnUsuarioTipoGestante.isSelected()) {
     private javax.swing.JRadioButton btnUsuarioTipoMedico;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -397,6 +418,7 @@ if (btnUsuarioTipoGestante.isSelected()) {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField txtContato;
     private javax.swing.JTextField txtCpf;
+    private javax.swing.JTextField txtDataNascimento;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtIdade;
     private javax.swing.JTextField txtLogin;
