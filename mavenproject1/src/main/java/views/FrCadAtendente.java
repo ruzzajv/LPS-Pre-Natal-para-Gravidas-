@@ -1,5 +1,6 @@
 package views;
 
+import controller.AtendenteController;
 import dao.UsuarioDAO;
 import entidades.Atendente;
 import javax.swing.JOptionPane;
@@ -222,34 +223,23 @@ public class FrCadAtendente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnSalvarAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAtendenteActionPerformed
+        
     try {
-    Atendente novoAtendente = new Atendente();
 
-    // 1. Dados Herdados
-    novoAtendente.setNome(nomeBase);
-    novoAtendente.setCpf(cpfBase); 
-    novoAtendente.setLogin(loginBase);
-    novoAtendente.setSenha(senhaBase);
-    novoAtendente.setEmail(emailBase);
-    novoAtendente.setDataNasc(dataNasc);
-    novoAtendente.setContato(contato);
-    novoAtendente.setIdade(idade);
-    novoAtendente.setTurnoTrabalho(txtTurnoDeTrabalho.getText()); 
+        AtendenteController controller = new AtendenteController();
+        
+        controller.cadastrar(nomeBase, cpfBase, loginBase, senhaBase, emailBase, dataNasc, contato, idade, txtTurnoDeTrabalho.getText());
 
-    
-    UsuarioDAO dao = new UsuarioDAO();
-    dao.salvar(novoAtendente);
-
-    JOptionPane.showMessageDialog(this, "Atendente cadastrado com sucesso!");
-   
-    this.dispose();
-    if (this.telaAnterior != null) {
-        this.telaAnterior.setVisible(true);
+        JOptionPane.showMessageDialog(this, "Atendente cadastrado com sucesso!");
+       
+        this.dispose();
+        if (this.telaAnterior != null) {
+            this.telaAnterior.setVisible(true);
+        }
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
     }
 
-} catch (Exception ex) {
-    JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-}        // TODO add your handling code here:
     }//GEN-LAST:event_btnSalvarAtendenteActionPerformed
 
     /**

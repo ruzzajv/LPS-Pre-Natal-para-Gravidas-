@@ -1,5 +1,6 @@
 package views;
 
+import controller.GestanteController;
 import dao.UsuarioDAO;
 import entidades.Gestante;
 import javax.swing.JOptionPane;
@@ -17,7 +18,7 @@ public class FrCadGestante extends javax.swing.JFrame {
 
     private javax.swing.JFrame telaAnterior;
 
-    // Variáveis para guardar os dados vindos da tela FrCadUsuario
+
     private String nomeBase;
     private String cpfBase;
     private String loginBase;
@@ -27,10 +28,9 @@ public class FrCadGestante extends javax.swing.JFrame {
     private String contato;
     private String idade;
 
-    // Novo construtor que recebe os dados da tela anterior
     public FrCadGestante(String nome, String cpf, String login, String senha, String email, String dataNasc, String contato, String idade) {
         initComponents();
-        setLocationRelativeTo(null); // Centraliza a tela
+        setLocationRelativeTo(null); 
 
         this.nomeBase = nome;
         this.cpfBase = cpf;
@@ -300,38 +300,26 @@ public class FrCadGestante extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnSalvarGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarGestanteActionPerformed
-        try {
-            Gestante novaGestante = new Gestante();
+     try {
+        String risco = BtnGravidezDeRisco.isSelected() ? "Sim" : "Não";
 
-            novaGestante.setNome(nomeBase);
-            novaGestante.setCpf(cpfBase);
-            novaGestante.setLogin(loginBase);
-            novaGestante.setSenha(senhaBase);
-            novaGestante.setEmail(emailBase);
-            novaGestante.setDataNasc(dataNasc);
-            novaGestante.setContato(contato);
-            novaGestante.setIdade(idade);
-            novaGestante.setDiaDaDescoberta(txtDiaDaDescoberta.getText());
-            novaGestante.setSemanasDeGravidez(txtSemanasDeGravidez.getText());
-            novaGestante.setPrevisaoDoParto(txtPrevisaoDoParto.getText());
-            if (BtnGravidezDeRisco.isSelected()) {
-                novaGestante.setGravidezDeRisco("Sim");
-            } else {
-                novaGestante.setGravidezDeRisco("Não");
-            }
-            UsuarioDAO dao = new UsuarioDAO();
-            dao.salvar(novaGestante);
+        GestanteController controller = new GestanteController();
+        controller.cadastrar(
+            nomeBase, cpfBase, loginBase, senhaBase, emailBase, 
+            dataNasc, contato, idade, 
+            txtDiaDaDescoberta.getText(), txtSemanasDeGravidez.getText(), 
+            txtPrevisaoDoParto.getText(), risco
+        );
 
-            JOptionPane.showMessageDialog(this, "Gestante cadastrada com sucesso!");
+        JOptionPane.showMessageDialog(this, "Gestante cadastrada com sucesso!");
 
-            this.dispose();
-            if (this.telaAnterior != null) {
-                this.telaAnterior.setVisible(true);
-            }
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        this.dispose();
+        if (this.telaAnterior != null) {
+            this.telaAnterior.setVisible(true);
         }
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Erro ao salvar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+    }
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalvarGestanteActionPerformed
 

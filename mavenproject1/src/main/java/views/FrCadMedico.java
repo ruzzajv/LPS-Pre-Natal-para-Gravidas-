@@ -1,5 +1,6 @@
 package views;
 
+import controller.MedicoController;
 import dao.UsuarioDAO;
 import entidades.Medico;
 import javax.swing.JOptionPane;
@@ -229,22 +230,20 @@ public class FrCadMedico extends javax.swing.JFrame {
 
     private void btnSalvarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarMedicoActionPerformed
         try {
-            Medico novoMedico = new Medico();
+            MedicoController controller = new MedicoController();
 
-            novoMedico.setNome(nomeBase);
-            novoMedico.setCpf(cpfBase);
-            novoMedico.setLogin(loginBase);
-            novoMedico.setSenha(senhaBase);
-            novoMedico.setEmail(emailBase);
-            novoMedico.setDataNasc(dataNasc);
-            novoMedico.setContato(contato);
-            novoMedico.setIdade(idade);
-
-            novoMedico.setCrm(txtCRM.getText());
-            novoMedico.setEspecialidade(txtEspecialidade.getText());
-
-            UsuarioDAO dao = new UsuarioDAO();
-            dao.salvar(novoMedico);
+            controller.cadastrar(
+                    nomeBase,
+                    cpfBase,
+                    loginBase,
+                    senhaBase,
+                    emailBase,
+                    dataNasc,
+                    contato,
+                    idade,
+                    txtCRM.getText(),
+                    txtEspecialidade.getText()
+            );
 
             JOptionPane.showMessageDialog(this, "Médico cadastrado com sucesso!");
 
@@ -253,8 +252,8 @@ public class FrCadMedico extends javax.swing.JFrame {
                 this.telaAnterior.setVisible(true);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-        }// TODO add your handling code here:
+            JOptionPane.showMessageDialog(this, "Erro ao salvar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnSalvarMedicoActionPerformed
 
     /**

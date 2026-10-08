@@ -1,5 +1,6 @@
 package views;
 
+import controller.GerenteController;
 import dao.UsuarioDAO;
 import entidades.Gerente;
 import javax.swing.JOptionPane;
@@ -242,37 +243,22 @@ public class FrCadGerente extends javax.swing.JFrame {
 
     private void btnSalvarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarMedicoActionPerformed
         try {
-            Gerente novoGerente = new Gerente();
+        String nivelAcesso = checkAcessoTotal.isSelected() ? "Total" : "Restrito";
 
-            // 1. Dados Herdados
-            novoGerente.setNome(nomeBase);
-            novoGerente.setCpf(cpfBase);
-            novoGerente.setLogin(loginBase);
-            novoGerente.setSenha(senhaBase);
-            novoGerente.setEmail(emailBase);
-            novoGerente.setDataNasc(dataNasc);
-            novoGerente.setContato(contato);
-            novoGerente.setIdade(idade);
+       
+        GerenteController controller = new GerenteController();
+        controller.cadastrar(nomeBase, cpfBase, loginBase, senhaBase, emailBase, dataNasc, contato, idade, nivelAcesso);
 
-            if (checkAcessoTotal.isSelected()) {
-                novoGerente.setNivelAcesso("Total");
-            } else {
-                novoGerente.setNivelAcesso("Restrito"); // ou "Padrão"
-            }
+        JOptionPane.showMessageDialog(this, "Gerente cadastrado com sucesso!");
 
-            UsuarioDAO dao = new UsuarioDAO();
-            dao.salvar(novoGerente);
-
-            JOptionPane.showMessageDialog(this, "Gerente cadastrado com sucesso!");
-
-            this.dispose();
-            if (this.telaAnterior != null) {
-                this.telaAnterior.setVisible(true);
-            }
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        this.dispose();
+        if (this.telaAnterior != null) {
+            this.telaAnterior.setVisible(true);
         }
+
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Erro ao salvar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnSalvarMedicoActionPerformed
 
     private void btnApagarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarMedicoActionPerformed
