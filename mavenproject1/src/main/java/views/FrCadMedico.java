@@ -1,6 +1,8 @@
 package views;
 
-
+import dao.UsuarioDAO;
+import entidades.Medico;
+import javax.swing.JOptionPane;
 import views.FrCadMedico;
 import views.FrCadMedico;
 
@@ -8,28 +10,48 @@ import views.FrCadMedico;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrCadMedico extends javax.swing.JFrame {
-    
+    private String nomeBase;
+    private String cpfBase;
+    private String loginBase;
+    private String senhaBase;
+    private String emailBase;
+    private String dataNasc;
+    private String contato;
+    private String idade;
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrCadMedico.class.getName());
-        private javax.swing.JFrame telaAnterior;
+    private javax.swing.JFrame telaAnterior;
 
     FrCadMedico(String nome, String cpf, String login, String senha, String email, String dataNasc, String contato, String idade) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       initComponents();
+        setLocationRelativeTo(null); 
+        this.nomeBase = nome;
+        this.cpfBase = cpf;
+        this.loginBase = login;
+        this.senhaBase = senha;
+        this.emailBase = email;
+        this.dataNasc= dataNasc;
+        this.contato=contato;
+        this.idade=idade;    
     }
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
+        
     }
+
     /**
      * Creates new form FrCadMedico
      */
     public FrCadMedico() {
-        initComponents();
+     initComponents();
+        setLocationRelativeTo(null); // Centraliza a tela
+        
     }
 
     /**
@@ -70,6 +92,7 @@ public class FrCadMedico extends javax.swing.JFrame {
         btnApagarMedico.setText("APAGAR");
 
         btnSalvarMedico.setText("SALVAR");
+        btnSalvarMedico.addActionListener(this::btnSalvarMedicoActionPerformed);
 
         btnLimparMedico.setText("LIMPAR");
 
@@ -196,12 +219,44 @@ public class FrCadMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCriarMedicoActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-    this.dispose(); 
-        
+        this.dispose();
+
         if (this.telaAnterior != null) {
             this.telaAnterior.setVisible(true);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnSalvarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarMedicoActionPerformed
+        try {
+            Medico novoMedico = new Medico();
+
+      
+            novoMedico.setNome(nomeBase);
+            novoMedico.setCpf(cpfBase);
+            novoMedico.setLogin(loginBase);
+            novoMedico.setSenha(senhaBase);
+            novoMedico.setEmail(emailBase);
+            novoMedico.setDataNasc(dataNasc); 
+            novoMedico.setContato(contato);
+            novoMedico.setIdade(idade);
+
+            novoMedico.setCrm(txtCRM.getText());
+            novoMedico.setEspecialidade(txtEspecialidade.getText());
+
+          
+            UsuarioDAO dao = new UsuarioDAO();
+            dao.salvar(novoMedico);
+
+            JOptionPane.showMessageDialog(this, "Médico cadastrado com sucesso!");
+
+      
+            new FrAtendente().setVisible(true);
+            this.dispose();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_btnSalvarMedicoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,5 +1,9 @@
 package views;
 
+import dao.UsuarioDAO;
+import entidades.Atendente;
+import javax.swing.JOptionPane;
+
 
 
 /*
@@ -13,11 +17,29 @@ package views;
  */
 public class FrCadAtendente extends javax.swing.JFrame {
     
+     private String nomeBase;
+    private String cpfBase;
+    private String loginBase;
+    private String senhaBase;
+    private String emailBase;
+    private String dataNasc;
+    private String contato;
+    private String idade;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrCadMedico.class.getName());
         private javax.swing.JFrame telaAnterior;
 
     FrCadAtendente(String nome, String cpf, String login, String senha, String email, String dataNasc, String contato, String idade) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        initComponents();
+        setLocationRelativeTo(null); 
+         
+        this.nomeBase = nome;
+        this.cpfBase = cpf;
+        this.loginBase = login;
+        this.senhaBase = senha;
+        this.emailBase = email;
+        this.dataNasc= dataNasc;
+        this.contato=contato;
+        this.idade=idade;    
     }
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
@@ -29,7 +51,8 @@ public class FrCadAtendente extends javax.swing.JFrame {
     public FrCadAtendente() {
         
         initComponents();
-    }
+        setLocationRelativeTo(null); 
+            }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,6 +90,7 @@ public class FrCadAtendente extends javax.swing.JFrame {
         btnApagarAtendente.setText("APAGAR");
 
         btnSalvarAtendente.setText("SALVAR");
+        btnSalvarAtendente.addActionListener(this::btnSalvarAtendenteActionPerformed);
 
         btnLimparAtendente.setText("LIMPAR");
 
@@ -196,6 +220,34 @@ public class FrCadAtendente extends javax.swing.JFrame {
             this.telaAnterior.setVisible(true);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnSalvarAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAtendenteActionPerformed
+    try {
+    Atendente novoAtendente = new Atendente();
+
+    // 1. Dados Herdados
+    novoAtendente.setNome(nomeBase);
+    novoAtendente.setCpf(cpfBase); 
+    novoAtendente.setLogin(loginBase);
+    novoAtendente.setSenha(senhaBase);
+    novoAtendente.setEmail(emailBase);
+    novoAtendente.setDataNasc(dataNasc);
+    novoAtendente.setContato(contato);
+    novoAtendente.setIdade(idade);
+    novoAtendente.setTurnoTrabalho(txtTurnoDeTrabalho.getText()); 
+
+    
+    UsuarioDAO dao = new UsuarioDAO();
+    dao.salvar(novoAtendente);
+
+    JOptionPane.showMessageDialog(this, "Atendente cadastrado com sucesso!");
+    new FrAtendente().setVisible(true);
+    this.dispose();
+
+} catch (Exception ex) {
+    JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+}        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalvarAtendenteActionPerformed
 
     /**
      * @param args the command line arguments
