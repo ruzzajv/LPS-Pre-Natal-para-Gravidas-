@@ -12,7 +12,7 @@ public class UsuarioController {
     private UsuarioDAO dao;
 
     public UsuarioController() {
-        this.dao = new UsuarioDAO(); // Instancia a conexão com o banco
+        this.dao = new UsuarioDAO(); 
     }
 
     public void salvarUsuario(String nome, String cpf, String login, String senha, String email, String tipoPerfil) throws Exception {
@@ -61,8 +61,8 @@ public class UsuarioController {
         throw new Exception("ID do usuário inválido para atualização.");
     }
 
-    // Busca o usuário direto pelo ID no banco
-    Usuario usuario = dao.buscarObjetoPorCpf(cpf); // ou em.find(Usuario.class, id) dependendo de como está no seu DAO
+   
+    Usuario usuario = dao.buscarObjetoPorCpf(cpf); 
     if (usuario != null) {
         usuario.setNome(nome);
         usuario.setIdade(idade);
@@ -71,7 +71,7 @@ public class UsuarioController {
         usuario.setEmail(email);
         usuario.setContato(contato);
         usuario.setDataNasc(dataNasc);
-        // O CPF geralmente não alteramos, mas se quiser atualizar, descomente abaixo:
+       
         // usuario.setCpf(cpf);
 
         dao.editar(usuario);
