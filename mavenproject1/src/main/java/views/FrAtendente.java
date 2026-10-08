@@ -149,15 +149,16 @@ public class FrAtendente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGerarPagamentoActionPerformed
 
     private void btnCadastrarGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarGestanteActionPerformed
-    FrCadUsuario telaCadastro = new FrCadUsuario();
-        
-        
+        FrCadUsuario telaCadastro = new FrCadUsuario();
+
         telaCadastro.setTelaAnterior(this);
         telaCadastro.pack();
         telaCadastro.setLocationRelativeTo(null);
         telaCadastro.setResizable(false);
         telaCadastro.setVisible(true);
-        
+
+        FrAtendente telaAtendente = new FrAtendente();
+        telaAtendente.setTelaAnterior(this.telaAnterior);
 
         this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_btnCadastrarGestanteActionPerformed
@@ -195,8 +196,8 @@ public class FrAtendente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVizualizarExtratoActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-this.dispose(); 
-        
+        this.dispose();
+
         views.LoginV2 telaLogin = new views.LoginV2();
         telaLogin.setLocationRelativeTo(null);
         telaLogin.setVisible(true);

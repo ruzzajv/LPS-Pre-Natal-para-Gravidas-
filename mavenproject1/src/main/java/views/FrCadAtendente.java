@@ -241,8 +241,11 @@ public class FrCadAtendente extends javax.swing.JFrame {
     dao.salvar(novoAtendente);
 
     JOptionPane.showMessageDialog(this, "Atendente cadastrado com sucesso!");
-    new FrAtendente().setVisible(true);
+   
     this.dispose();
+    if (this.telaAnterior != null) {
+        this.telaAnterior.setVisible(true);
+    }
 
 } catch (Exception ex) {
     JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

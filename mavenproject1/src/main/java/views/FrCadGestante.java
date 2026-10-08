@@ -13,11 +13,10 @@ import javax.swing.JOptionPane;
  *
  * @author 09816655608
  */
-
 public class FrCadGestante extends javax.swing.JFrame {
 
-   private javax.swing.JFrame telaAnterior;
-    
+    private javax.swing.JFrame telaAnterior;
+
     // Variáveis para guardar os dados vindos da tela FrCadUsuario
     private String nomeBase;
     private String cpfBase;
@@ -32,15 +31,15 @@ public class FrCadGestante extends javax.swing.JFrame {
     public FrCadGestante(String nome, String cpf, String login, String senha, String email, String dataNasc, String contato, String idade) {
         initComponents();
         setLocationRelativeTo(null); // Centraliza a tela
-        
+
         this.nomeBase = nome;
         this.cpfBase = cpf;
         this.loginBase = login;
         this.senhaBase = senha;
         this.emailBase = email;
-        this.dataNasc= dataNasc;
-        this.contato=contato;
-        this.idade=idade;
+        this.dataNasc = dataNasc;
+        this.contato = contato;
+        this.idade = idade;
     }
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
@@ -305,16 +304,16 @@ public class FrCadGestante extends javax.swing.JFrame {
             Gestante novaGestante = new Gestante();
 
             novaGestante.setNome(nomeBase);
-             novaGestante.setCpf(cpfBase); 
+            novaGestante.setCpf(cpfBase);
             novaGestante.setLogin(loginBase);
             novaGestante.setSenha(senhaBase);
             novaGestante.setEmail(emailBase);
             novaGestante.setDataNasc(dataNasc);
             novaGestante.setContato(contato);
             novaGestante.setIdade(idade);
-            novaGestante.setDiaDaDescoberta(txtDiaDaDescoberta.getText());   
-            novaGestante.setSemanasDeGravidez(txtSemanasDeGravidez.getText());            
-            novaGestante.setPrevisaoDoParto(txtPrevisaoDoParto.getText()); 
+            novaGestante.setDiaDaDescoberta(txtDiaDaDescoberta.getText());
+            novaGestante.setSemanasDeGravidez(txtSemanasDeGravidez.getText());
+            novaGestante.setPrevisaoDoParto(txtPrevisaoDoParto.getText());
             if (BtnGravidezDeRisco.isSelected()) {
                 novaGestante.setGravidezDeRisco("Sim");
             } else {
@@ -324,49 +323,52 @@ public class FrCadGestante extends javax.swing.JFrame {
             dao.salvar(novaGestante);
 
             JOptionPane.showMessageDialog(this, "Gestante cadastrada com sucesso!");
-            new FrAtendente().setVisible(true);
-            this.dispose();
 
-        }catch (Exception ex) {
+            this.dispose();
+            if (this.telaAnterior != null) {
+                this.telaAnterior.setVisible(true);
+            }
+
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-          // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnSalvarGestanteActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-    /* Set the Nimbus look and feel */
-    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-     */
-    try {
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                break;
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FrCadGestante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FrCadGestante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FrCadGestante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FrCadGestante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    } catch (ClassNotFoundException ex) {
-        java.util.logging.Logger.getLogger(FrCadGestante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        java.util.logging.Logger.getLogger(FrCadGestante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        java.util.logging.Logger.getLogger(FrCadGestante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-        java.util.logging.Logger.getLogger(FrCadGestante.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    }
-    //</editor-fold>
+        //</editor-fold>
 
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            new FrCadGestante().setVisible(true);
-        }
-    });
-}
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FrCadGestante().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton BtnGravidezDeRisco;

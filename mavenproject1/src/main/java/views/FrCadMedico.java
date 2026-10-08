@@ -15,6 +15,7 @@ import views.FrCadMedico;
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrCadMedico extends javax.swing.JFrame {
+
     private String nomeBase;
     private String cpfBase;
     private String loginBase;
@@ -28,30 +29,30 @@ public class FrCadMedico extends javax.swing.JFrame {
     private javax.swing.JFrame telaAnterior;
 
     FrCadMedico(String nome, String cpf, String login, String senha, String email, String dataNasc, String contato, String idade) {
-       initComponents();
-        setLocationRelativeTo(null); 
+        initComponents();
+        setLocationRelativeTo(null);
         this.nomeBase = nome;
         this.cpfBase = cpf;
         this.loginBase = login;
         this.senhaBase = senha;
         this.emailBase = email;
-        this.dataNasc= dataNasc;
-        this.contato=contato;
-        this.idade=idade;    
+        this.dataNasc = dataNasc;
+        this.contato = contato;
+        this.idade = idade;
     }
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
-        
+
     }
 
     /**
      * Creates new form FrCadMedico
      */
     public FrCadMedico() {
-     initComponents();
+        initComponents();
         setLocationRelativeTo(null); // Centraliza a tela
-        
+
     }
 
     /**
@@ -230,29 +231,27 @@ public class FrCadMedico extends javax.swing.JFrame {
         try {
             Medico novoMedico = new Medico();
 
-      
             novoMedico.setNome(nomeBase);
             novoMedico.setCpf(cpfBase);
             novoMedico.setLogin(loginBase);
             novoMedico.setSenha(senhaBase);
             novoMedico.setEmail(emailBase);
-            novoMedico.setDataNasc(dataNasc); 
+            novoMedico.setDataNasc(dataNasc);
             novoMedico.setContato(contato);
             novoMedico.setIdade(idade);
 
             novoMedico.setCrm(txtCRM.getText());
             novoMedico.setEspecialidade(txtEspecialidade.getText());
 
-          
             UsuarioDAO dao = new UsuarioDAO();
             dao.salvar(novoMedico);
 
             JOptionPane.showMessageDialog(this, "Médico cadastrado com sucesso!");
 
-      
-            new FrAtendente().setVisible(true);
             this.dispose();
-
+            if (this.telaAnterior != null) {
+                this.telaAnterior.setVisible(true);
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }// TODO add your handling code here:

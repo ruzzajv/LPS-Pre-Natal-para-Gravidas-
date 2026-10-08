@@ -1,18 +1,16 @@
 package views;
 
-
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrGerente extends javax.swing.JFrame {
-        private javax.swing.JFrame telaAnterior;
+
+    private javax.swing.JFrame telaAnterior;
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
@@ -131,31 +129,45 @@ public class FrGerente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-this.dispose(); 
-        
+        this.dispose();
+
         views.LoginV2 telaLogin = new views.LoginV2();
         telaLogin.setLocationRelativeTo(null);
         telaLogin.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnCadastrarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarMedicoActionPerformed
-FrCadMedico telaCadMedico = new FrCadMedico();
-        telaCadMedico.setTelaAnterior(this);
-        telaCadMedico.setLocationRelativeTo(null);
-        telaCadMedico.setVisible(true);
+        FrCadUsuario telaCadastro = new FrCadUsuario();
+
+        telaCadastro.setTelaAnterior(this);
+        telaCadastro.pack();
+        telaCadastro.setLocationRelativeTo(null);
+        telaCadastro.setResizable(false);
+        telaCadastro.setVisible(true);
+
+        FrGerente telaGerente = new FrGerente();
+        telaGerente.setTelaAnterior(this.telaAnterior);
+
         this.setVisible(false);
     }//GEN-LAST:event_btnCadastrarMedicoActionPerformed
 
     private void btnCadastrarAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarAtendenteActionPerformed
-FrCadAtendente telaCadAtendente = new FrCadAtendente();
-        telaCadAtendente.setTelaAnterior(this);
-        telaCadAtendente.setLocationRelativeTo(null);
-        telaCadAtendente.setVisible(true);
+        FrCadUsuario telaCadastro = new FrCadUsuario();
+
+        telaCadastro.setTelaAnterior(this);
+        telaCadastro.pack();
+        telaCadastro.setLocationRelativeTo(null);
+        telaCadastro.setResizable(false);
+        telaCadastro.setVisible(true);
+
+        FrGerente telaGerente = new FrGerente();
+        telaGerente.setTelaAnterior(this.telaAnterior);
+
         this.setVisible(false);
     }//GEN-LAST:event_btnCadastrarAtendenteActionPerformed
 
     private void btnVizualizarExtratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVizualizarExtratoActionPerformed
-FrExtrato telaExtrato = new FrExtrato();
+        FrExtrato telaExtrato = new FrExtrato();
         telaExtrato.setTelaAnterior(this);
         telaExtrato.setLocationRelativeTo(null);
         telaExtrato.setVisible(true);

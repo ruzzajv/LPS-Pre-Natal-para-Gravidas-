@@ -265,8 +265,10 @@ public class FrCadGerente extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this, "Gerente cadastrado com sucesso!");
 
-            new FrAtendente().setVisible(true);
             this.dispose();
+            if (this.telaAnterior != null) {
+                this.telaAnterior.setVisible(true);
+            }
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro ao salvar no banco de dados: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
