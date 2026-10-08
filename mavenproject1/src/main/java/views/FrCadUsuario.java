@@ -27,7 +27,7 @@ public class FrCadUsuario extends javax.swing.JFrame {
         initComponents();
     }
 
-    // Limpa todos os campos de texto e senha
+
     private void limparFormulario() {
         txtNome.setText("");
         txtCpf.setText("");
@@ -38,7 +38,7 @@ public class FrCadUsuario extends javax.swing.JFrame {
         txtContato.setText("");
         txtDataNascimento.setText("");
 
-        // Limpa os RadioButtons de tipo
+
         btnUsuarioTipoGestante.setSelected(false);
         btnUsuarioTipoMedico.setSelected(false);
         btnUsuarioTipoAtendente.setSelected(false);
@@ -48,7 +48,7 @@ public class FrCadUsuario extends javax.swing.JFrame {
         txtCpf.setEnabled(true);
     }
 
-    // Habilita ou desabilita os campos do formulário
+
     private void habilitarFormulario(boolean habilitar) {
         txtNome.setEnabled(habilitar);
         txtIdade.setEnabled(habilitar);
@@ -483,7 +483,7 @@ public class FrCadUsuario extends javax.swing.JFrame {
         if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
             try {
                 UsuarioController controller = new UsuarioController();
-                // Função correta corrigida aqui:
+                
                 entidades.Usuario usuario = controller.buscarPorCpf(cpfDigitado.trim());
 
                 this.limparFormulario();

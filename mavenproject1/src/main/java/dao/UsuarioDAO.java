@@ -96,7 +96,7 @@ public class UsuarioDAO {
         }
     }
 
-    // Exclusão por CPF utilizando o mesmo EntityManager ativo na transação
+    
     public void excluirPorCpf(String cpf) throws Exception {
         EntityManager em = getEntityManager();
         try {

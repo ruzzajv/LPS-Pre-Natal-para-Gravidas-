@@ -47,7 +47,7 @@ public class LoginController {
               
                 telaLogin.dispose();
 
-                // Redireciona e abre a tela correta conforme o tipo de utilizador
+    
                 if (usuarioAutenticado instanceof Gerente) {
                     new FrGerente().setVisible(true);
                 } else if (usuarioAutenticado instanceof Atendente) {

@@ -22,6 +22,7 @@ public class FrGerente extends javax.swing.JFrame {
      */
     public FrGerente() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

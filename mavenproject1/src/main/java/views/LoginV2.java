@@ -22,6 +22,7 @@ public class LoginV2 extends javax.swing.JFrame {
      */
     public LoginV2() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
