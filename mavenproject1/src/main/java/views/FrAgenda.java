@@ -1,5 +1,13 @@
 package views;
 
+import controller.AgendaController;
+import controller.ConsultaController;
+import dao.ConsultaDAO;
+import entidades.Consulta;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -12,16 +20,48 @@ public class FrAgenda extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrAgenda.class.getName());
     private javax.swing.JFrame telaAnterior;
+    private List<Consulta> listaConsultas;
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
     }
+    public final void carregarTabela() {
+        DefaultTableModel modelo = (DefaultTableModel) tableAgenda.getModel();
+        modelo.setNumRows(0);
 
+        // Substitui Title 1, Title 2, Title 3, Title 4 pelos nomes reais mostrando a Paciente!
+        modelo.setColumnIdentifiers(new Object[]{"Paciente (Gestante)", "Médico", "Data", "Hora"});
+
+        AgendaController agendaController = new AgendaController();
+        ConsultaController consultaController = new ConsultaController();
+        this.listaConsultas = agendaController.listarConsultasDaAgenda();
+
+        if (this.listaConsultas != null) {
+            for (Consulta c : this.listaConsultas) {
+                String nomePaciente = (c.getGestante() != null && c.getGestante().getNome() != null)
+                        ? c.getGestante().getNome()
+                        : "Não informada";
+
+                String nomeMedico = (c.getMedico() != null && c.getMedico().getNome() != null)
+                        ? c.getMedico().getNome()
+                        : "Não informado";
+
+                modelo.addRow(new Object[]{
+                    nomePaciente,
+                    nomeMedico,
+                    consultaController.formatarData(c.getData()),
+                    consultaController.formatarHora(c.getHora())
+                });
+            }
+        }
+}
     /**
      * Creates new form FrAgenda
      */
     public FrAgenda() {
         initComponents();
+        setLocationRelativeTo(null);
+        carregarTabela();
     }
 
     /**
@@ -41,7 +81,6 @@ public class FrAgenda extends javax.swing.JFrame {
         btnEditarAgenda = new javax.swing.JButton();
         btnApagarAgenda = new javax.swing.JButton();
         btnSalvarAgenda = new javax.swing.JButton();
-        btnLimparAgenda = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableAgenda = new javax.swing.JTable();
         btnVoltar = new javax.swing.JButton();
@@ -61,12 +100,13 @@ public class FrAgenda extends javax.swing.JFrame {
         btnCriarAgenda.addActionListener(this::btnCriarAgendaActionPerformed);
 
         btnEditarAgenda.setText("EDITAR");
+        btnEditarAgenda.addActionListener(this::btnEditarAgendaActionPerformed);
 
         btnApagarAgenda.setText("APAGAR");
+        btnApagarAgenda.addActionListener(this::btnApagarAgendaActionPerformed);
 
-        btnSalvarAgenda.setText("SALVAR");
-
-        btnLimparAgenda.setText("LIMPAR");
+        btnSalvarAgenda.setText("ATUALIZAR");
+        btnSalvarAgenda.addActionListener(this::btnSalvarAgendaActionPerformed);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -75,15 +115,13 @@ public class FrAgenda extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCriarAgenda)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnEditarAgenda)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(btnApagarAgenda)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnSalvarAgenda)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLimparAgenda)
-                .addGap(100, 100, 100))
+                .addGap(103, 103, 103))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,8 +131,7 @@ public class FrAgenda extends javax.swing.JFrame {
                     .addComponent(btnCriarAgenda)
                     .addComponent(btnEditarAgenda)
                     .addComponent(btnApagarAgenda)
-                    .addComponent(btnSalvarAgenda)
-                    .addComponent(btnLimparAgenda))
+                    .addComponent(btnSalvarAgenda))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -103,16 +140,15 @@ public class FrAgenda extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         tableAgenda.setModel(new javax.swing.table.DefaultTableModel(
@@ -135,10 +171,6 @@ public class FrAgenda extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,6 +180,10 @@ public class FrAgenda extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(btnVoltar)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(131, 131, 131))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,7 +213,11 @@ public class FrAgenda extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCriarAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarAgendaActionPerformed
-        // TODO add your handling code here:
+    FrConsulta telaConsulta = new FrConsulta();
+        telaConsulta.setTelaAnterior(this);
+        telaConsulta.setLocationRelativeTo(null);
+        telaConsulta.setVisible(true);
+        this.setVisible(false);        
     }//GEN-LAST:event_btnCriarAgendaActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -188,9 +228,70 @@ public class FrAgenda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnEditarAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAgendaActionPerformed
+    int linhaSelecionada = tableAgenda.getSelectedRow();
+
+        if (linhaSelecionada == -1 || listaConsultas == null || linhaSelecionada >= listaConsultas.size()) {
+            JOptionPane.showMessageDialog(this, "Selecione uma consulta na tabela para editar!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Consulta consultaSelecionada = listaConsultas.get(linhaSelecionada);
+
+        FrConsulta telaConsulta = new FrConsulta(consultaSelecionada.getIdConsulta());
+        telaConsulta.setTelaAnterior(this);
+        telaConsulta.setLocationRelativeTo(null);
+        telaConsulta.setVisible(true);
+        this.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarAgendaActionPerformed
+
+    private void btnApagarAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarAgendaActionPerformed
+    int linhaSelecionada = tableAgenda.getSelectedRow();
+
+        if (linhaSelecionada == -1 || listaConsultas == null || linhaSelecionada >= listaConsultas.size()) {
+            JOptionPane.showMessageDialog(this, "Selecione uma consulta na tabela para apagar!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Consulta consultaSelecionada = listaConsultas.get(linhaSelecionada);
+        String nomePaciente = (consultaSelecionada.getGestante() != null) ? consultaSelecionada.getGestante().getNome() : "Paciente";
+
+        int resposta = JOptionPane.showConfirmDialog(
+                this,
+                "Deseja realmente cancelar/excluir a consulta de " + nomePaciente + "?",
+                "Confirmar Exclusão",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        if (resposta == JOptionPane.YES_OPTION) {
+            try {
+                AgendaController controller = new AgendaController();
+                controller.excluirConsulta(consultaSelecionada.getIdConsulta());
+                JOptionPane.showMessageDialog(this, "Consulta excluída com sucesso!");
+                carregarTabela();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao excluir: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btnApagarAgendaActionPerformed
+
+    private void btnSalvarAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAgendaActionPerformed
+    carregarTabela();
+        JOptionPane.showMessageDialog(this, "Agenda atualizada!");        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalvarAgendaActionPerformed
+
+  
+    
+    @Override
+    public void setVisible(boolean b) {
+        if (b) {
+            carregarTabela(); // Sempre recarrega a tabela ao voltar da tela de Consulta
+        }
+        super.setVisible(b);
+    }
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -217,7 +318,6 @@ public class FrAgenda extends javax.swing.JFrame {
     private javax.swing.JButton btnApagarAgenda;
     private javax.swing.JButton btnCriarAgenda;
     private javax.swing.JButton btnEditarAgenda;
-    private javax.swing.JButton btnLimparAgenda;
     private javax.swing.JButton btnSalvarAgenda;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;

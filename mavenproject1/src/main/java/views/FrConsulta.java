@@ -1,5 +1,11 @@
 package views;
 
+import controller.ConsultaController;
+import dao.ConsultaDAO;
+import entidades.Consulta;
+import entidades.Gestante;
+import javax.swing.JOptionPane;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,6 +19,8 @@ package views;
 public class FrConsulta extends javax.swing.JFrame {
 
     private javax.swing.JFrame telaAnterior;
+    private Long idConsultaEdicao = null;
+    private String cpfOuNomeGestanteAtual = null;
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
@@ -25,6 +33,64 @@ public class FrConsulta extends javax.swing.JFrame {
         initComponents();
         this.habilitarCampos(false);
         this.limparCampos();
+        this.txtConsultas.setEditable(false);
+        this.atualizarResumoConsultas();
+    }
+
+    public FrConsulta(Long idConsulta) {
+        initComponents();
+        setLocationRelativeTo(null);
+        this.idConsultaEdicao = idConsulta;
+        this.habilitarCampos(true);
+        this.carregarDadosParaEdicao(idConsulta);
+        this.atualizarResumoConsultas();
+    }
+
+    private void carregarDadosParaEdicao(Long id) {
+        try {
+            ConsultaController controller = new ConsultaController();
+            Consulta consulta = controller.buscarPorId(id);
+
+            if (consulta != null) {
+                txtData.setText(controller.formatarData(consulta.getData()));
+                txtHora.setText(controller.formatarHora(consulta.getHora()));
+                txtMotivo.setText(consulta.getMotivo() != null ? consulta.getMotivo() : "");
+                txtRelatorio.setText(consulta.getStatus() != null ? consulta.getStatus() : "");
+
+                if (consulta.getMedico() != null) {
+                    txtMedico.setText(consulta.getMedico().getNome());
+                }
+
+                if (consulta.getGestante() != null) {
+                    Gestante g = consulta.getGestante();
+                    this.cpfOuNomeGestanteAtual = g.getCpf();
+                    btnGravidezDeRisco.setSelected("Sim".equalsIgnoreCase(g.getGravidezDeRisco()));
+                    txtPrevisaoDoParto.setText(g.getPrevisaoDoParto() != null ? g.getPrevisaoDoParto() : "");
+                }
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao carregar consulta: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void atualizarResumoConsultas() {
+        try {
+            ConsultaController controller = new ConsultaController();
+            StringBuilder sb = new StringBuilder();
+            for (Consulta c : controller.listarTodas()) {
+                String pac = (c.getGestante() != null) ? c.getGestante().getNome() : "N/A";
+                String med = (c.getMedico() != null) ? c.getMedico().getNome() : "N/A";
+                sb.append("Paciente: ").append(pac)
+                        .append(" | Médico: ").append(med)
+                        .append(" | Data: ").append(controller.formatarData(c.getData()))
+                        .append(" às ").append(controller.formatarHora(c.getHora()))
+                        .append(" | Motivo: ").append(c.getMotivo() != null ? c.getMotivo() : "")
+                        .append("\n");
+            }
+            txtConsultas.setText(sb.toString());
+        } catch (Exception e) {
+
+        }
     }
 
     /**
@@ -54,7 +120,7 @@ public class FrConsulta extends javax.swing.JFrame {
         txtMedico = new javax.swing.JTextField();
         txtRelatorio = new javax.swing.JTextField();
         txtPrevisaoDoParto = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnEnviar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtConsultas = new javax.swing.JTextArea();
         btnPedidoExame = new javax.swing.JButton();
@@ -63,7 +129,6 @@ public class FrConsulta extends javax.swing.JFrame {
         btnCriarConsulta = new javax.swing.JButton();
         btnEditarConsulta = new javax.swing.JButton();
         btnApagarConsulta = new javax.swing.JButton();
-        btnSalvarConsulta = new javax.swing.JButton();
         btnLimparConsulta = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
 
@@ -126,10 +191,10 @@ public class FrConsulta extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("ENVIAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnEnviar.setText("ENVIAR");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnEnviarActionPerformed(evt);
             }
         });
 
@@ -183,7 +248,7 @@ public class FrConsulta extends javax.swing.JFrame {
                                 .addComponent(txtPrevisaoDoParto))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(172, 172, 172)
-                        .addComponent(jButton1)
+                        .addComponent(btnEnviar)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -223,7 +288,7 @@ public class FrConsulta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btnEnviar)
                 .addGap(19, 19, 19))
         );
 
@@ -241,10 +306,18 @@ public class FrConsulta extends javax.swing.JFrame {
         });
 
         btnEditarConsulta.setText("EDITAR");
+        btnEditarConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarConsultaActionPerformed(evt);
+            }
+        });
 
         btnApagarConsulta.setText("APAGAR");
-
-        btnSalvarConsulta.setText("SALVAR");
+        btnApagarConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApagarConsultaActionPerformed(evt);
+            }
+        });
 
         btnLimparConsulta.setText("LIMPAR");
         btnLimparConsulta.addActionListener(new java.awt.event.ActionListener() {
@@ -260,13 +333,11 @@ public class FrConsulta extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCriarConsulta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(37, 37, 37)
                 .addComponent(btnEditarConsulta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(44, 44, 44)
                 .addComponent(btnApagarConsulta)
-                .addGap(18, 18, 18)
-                .addComponent(btnSalvarConsulta)
-                .addGap(18, 18, 18)
+                .addGap(45, 45, 45)
                 .addComponent(btnLimparConsulta)
                 .addGap(88, 88, 88))
         );
@@ -278,7 +349,6 @@ public class FrConsulta extends javax.swing.JFrame {
                     .addComponent(btnCriarConsulta)
                     .addComponent(btnEditarConsulta)
                     .addComponent(btnApagarConsulta)
-                    .addComponent(btnSalvarConsulta)
                     .addComponent(btnLimparConsulta))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -304,7 +374,7 @@ public class FrConsulta extends javax.swing.JFrame {
                 .addComponent(btnVoltar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addGap(30, 30, 30))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,18 +429,76 @@ public class FrConsulta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGravidezDeRiscoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+     try {
+        if (cpfOuNomeGestanteAtual == null || cpfOuNomeGestanteAtual.trim().isEmpty()) {
+            cpfOuNomeGestanteAtual = JOptionPane.showInputDialog(this, "Digite o CPF ou Nome da Gestante (Paciente) para esta consulta:", "Identificar Paciente", JOptionPane.QUESTION_MESSAGE);
+            if (cpfOuNomeGestanteAtual == null || cpfOuNomeGestanteAtual.trim().isEmpty()) {
+                return;
+            }
+        }
+
+        ConsultaController controller = new ConsultaController();
+        boolean isEdicao = (idConsultaEdicao != null);
+
+        controller.salvarOuAtualizar(
+            idConsultaEdicao,
+            cpfOuNomeGestanteAtual,
+            txtMedico.getText(),
+            txtData.getText(),
+            txtHora.getText(),
+            txtMotivo.getText(),
+            txtRelatorio.getText(),
+            btnGravidezDeRisco.isSelected(),
+            txtPrevisaoDoParto.getText()
+        );
+
+        JOptionPane.showMessageDialog(this, isEdicao ? "Consulta atualizada com sucesso!" : "Consulta agendada com sucesso!");
+
+        this.limparCampos();
+        this.habilitarCampos(false);
+        this.txtConsultas.setEditable(false);
+        this.atualizarResumoConsultas();
+
+        if (this.telaAnterior instanceof FrAgenda) {
+            this.dispose();
+            this.telaAnterior.setVisible(true);
+        }
+
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Erro ao salvar consulta: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void btnCriarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarConsultaActionPerformed
-        this.habilitarCampos(true);
+        this.cpfOuNomeGestanteAtual = null;
         this.limparCampos();
+        this.habilitarCampos(true);
+        this.txtConsultas.setEditable(false);
+
+        String termoGestante = JOptionPane.showInputDialog(this, "Digite o CPF ou Nome da Gestante (Paciente):", "Selecionar Paciente", JOptionPane.QUESTION_MESSAGE);
+
+        if (termoGestante != null && !termoGestante.trim().isEmpty()) {
+            ConsultaDAO dao = new ConsultaDAO();
+            Gestante g = dao.buscarGestante(termoGestante.trim());
+
+            if (g != null) {
+                this.cpfOuNomeGestanteAtual = g.getCpf(); 
+                btnGravidezDeRisco.setSelected("Sim".equalsIgnoreCase(g.getGravidezDeRisco()));
+                txtPrevisaoDoParto.setText(g.getPrevisaoDoParto() != null ? g.getPrevisaoDoParto() : "");
+                JOptionPane.showMessageDialog(this, "Paciente selecionada: " + g.getNome());
+            } else {
+                JOptionPane.showMessageDialog(this, "Nenhuma gestante encontrada com esse CPF/Nome!", "Aviso", JOptionPane.WARNING_MESSAGE);
+                this.habilitarCampos(false); 
+            }
+        } else {
+            this.habilitarCampos(false); 
+        }
     }//GEN-LAST:event_btnCriarConsultaActionPerformed
 
     private void btnPedidoExameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidoExameActionPerformed
-views.FrExame telaExame = new views.FrExame();
-        telaExame.setTelaAnterior(this); 
+        views.FrExame telaExame = new views.FrExame();
+        telaExame.setTelaAnterior(this);
         telaExame.setLocationRelativeTo(null);
         telaExame.setVisible(true);
         this.dispose();
@@ -382,12 +510,39 @@ views.FrExame telaExame = new views.FrExame();
     }//GEN-LAST:event_btnLimparConsultaActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-      this.dispose(); 
-        
+        this.dispose();
+
         if (this.telaAnterior != null) {
             this.telaAnterior.setVisible(true);
         }
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnEditarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarConsultaActionPerformed
+        FrAgenda telaAgenda = new FrAgenda();
+        telaAgenda.setTelaAnterior(this);
+        telaAgenda.setLocationRelativeTo(null);
+        telaAgenda.setVisible(true);
+        this.setVisible(false);        
+    }//GEN-LAST:event_btnEditarConsultaActionPerformed
+
+    private void btnApagarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarConsultaActionPerformed
+        if (idConsultaEdicao != null) {
+            int resp = JOptionPane.showConfirmDialog(this, "Deseja excluir esta consulta em edição?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (resp == JOptionPane.YES_OPTION) {
+                try {
+                    new ConsultaController().excluir(idConsultaEdicao);
+                    JOptionPane.showMessageDialog(this, "Consulta excluída com sucesso!");
+                    this.limparCampos();
+                    this.habilitarCampos(false);
+                    this.atualizarResumoConsultas();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Erro ao excluir: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma consulta pela tela de Agenda para excluir ou editar.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnApagarConsultaActionPerformed
     public void limparCampos() {
         txtData.setText("");
         txtHora.setText("");
@@ -396,6 +551,8 @@ views.FrExame telaExame = new views.FrExame();
         txtRelatorio.setText("");
         txtPrevisaoDoParto.setText("");
         btnGravidezDeRisco.setSelected(false);
+        idConsultaEdicao = null;
+        cpfOuNomeGestanteAtual = null;
     }
 
     public void habilitarCampos(boolean flag) {
@@ -448,12 +605,11 @@ views.FrExame telaExame = new views.FrExame();
     private javax.swing.JButton btnApagarConsulta;
     private javax.swing.JButton btnCriarConsulta;
     private javax.swing.JButton btnEditarConsulta;
+    private javax.swing.JButton btnEnviar;
     private javax.swing.JRadioButton btnGravidezDeRisco;
     private javax.swing.JButton btnLimparConsulta;
     private javax.swing.JButton btnPedidoExame;
-    private javax.swing.JButton btnSalvarConsulta;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

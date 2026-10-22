@@ -34,7 +34,7 @@ public class FrCadAtendente extends javax.swing.JFrame {
     private String dataNasc;
     private String contato;
     private String idade;
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrCadMedico.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrCadAtendente.class.getName());
     private javax.swing.JFrame telaAnterior;
 
     FrCadAtendente(String nome, String cpf, String login, String senha, String email, String dataNasc, String contato, String idade) {
@@ -56,7 +56,7 @@ public class FrCadAtendente extends javax.swing.JFrame {
     }
 
     /**
-     * Creates new form FrCadMedico
+     * Creates new form FrCadAtendente
      */
     public FrCadAtendente() {
 
@@ -96,6 +96,7 @@ public class FrCadAtendente extends javax.swing.JFrame {
         btnCriarAtendente.addActionListener(this::btnCriarAtendenteActionPerformed);
 
         btnEditarAtendente.setText("EDITAR");
+        btnEditarAtendente.addActionListener(this::btnEditarAtendenteActionPerformed);
 
         btnApagarAtendente.setText("APAGAR");
         btnApagarAtendente.addActionListener(this::btnApagarAtendenteActionPerformed);
@@ -237,10 +238,31 @@ public class FrCadAtendente extends javax.swing.JFrame {
     private void btnSalvarAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAtendenteActionPerformed
 
         try {
+            UsuarioDAO dao = new UsuarioDAO();
+
+            if (cpfAtendenteEdicao != null) {
+                entidades.Usuario usuario = dao.buscarObjetoPorCpf(cpfAtendenteEdicao);
+
+                if (usuario instanceof entidades.Atendente) {
+                    entidades.Atendente atendente = (entidades.Atendente) usuario;
+
+                    atendente.setTurnoTrabalho(txtTurnoDeTrabalho.getText());
+
+                    dao.editar(atendente);
+                    JOptionPane.showMessageDialog(this, "Atendente atualizado com sucesso!");
+
+                    this.limparFormulario();
+                    this.habilitarFormulario(false);
+                    return;
+                }
+            }
 
             AtendenteController controller = new AtendenteController();
-
-            controller.cadastrar(nomeBase, cpfBase, loginBase, senhaBase, emailBase, dataNasc, contato, idade, txtTurnoDeTrabalho.getText());
+            controller.cadastrar(
+                    nomeBase, cpfBase, loginBase, senhaBase, emailBase,
+                    dataNasc, contato, idade,
+                    txtTurnoDeTrabalho.getText()
+            );
 
             JOptionPane.showMessageDialog(this, "Atendente cadastrado com sucesso!");
 
@@ -249,7 +271,7 @@ public class FrCadAtendente extends javax.swing.JFrame {
                 this.telaAnterior.setVisible(true);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro ao salvar/atualizar: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnSalvarAtendenteActionPerformed
@@ -296,6 +318,35 @@ public class FrCadAtendente extends javax.swing.JFrame {
         this.habilitarFormulario(true);             // TODO add your handling code here:
     }//GEN-LAST:event_btnLimparAtendenteActionPerformed
 
+    private void btnEditarAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAtendenteActionPerformed
+        String cpfDigitado = JOptionPane.showInputDialog(this, "Digite o CPF do atendente para editar:", "Editar Atendente", JOptionPane.QUESTION_MESSAGE);
+
+        if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
+            try {
+                UsuarioDAO dao = new UsuarioDAO();
+                entidades.Usuario usuario = dao.buscarObjetoPorCpf(cpfDigitado.trim());
+
+                if (usuario instanceof entidades.Atendente) {
+                    entidades.Atendente atendente = (entidades.Atendente) usuario;
+
+                    this.limparFormulario();
+                    this.habilitarFormulario(true);
+
+                    cpfAtendenteEdicao = atendente.getCpf();
+
+                    txtTurnoDeTrabalho.setText(atendente.getTurnoTrabalho());
+
+                    JOptionPane.showMessageDialog(this, "Dados do atendente carregados para edição!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nenhum atendente encontrado com este CPF.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Erro ao buscar: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+    }//GEN-LAST:event_btnEditarAtendenteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -318,7 +369,7 @@ public class FrCadAtendente extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FrCadMedico().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FrCadAtendente().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
