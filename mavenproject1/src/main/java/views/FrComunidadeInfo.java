@@ -1,15 +1,16 @@
 package views;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrComunidadeInfo extends javax.swing.JFrame {
-        private javax.swing.JFrame telaAnterior;
+
+    private javax.swing.JFrame telaAnterior;
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
@@ -21,6 +22,10 @@ public class FrComunidadeInfo extends javax.swing.JFrame {
      */
     public FrComunidadeInfo() {
         initComponents();
+        setLocationRelativeTo(null);
+        painelDePosts.setEditable(false);
+        habilitarCampos(false);
+        carregarInformacoes();
     }
 
     /**
@@ -67,6 +72,7 @@ public class FrComunidadeInfo extends javax.swing.JFrame {
         BtnApagarPost.addActionListener(this::BtnApagarPostActionPerformed);
 
         btnSalvarPost.setText("SALVAR");
+        btnSalvarPost.addActionListener(this::btnSalvarPostActionPerformed);
 
         btnLimparPost.setText("LIMPAR");
 
@@ -200,15 +206,61 @@ public class FrComunidadeInfo extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnApagarPostActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-    this.dispose(); 
-        
+        this.dispose();
+
         if (this.telaAnterior != null) {
             this.telaAnterior.setVisible(true);
         }    }//GEN-LAST:event_btnVoltarActionPerformed
 
+    private void btnSalvarPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarPostActionPerformed
+        try {
+
+            new controller.ComunidadeController().salvarPostInformacao(txtTema.getText(), txtTitulo.getText(), txtTextoPost.getText());
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Informação publicada com sucesso!");
+            limparCampos();
+            habilitarCampos(false);
+            carregarInformacoes();
+
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSalvarPostActionPerformed
+
     /**
      * @param args the command line arguments
      */
+    private void carregarInformacoes() {
+        try {
+            java.util.List<entidades.Informacoes> lista = new controller.ComunidadeController().listarInformacoes();
+            StringBuilder sb = new StringBuilder();
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+            for (entidades.Informacoes i : lista) {
+                sb.append("Data: ").append(sdf.format(i.getDataPublicacao())).append("\n");
+                sb.append("TÍTULO: ").append(i.getTituloAviso()).append("\n");
+
+                sb.append(i.getConteudoTecnico()).append("\n");
+                sb.append("--------------------------------------------------\n\n");
+            }
+
+            painelDePosts.setText(sb.toString());
+        } catch (Exception e) {
+        }
+    }
+
+    private void habilitarCampos(boolean flag) {
+        txtTema.setEnabled(flag);
+        txtTitulo.setEnabled(flag);
+        txtTextoPost.setEnabled(flag);
+    }
+
+    private void limparCampos() {
+        txtTema.setText("");
+        txtTitulo.setText("");
+        txtTextoPost.setText("");
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

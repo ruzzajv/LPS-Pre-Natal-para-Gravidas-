@@ -4,13 +4,13 @@ package views;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrGestante extends javax.swing.JFrame {
-        private javax.swing.JFrame telaAnterior;
+
+    private javax.swing.JFrame telaAnterior;
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
@@ -22,6 +22,7 @@ public class FrGestante extends javax.swing.JFrame {
      */
     public FrGestante() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -118,18 +119,17 @@ public class FrGestante extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarComunidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarComunidadeActionPerformed
-views.FrComunidade telaComunidade = new views.FrComunidade();
+        views.FrComunidade telaComunidade = new views.FrComunidade();
         telaComunidade.setTelaAnterior(this);
         telaComunidade.setLocationRelativeTo(null);
         telaComunidade.setVisible(true);
-        this.setVisible(false);    
+        this.setVisible(false);
 // TODO add your handling code here:
     }//GEN-LAST:event_btnEntrarComunidadeActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-this.dispose(); 
-        
-        
+        this.dispose();
+
         views.LoginV2 telaLogin = new views.LoginV2();
         telaLogin.setLocationRelativeTo(null);
         telaLogin.setVisible(true);      // TODO add your handling code here:

@@ -19,23 +19,24 @@ public class Mural implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataPublicacao;
 
-
     @ManyToOne
     @JoinColumn(name = "id_gestante")
     private Gestante gestante;
 
-  
     @ManyToOne
     @JoinColumn(name = "id_comunidade")
     private Comunidade comunidade;
 
+    @ManyToOne
+    @JoinColumn(name = "id_postagem_pai")
+    private Mural postagemPai;
+
     public Mural() {
     }
 
+    public void crudDicas() {
+    }
 
-    public void crudDicas() {}
-
- 
     public Long getIdPostMural() {
         return idPostMural;
     }
@@ -74,5 +75,12 @@ public class Mural implements Serializable {
 
     public void setComunidade(Comunidade comunidade) {
         this.comunidade = comunidade;
+    }
+    public Mural getPostagemPai() {
+        return postagemPai;
+    }
+
+    public void setPostagemPai(Mural postagemPai) {
+        this.postagemPai = postagemPai;
     }
 }

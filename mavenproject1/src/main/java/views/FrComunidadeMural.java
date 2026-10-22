@@ -1,15 +1,20 @@
 package views;
+
+import dao.MuralDAO;
+import entidades.Mural;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrComunidadeMural extends javax.swing.JFrame {
-        private javax.swing.JFrame telaAnterior;
+
+    private javax.swing.JFrame telaAnterior;
+    private Long idPostagemEmEdicao = null;
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
@@ -21,6 +26,25 @@ public class FrComunidadeMural extends javax.swing.JFrame {
      */
     public FrComunidadeMural() {
         initComponents();
+        setLocationRelativeTo(null);
+
+        // Transforma o painel num visualizador HTML interativo
+        painelMural.setContentType("text/html");
+        painelMural.setEditable(false);
+
+        // Ouve os cliques nos links de editar e apagar
+        painelMural.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            @Override
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent e) {
+                if (e.getEventType() == javax.swing.event.HyperlinkEvent.EventType.ACTIVATED) {
+                    String comando = e.getDescription(); // Pega o comando invisível do link
+                    processarCliqueAcao(comando);
+                }
+            }
+        });
+
+        habilitarCampos(false);
+        carregarMural();
     }
 
     /**
@@ -36,8 +60,6 @@ public class FrComunidadeMural extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         btnCriarMural = new javax.swing.JButton();
-        BtnEditarMural = new javax.swing.JButton();
-        btnApagarMural = new javax.swing.JButton();
         BtnSalvarMural = new javax.swing.JButton();
         btnLimparMural = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -60,15 +82,13 @@ public class FrComunidadeMural extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
         btnCriarMural.setText("CRIAR ");
-
-        BtnEditarMural.setText("EDITAR");
-
-        btnApagarMural.setText("APAGAR");
-        btnApagarMural.addActionListener(this::btnApagarMuralActionPerformed);
+        btnCriarMural.addActionListener(this::btnCriarMuralActionPerformed);
 
         BtnSalvarMural.setText("SALVAR");
+        BtnSalvarMural.addActionListener(this::BtnSalvarMuralActionPerformed);
 
         btnLimparMural.setText("LIMPAR");
+        btnLimparMural.addActionListener(this::btnLimparMuralActionPerformed);
 
         jLabel2.setText("TITULO:");
 
@@ -104,20 +124,18 @@ public class FrComunidadeMural extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtTema))
-                            .addComponent(jScrollPane1)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(59, 59, 59)
                                 .addComponent(btnCriarMural)
-                                .addGap(26, 26, 26)
-                                .addComponent(BtnEditarMural)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnApagarMural)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(BtnSalvarMural)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnLimparMural))))
+                                .addGap(180, 180, 180))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(98, 98, 98)
-                        .addComponent(jLabel5)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnLimparMural)
+                            .addComponent(jLabel5))))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -128,8 +146,6 @@ public class FrComunidadeMural extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCriarMural)
-                    .addComponent(BtnEditarMural)
-                    .addComponent(btnApagarMural)
                     .addComponent(BtnSalvarMural)
                     .addComponent(btnLimparMural))
                 .addGap(35, 35, 35)
@@ -168,7 +184,7 @@ public class FrComunidadeMural extends javax.swing.JFrame {
                         .addGap(94, 94, 94)
                         .addComponent(jLabel1))
                     .addComponent(btnVoltar))
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,21 +214,163 @@ public class FrComunidadeMural extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnApagarMuralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarMuralActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnApagarMuralActionPerformed
-
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-    this.dispose(); 
-        
+        this.dispose();
+
         if (this.telaAnterior != null) {
             this.telaAnterior.setVisible(true);
         }   // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnCriarMuralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarMuralActionPerformed
+        limparCampos();
+        habilitarCampos(true);
+    }//GEN-LAST:event_btnCriarMuralActionPerformed
+
+    private void BtnSalvarMuralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalvarMuralActionPerformed
+        try {
+
+            entidades.Usuario usuarioLogado = controller.SessaoController.getUsuarioLogado();
+
+            if (!(usuarioLogado instanceof entidades.Gestante)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Apenas gestantes podem criar tópicos aqui!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            entidades.Gestante autora = (entidades.Gestante) usuarioLogado;
+
+            new controller.ComunidadeController().salvarPostMural(txtTema.getText(), txtTitulo.getText(), TxtTextoMural.getText(), autora, null);
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Postagem enviada com sucesso!");
+            limparCampos();
+            habilitarCampos(false);
+            carregarMural();
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_BtnSalvarMuralActionPerformed
+
+    private void btnLimparMuralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparMuralActionPerformed
+        limparCampos();
+        habilitarCampos(false);
+        this.idPostagemEmEdicao = null;        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimparMuralActionPerformed
+   
+    private void processarCliqueAcao(String comando) {
+        try {
+            if (comando.startsWith("edit_")) {
+                Long id = Long.parseLong(comando.replace("edit_", ""));
+
+                // Carrega para edição
+                entidades.Mural mural = new dao.MuralDAO().buscar(id);
+                if (mural != null) {
+                    this.idPostagemEmEdicao = mural.getIdPostMural();
+                    TxtTextoMural.setText(mural.getTextoDica());
+                    txtTema.setText("");
+                    txtTitulo.setText("");
+                    habilitarCampos(true);
+                }
+
+            } else if (comando.startsWith("del_")) {
+                Long id = Long.parseLong(comando.replace("del_", ""));
+
+                // Pergunta antes de apagar
+                int resposta = javax.swing.JOptionPane.showConfirmDialog(this, "Tem a certeza que deseja APAGAR esta postagem?", "Atenção", javax.swing.JOptionPane.YES_NO_OPTION);
+                if (resposta == javax.swing.JOptionPane.YES_OPTION) {
+                    new dao.MuralDAO().excluir(id);
+                    javax.swing.JOptionPane.showMessageDialog(this, "Postagem apagada com sucesso!");
+                    carregarMural();
+                }
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao processar ação: " + e.getMessage());
+        }
+    }
+
+    public void salvarPostMural(String tema, String titulo, String texto, entidades.Gestante autora, entidades.Mural postagemPai) throws Exception {
+        if (texto == null || texto.trim().isEmpty()) {
+            throw new Exception("O texto da postagem não pode estar vazio!");
+        }
+        Mural mural = new Mural();
+        mural.setDataPublicacao(new java.util.Date());
+
+        //  resposta não precisa de tema e ttulo
+        if (postagemPai != null) {
+            mural.setTextoDica(texto);
+            mural.setPostagemPai(postagemPai);
+        } else {
+            mural.setTextoDica("TEMA: " + tema + " | TÍTULO: " + titulo + "\n" + texto);
+        }
+
+        mural.setGestante(autora);
+        new MuralDAO().salvar(mural);
+    }
+
+private void carregarMural() {
+        try {
+         
+            entidades.Usuario usuarioLogado = controller.SessaoController.getUsuarioLogado();
+
+            java.util.List<entidades.Mural> lista = new controller.ComunidadeController().listarMural();
+            StringBuilder html = new StringBuilder();
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
+            
+            html.append("<html><body style='font-family: Tahoma, sans-serif; margin: 10px; background-color: #eaeded;'>");
+            
+            for (entidades.Mural m : lista) {
+                
+            
+                boolean isDonaDoPost = false;
+                
+                if (usuarioLogado != null && m.getGestante() != null) {
+                    // Compara o CPF da pessoa logada com o CPF da autora do post
+                    if (usuarioLogado.getCpf().equals(m.getGestante().getCpf())) {
+                        isDonaDoPost = true;
+                    }
+                }
+
+            
+                if (isDonaDoPost) {
+                    // Desenha a caixa branca
+                    html.append("<div style='background-color: #ffffff; border: 1px solid #cccccc; border-radius: 5px; margin-bottom: 8px; padding: 10px;'>");
+                    
+                    html.append("<div style='color: #787c7e; font-size: 10px; margin-bottom: 5px;'>")
+                        .append("Data: ").append(sdf.format(m.getDataPublicacao()))
+                        .append("</div>");
+                        
+                    html.append("<div style='color: #333333; font-size: 12px; margin-bottom: 8px;'>")
+                        .append(m.getTextoDica().replace("\n", "<br>"))
+                        .append("</div>");
+                    
+                    // Desenha os botões de Editar e Apagar
+                    html.append("<div>")
+                        .append("<a href='edit_").append(m.getIdPostMural()).append("' style='color: #0079d3; text-decoration: none; font-size: 11px; font-weight: bold;'>[ Editar ]</a>")
+                        .append("&nbsp;&nbsp;&nbsp;") // Espaços
+                        .append("<a href='del_").append(m.getIdPostMural()).append("' style='color: #d93025; text-decoration: none; font-size: 11px; font-weight: bold;'>[ Apagar ]</a>")
+                        .append("</div>");
+                        
+                    html.append("</div>"); // Fecha a caixa branca
+                }
+            }
+            
+            html.append("</body></html>");
+            painelMural.setText(html.toString());
+            painelMural.setCaretPosition(0);
+        } catch (Exception e) {}
+    }
+
+    private void habilitarCampos(boolean flag) {
+        txtTema.setEnabled(flag);
+        txtTitulo.setEnabled(flag);
+        TxtTextoMural.setEnabled(flag);
+    }
+
+    private void limparCampos() {
+        txtTema.setText("");
+        txtTitulo.setText("");
+        TxtTextoMural.setText("");
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -236,10 +394,8 @@ public class FrComunidadeMural extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnEditarMural;
     private javax.swing.JButton BtnSalvarMural;
     private javax.swing.JTextArea TxtTextoMural;
-    private javax.swing.JButton btnApagarMural;
     private javax.swing.JButton btnCriarMural;
     private javax.swing.JButton btnLimparMural;
     private javax.swing.JButton btnVoltar;

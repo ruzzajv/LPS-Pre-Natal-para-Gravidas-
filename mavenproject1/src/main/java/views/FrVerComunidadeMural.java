@@ -1,15 +1,16 @@
 package views;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrVerComunidadeMural extends javax.swing.JFrame {
-        private javax.swing.JFrame telaAnterior;
+
+    private javax.swing.JFrame telaAnterior;
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
@@ -21,6 +22,108 @@ public class FrVerComunidadeMural extends javax.swing.JFrame {
      */
     public FrVerComunidadeMural() {
         initComponents();
+        setLocationRelativeTo(null);
+
+        VerMural.setContentType("text/html");
+        VerMural.setEditable(false);
+
+        // Ativa o clique no link "[ Responder ]"
+        VerMural.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            @Override
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent e) {
+                if (e.getEventType() == javax.swing.event.HyperlinkEvent.EventType.ACTIVATED) {
+                    String idPostagemPai = e.getDescription();
+                    responderPostagem(Long.parseLong(idPostagemPai));
+                }
+            }
+        });
+
+        carregarFórum();
+    }
+
+    private void responderPostagem(Long idPostagemPai) {
+        String resposta = javax.swing.JOptionPane.showInputDialog(this, "Digite a sua resposta:", "Responder", javax.swing.JOptionPane.PLAIN_MESSAGE);
+
+        if (resposta != null && !resposta.trim().isEmpty()) {
+
+            try {
+
+                entidades.Usuario usuarioLogado = controller.SessaoController.getUsuarioLogado();
+
+                if (!(usuarioLogado instanceof entidades.Gestante)) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Apenas gestantes podem responder no fórum!", "Acesso Negado", javax.swing.JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                entidades.Gestante autora = (entidades.Gestante) usuarioLogado;
+
+                dao.MuralDAO muralDAO = new dao.MuralDAO();
+                entidades.Mural postPai = muralDAO.listarTodos().stream().filter(p -> p.getIdPostMural().equals(idPostagemPai)).findFirst().orElse(null);
+
+                if (postPai != null) {
+                    new controller.ComunidadeController().salvarPostMural("", "", resposta, autora, postPai);
+                    carregarFórum(); // Recarrega a tela para exibir a nova resposta
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Erro: Tópico original não encontrado.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (Exception e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Erro ao salvar resposta: " + e.getMessage());
+            }
+        }
+    }
+
+
+    private void carregarFórum() {
+        try {
+            java.util.List<entidades.Mural> lista = new controller.ComunidadeController().listarMural();
+            StringBuilder html = new StringBuilder();
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy 'às' HH:mm");
+
+            html.append("<html><body style='font-family: Tahoma, sans-serif; background-color: #eaeded; margin: 10px;'>");
+
+            // 1. Loop para os TÓPICOS PRINCIPAIS (postagemPai == null)
+            for (entidades.Mural m : lista) {
+                if (m.getPostagemPai() == null) {
+                    String autora = (m.getGestante() != null) ? m.getGestante().getNome() : "Desconhecida";
+                    String dataStr = sdf.format(m.getDataPublicacao());
+
+                    html.append("<div style='background-color: #ffffff; border: 1px solid #cccccc; border-radius: 5px; margin-bottom: 5px; padding: 10px;'>");
+                    html.append("<div style='color: #787c7e; font-size: 10px; margin-bottom: 5px;'>")
+                            .append("Postado por <b>u/").append(autora.replaceAll(" ", "")).append("</b> em ").append(dataStr)
+                            .append("</div>");
+                    html.append("<div style='color: #1c1c1c; font-size: 12px;'>")
+                            .append(m.getTextoDica().replace("\n", "<br>"))
+                            .append("</div>");
+                    // Link para responder a este tópico
+                    html.append("<div style='margin-top: 8px;'><a href='").append(m.getIdPostMural()).append("' style='color: #0079d3; text-decoration: none; font-size: 10px; font-weight: bold;'>[ Responder ]</a></div>");
+                    html.append("</div>");
+
+                    // 2. Loop para as RESPOSTAS deste tópico
+                    for (entidades.Mural resp : lista) {
+                        if (resp.getPostagemPai() != null && resp.getPostagemPai().getIdPostMural().equals(m.getIdPostMural())) {
+                            String autoraResp = (resp.getGestante() != null) ? resp.getGestante().getNome() : "Desconhecida";
+                            String dataResp = sdf.format(resp.getDataPublicacao());
+
+                            // A margem esquerda (margin-left: 30px) cria o efeito de "escadinha" do Reddit
+                            html.append("<div style='background-color: #f8f9fa; border-left: 3px solid #d7dadc; margin-left: 30px; margin-bottom: 5px; padding: 8px;'>");
+                            html.append("<div style='color: #787c7e; font-size: 9px; margin-bottom: 3px;'>")
+                                    .append("↳ Resposta de <b>u/").append(autoraResp.replaceAll(" ", "")).append("</b> em ").append(dataResp)
+                                    .append("</div>");
+                            html.append("<div style='color: #1c1c1c; font-size: 11px;'>")
+                                    .append(resp.getTextoDica().replace("\n", "<br>"))
+                                    .append("</div>");
+                            html.append("</div>");
+                        }
+                    }
+                    html.append("<br>");
+                }
+            }
+            html.append("</body></html>");
+            VerMural.setText(html.toString());
+            VerMural.setCaretPosition(0);
+        } catch (Exception e) {
+            VerMural.setText("<html><body>Erro ao carregar o fórum.</body></html>");
+        }
     }
 
     /**
@@ -121,8 +224,8 @@ public class FrVerComunidadeMural extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-    this.dispose(); 
-        
+        this.dispose();
+
         if (this.telaAnterior != null) {
             this.telaAnterior.setVisible(true);
         }        // TODO add your handling code here:

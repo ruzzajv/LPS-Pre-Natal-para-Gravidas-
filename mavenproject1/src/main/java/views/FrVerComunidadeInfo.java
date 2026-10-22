@@ -4,13 +4,13 @@ package views;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrVerComunidadeInfo extends javax.swing.JFrame {
-        private javax.swing.JFrame telaAnterior;
+
+    private javax.swing.JFrame telaAnterior;
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
@@ -22,6 +22,50 @@ public class FrVerComunidadeInfo extends javax.swing.JFrame {
      */
     public FrVerComunidadeInfo() {
         initComponents();
+        setLocationRelativeTo(null);
+
+        // Ativa o suporte a HTML e CSS no painel
+        VerComunidade.setContentType("text/html");
+        VerComunidade.setEditable(false);
+
+        try {
+            java.util.List<entidades.Informacoes> lista = new controller.ComunidadeController().listarInformacoes();
+            StringBuilder html = new StringBuilder();
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+
+            html.append("<html><body style='font-family: Tahoma, sans-serif; background-color: #eaeded; margin: 10px; padding: 0;'>");
+
+            for (entidades.Informacoes i : lista) {
+                String dataStr = sdf.format(i.getDataPublicacao());
+
+                // Card oficial com borda azul lateral
+                html.append("<div style='background-color: #ffffff; border-left: 5px solid #6666ff; border-radius: 4px; margin-bottom: 12px; padding: 12px; border-top: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;'>");
+
+                // Título da Informação
+                html.append("<div style='color: #333399; font-size: 14px; font-weight: bold; margin-bottom: 4px;'>")
+                        .append(i.getTituloAviso())
+                        .append("</div>");
+
+                // Data de publicação
+                html.append("<div style='color: #888888; font-size: 9px; margin-bottom: 10px;'>")
+                        .append("Publicado em ").append(dataStr)
+                        .append("</div>");
+
+                // Conteúdo Técnico
+                html.append("<div style='color: #333333; font-size: 12px; line-height: 1.5;'>")
+                        .append(i.getConteudoTecnico().replace("\n", "<br>"))
+                        .append("</div>");
+
+                html.append("</div>");
+            }
+
+            html.append("</body></html>");
+            VerComunidade.setText(html.toString());
+            VerComunidade.setCaretPosition(0);
+
+        } catch (Exception e) {
+            VerComunidade.setText("<html><body>Erro ao carregar informações.</body></html>");
+        }
     }
 
     /**
@@ -120,8 +164,8 @@ public class FrVerComunidadeInfo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-    this.dispose();
-        
+        this.dispose();
+
         if (this.telaAnterior != null) {
             this.telaAnterior.setVisible(true);
         }    // TODO add your handling code here:

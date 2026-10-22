@@ -5,18 +5,19 @@ package views;
  * @author jruza
  */
 public class LoginV2 extends javax.swing.JFrame {
-        // Método para limpar os campos de texto e senha
+
     public void limparCampos() {
         txtUsuario.setText("");
         txtSenha.setText("");
-        txtUsuario.requestFocus(); // Deixa o cursor piscando no campo de usuário
+        txtUsuario.requestFocus();
     }
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginV2.class.getName());
-        private javax.swing.JFrame telaAnterior;
+    private javax.swing.JFrame telaAnterior;
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
     }
+
     /**
      * Creates new form LoginV2
      */
@@ -131,12 +132,12 @@ public class LoginV2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
-controller.LoginController loginCtrl = new controller.LoginController();
-    
-    String usuario = txtUsuario.getText();
-    String senha = txtSenha.getText(); 
-    
-    loginCtrl.verificarLogin(usuario, senha, this);        // TODO add your handling code here:
+        controller.LoginController loginCtrl = new controller.LoginController();
+
+        String usuario = txtUsuario.getText();
+        String senha = txtSenha.getText();
+
+        loginCtrl.verificarLogin(usuario, senha, this);        
     }//GEN-LAST:event_btnVerificarActionPerformed
 
     /**
