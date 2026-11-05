@@ -60,7 +60,6 @@ public class ProntuarioController {
         Prontuario prontuario = dao.buscarPorCpfPaciente(cpfPaciente);
         
         if (prontuario != null) {
-            // 2. Atualiza os atributos com os dados vindos da tela
             prontuario.setTipoSanguineo(tipoSanguineo);
             prontuario.setAlergias(alergias);
             prontuario.setMedicamentos(medicamentos);
@@ -79,20 +78,16 @@ public class ProntuarioController {
             throw new Exception("CPF da paciente não informado.");
         }
 
-        // 1. Busca o prontuário atual
         entidades.Prontuario prontuario = dao.buscarPorCpfPaciente(cpfPaciente);
         
         if (prontuario != null) {
-            // 2. Pega o que já estava escrito no campo circulado de verde
             String historicoAtual = prontuario.getObservacoes1();
             if (historicoAtual == null) {
                 historicoAtual = "";
             }
             
-            // 3. Junta o texto antigo com o novo exame (adicionando uma quebra de linha \n)
             String novoHistorico = historicoAtual + "\n- EXAME: " + resumoExame;
             
-            // 4. Salva a alteração
             prontuario.setObservacoes1(novoHistorico.trim());
             dao.editar(prontuario);
         } else {

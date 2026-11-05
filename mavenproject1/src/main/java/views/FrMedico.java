@@ -6,13 +6,13 @@ import controller.UsuarioController;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrMedico extends javax.swing.JFrame {
-        private javax.swing.JFrame telaAnterior;
+
+    private javax.swing.JFrame telaAnterior;
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
@@ -26,8 +26,6 @@ public class FrMedico extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -115,7 +113,7 @@ public class FrMedico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVizualizarAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVizualizarAgendaActionPerformed
-FrAgenda telaAgenda = new FrAgenda();
+        FrAgenda telaAgenda = new FrAgenda();
         telaAgenda.setTelaAnterior(this);
         telaAgenda.setLocationRelativeTo(null);
         telaAgenda.setVisible(true);
@@ -123,46 +121,52 @@ FrAgenda telaAgenda = new FrAgenda();
     }//GEN-LAST:event_btnVizualizarAgendaActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-this.dispose();
-        
-        
+        this.dispose();
+
         views.LoginV2 telaLogin = new views.LoginV2();
         telaLogin.setLocationRelativeTo(null);
         telaLogin.setVisible(true);    // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnRegistrarExamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarExamesActionPerformed
-FrExame telaRegistrarExame = new FrExame(); 
-        telaRegistrarExame.setTelaAnterior(this);
-        telaRegistrarExame.setLocationRelativeTo(null);
-        telaRegistrarExame.setVisible(true);
-        this.setVisible(false);        // TODO add your handling code here:
+        String cpfDigitado = javax.swing.JOptionPane.showInputDialog(this,
+                "Digite o CPF da paciente para registrar o exame:",
+                "Registrar Exame",
+                javax.swing.JOptionPane.QUESTION_MESSAGE);
+
+        if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
+
+            FrExame telaRegistrarExame = new FrExame(cpfDigitado.trim());
+            telaRegistrarExame.setTelaAnterior(this);
+            telaRegistrarExame.setLocationRelativeTo(null);
+            telaRegistrarExame.setVisible(true);
+            this.setVisible(false);
+        }  
     }//GEN-LAST:event_btnRegistrarExamesActionPerformed
 
     private void btnAcessarPronturariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarPronturariosActionPerformed
-String cpfDigitado = javax.swing.JOptionPane.showInputDialog(this, 
-        "Digite o CPF da paciente:", 
-        "Buscar Prontuário", 
-        javax.swing.JOptionPane.QUESTION_MESSAGE);
+        String cpfDigitado = javax.swing.JOptionPane.showInputDialog(this,
+                "Digite o CPF da paciente:",
+                "Buscar Prontuário",
+                javax.swing.JOptionPane.QUESTION_MESSAGE);
 
-    if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
-        try {
-            // 2. Verifica se a paciente existe no banco (opcional, mas recomendado)
-            UsuarioController controller = new UsuarioController();
-            entidades.Usuario paciente = controller.buscarPorCpf(cpfDigitado.trim());
-            
-           
-            FrProntuario telaProntuario = new FrProntuario(paciente.getCpf());
-            telaProntuario.setTelaAnterior(this);
-            telaProntuario.setLocationRelativeTo(null); // Centraliza a tela
-            telaProntuario.setVisible(true);
-            this.dispose();
-            
-        } catch (Exception ex) {
-            // Se o CPF não existir, avisa o médico
-            javax.swing.JOptionPane.showMessageDialog(this, "Paciente não encontrada: " + ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
-    }    // TODO add your handling code here:
+        if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
+            try {
+                // 2. Verifica se a paciente existe no banco (opcional, mas recomendado)
+                UsuarioController controller = new UsuarioController();
+                entidades.Usuario paciente = controller.buscarPorCpf(cpfDigitado.trim());
+
+                FrProntuario telaProntuario = new FrProntuario(paciente.getCpf());
+                telaProntuario.setTelaAnterior(this);
+                telaProntuario.setLocationRelativeTo(null); // Centraliza a tela
+                telaProntuario.setVisible(true);
+                this.dispose();
+
+            } catch (Exception ex) {
+                // Se o CPF não existir, avisa o médico
+                javax.swing.JOptionPane.showMessageDialog(this, "Paciente não encontrada: " + ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+        }    // TODO add your handling code here:
     }//GEN-LAST:event_btnAcessarPronturariosActionPerformed
 
     /**

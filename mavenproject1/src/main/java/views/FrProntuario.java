@@ -45,13 +45,10 @@ public class FrProntuario extends javax.swing.JFrame {
 
     private void carregarDadosProntuario() {
         try {
-            // Instancia o controller responsável pelo Prontuário
             controller.ProntuarioController controller = new controller.ProntuarioController();
 
-            // Busca o prontuário no banco de dados usando o CPF da paciente
             entidades.Prontuario p = controller.buscarPorCpfPaciente(this.cpfPacienteAtual);
 
-            // Se encontrou um prontuário já cadastrado, preenche os campos da tela
             if (p != null) {
                 txtTipoSanguineo.setText(p.getTipoSanguineo());
                 txtAlergias.setText(p.getAlergias());
@@ -59,17 +56,14 @@ public class FrProntuario extends javax.swing.JFrame {
                 txtCondicoesPreExistentes.setText(p.getCondicoesPreExistentes());
                 txtObservacoes.setText(p.getObservacoes());
 
-                // Na sua tela tem 2 campos de observação. Caso a entidade tenha um segundo campo, use:
-                // txtObservacoes1.setText(p.getObservacoes1());
-                // Se o prontuário já existe, desabilitamos o botão CRIAR e deixamos apenas EDITAR/SALVAR
+                txtObservacoes1.setText(p.getObservacoes1());
                 btnCriarProntuario.setEnabled(false);
                 btnSalvarProntuario.setEnabled(true);
             } else {
-                // Se retornou null, a paciente ainda não tem prontuário.
-                // Limpamos os campos e deixamos o botão CRIAR habilitado.
+             
                 limparCamposProntuario();
                 btnCriarProntuario.setEnabled(true);
-                btnSalvarProntuario.setEnabled(false); // Só salva depois de criar
+                btnSalvarProntuario.setEnabled(false);
             }
 
         } catch (Exception e) {
@@ -80,7 +74,7 @@ public class FrProntuario extends javax.swing.JFrame {
         }
     }
 
-    // Método auxiliar para garantir que a tela fique limpa para um novo cadastro
+    
     private void limparCamposProntuario() {
         txtTipoSanguineo.setText("");
         txtAlergias.setText("");
@@ -303,7 +297,7 @@ public class FrProntuario extends javax.swing.JFrame {
         try {
             controller.ProntuarioController controller = new controller.ProntuarioController();
 
-            // Passa os dados da tela para o Controller
+          
             controller.cadastrar(
                     this.cpfPacienteAtual,
                     txtTipoSanguineo.getText(),
@@ -316,10 +310,10 @@ public class FrProntuario extends javax.swing.JFrame {
 
             javax.swing.JOptionPane.showMessageDialog(this, "Prontuário criado com sucesso!");
 
-            // Após criar, desabilita o botão criar e habilita a edição
+          
             btnCriarProntuario.setEnabled(false);
             btnSalvarProntuario.setEnabled(true);
-            habilitarCamposProntuario(false); // Trava os campos
+            habilitarCamposProntuario(false); 
 
         } catch (Exception ex) {
             javax.swing.JOptionPane.showMessageDialog(this, "Erro ao criar prontuário: " + ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
@@ -343,7 +337,7 @@ public class FrProntuario extends javax.swing.JFrame {
 try {
         controller.ProntuarioController controller = new controller.ProntuarioController();
         
-        // Chama o método atualizar do Controller (usando merge no DAO)
+
         controller.atualizar(
             this.cpfPacienteAtual,
             txtTipoSanguineo.getText(),
@@ -355,7 +349,7 @@ try {
         );
         
         javax.swing.JOptionPane.showMessageDialog(this, "Prontuário atualizado com sucesso!");
-        habilitarCamposProntuario(false); // Trava os campos novamente após salvar
+        habilitarCamposProntuario(false); 
         
     } catch (Exception ex) {
         javax.swing.JOptionPane.showMessageDialog(this, "Erro ao atualizar: " + ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);

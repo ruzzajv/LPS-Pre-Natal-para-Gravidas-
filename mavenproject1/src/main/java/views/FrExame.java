@@ -12,6 +12,7 @@ package views;
  */
 public class FrExame extends javax.swing.JFrame {
         private javax.swing.JFrame telaAnterior;
+        private String cpfPacienteAtual;
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
@@ -20,6 +21,11 @@ public class FrExame extends javax.swing.JFrame {
      * Creates new form FrCadGerente
      */
     public FrExame() {
+        initComponents();
+    }
+    
+    public FrExame(String cpfPaciente) {
+        this.cpfPacienteAtual = cpfPaciente;
         initComponents();
     }
 
@@ -184,8 +190,21 @@ this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnImprimirActionPerformed
+try {
+        String tipo = txtTipo.getText();
+        String convenio = TxtConvenio.getText();
+        String obsExame = Txtobservacoes.getText(); 
+
+        String resumoLinhaUnica = tipo + " | Convênio: " + convenio + " | Obs: " + obsExame;
+
+        controller.ProntuarioController controller = new controller.ProntuarioController();
+        controller.adicionarExameAoProntuario(this.cpfPacienteAtual, resumoLinhaUnica);
+        
+        javax.swing.JOptionPane.showMessageDialog(this, "Exame salvo e anexado ao prontuário com sucesso!");
+        
+    } catch (Exception ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }    }//GEN-LAST:event_btnImprimirActionPerformed
 
     /**
      * @param args the command line arguments
