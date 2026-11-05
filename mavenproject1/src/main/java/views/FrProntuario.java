@@ -1,15 +1,17 @@
 package views;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author CAMPUSRP-LAB\09816655608
  */
 public class FrProntuario extends javax.swing.JFrame {
-        private javax.swing.JFrame telaAnterior;
+
+    private javax.swing.JFrame telaAnterior;
+    private String cpfPacienteAtual;
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
@@ -20,7 +22,72 @@ public class FrProntuario extends javax.swing.JFrame {
      * Creates new form FrProntuario
      */
     public FrProntuario() {
+
         initComponents();
+
+    }
+
+    public FrProntuario(String cpfPaciente) {
+        this.cpfPacienteAtual = cpfPaciente;
+        initComponents();
+
+        carregarDadosProntuario();
+    }
+
+    private void habilitarCamposProntuario(boolean habilitar) {
+        txtTipoSanguineo.setEnabled(habilitar);
+        txtAlergias.setEnabled(habilitar);
+        txtMedicamentos.setEnabled(habilitar);
+        txtCondicoesPreExistentes.setEnabled(habilitar);
+        txtObservacoes.setEnabled(habilitar);
+        txtObservacoes1.setEnabled(habilitar);
+    }
+
+    private void carregarDadosProntuario() {
+        try {
+            // Instancia o controller responsável pelo Prontuário
+            controller.ProntuarioController controller = new controller.ProntuarioController();
+
+            // Busca o prontuário no banco de dados usando o CPF da paciente
+            entidades.Prontuario p = controller.buscarPorCpfPaciente(this.cpfPacienteAtual);
+
+            // Se encontrou um prontuário já cadastrado, preenche os campos da tela
+            if (p != null) {
+                txtTipoSanguineo.setText(p.getTipoSanguineo());
+                txtAlergias.setText(p.getAlergias());
+                txtMedicamentos.setText(p.getMedicamentos());
+                txtCondicoesPreExistentes.setText(p.getCondicoesPreExistentes());
+                txtObservacoes.setText(p.getObservacoes());
+
+                // Na sua tela tem 2 campos de observação. Caso a entidade tenha um segundo campo, use:
+                // txtObservacoes1.setText(p.getObservacoes1());
+                // Se o prontuário já existe, desabilitamos o botão CRIAR e deixamos apenas EDITAR/SALVAR
+                btnCriarProntuario.setEnabled(false);
+                btnSalvarProntuario.setEnabled(true);
+            } else {
+                // Se retornou null, a paciente ainda não tem prontuário.
+                // Limpamos os campos e deixamos o botão CRIAR habilitado.
+                limparCamposProntuario();
+                btnCriarProntuario.setEnabled(true);
+                btnSalvarProntuario.setEnabled(false); // Só salva depois de criar
+            }
+
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Aviso: " + e.getMessage(),
+                    "Informação",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    // Método auxiliar para garantir que a tela fique limpa para um novo cadastro
+    private void limparCamposProntuario() {
+        txtTipoSanguineo.setText("");
+        txtAlergias.setText("");
+        txtMedicamentos.setText("");
+        txtCondicoesPreExistentes.setText("");
+        txtObservacoes.setText("");
+        txtObservacoes1.setText("");
     }
 
     /**
@@ -52,9 +119,7 @@ public class FrProntuario extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         btnCriarProntuario = new javax.swing.JButton();
         btnEnviar = new javax.swing.JButton();
-        btnApagarProntuario = new javax.swing.JButton();
         btnSalvarProntuario = new javax.swing.JButton();
-        btnLimparProntuario = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -155,29 +220,23 @@ public class FrProntuario extends javax.swing.JFrame {
         btnCriarProntuario.addActionListener(this::btnCriarProntuarioActionPerformed);
 
         btnEnviar.setText("EDITAR");
-
-        btnApagarProntuario.setText("APAGAR");
+        btnEnviar.addActionListener(this::btnEnviarActionPerformed);
 
         btnSalvarProntuario.setText("SALVAR");
-
-        btnLimparProntuario.setText("LIMPAR");
+        btnSalvarProntuario.addActionListener(this::btnSalvarProntuarioActionPerformed);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(23, 23, 23)
                 .addComponent(btnCriarProntuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnEnviar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnApagarProntuario)
-                .addGap(18, 18, 18)
+                .addGap(83, 83, 83)
                 .addComponent(btnSalvarProntuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLimparProntuario)
-                .addGap(100, 100, 100))
+                .addGap(128, 128, 128))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,9 +245,7 @@ public class FrProntuario extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCriarProntuario)
                     .addComponent(btnEnviar)
-                    .addComponent(btnApagarProntuario)
-                    .addComponent(btnSalvarProntuario)
-                    .addComponent(btnLimparProntuario))
+                    .addComponent(btnSalvarProntuario))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -243,16 +300,67 @@ public class FrProntuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCriarProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarProntuarioActionPerformed
-        // TODO add your handling code here:
+        try {
+            controller.ProntuarioController controller = new controller.ProntuarioController();
+
+            // Passa os dados da tela para o Controller
+            controller.cadastrar(
+                    this.cpfPacienteAtual,
+                    txtTipoSanguineo.getText(),
+                    txtAlergias.getText(),
+                    txtMedicamentos.getText(),
+                    txtCondicoesPreExistentes.getText(),
+                    txtObservacoes.getText(),
+                    txtObservacoes1.getText()
+            );
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Prontuário criado com sucesso!");
+
+            // Após criar, desabilita o botão criar e habilita a edição
+            btnCriarProntuario.setEnabled(false);
+            btnSalvarProntuario.setEnabled(true);
+            habilitarCamposProntuario(false); // Trava os campos
+
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao criar prontuário: " + ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_btnCriarProntuarioActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-    this.dispose(); 
-        
+        this.dispose();
+
         if (this.telaAnterior != null) {
             this.telaAnterior.setVisible(true);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        habilitarCamposProntuario(true);
+        javax.swing.JOptionPane.showMessageDialog(this, "Campos liberados para edição.");        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void btnSalvarProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarProntuarioActionPerformed
+try {
+        controller.ProntuarioController controller = new controller.ProntuarioController();
+        
+        // Chama o método atualizar do Controller (usando merge no DAO)
+        controller.atualizar(
+            this.cpfPacienteAtual,
+            txtTipoSanguineo.getText(),
+            txtAlergias.getText(),
+            txtMedicamentos.getText(),
+            txtCondicoesPreExistentes.getText(),
+            txtObservacoes.getText(),
+            txtObservacoes1.getText()
+        );
+        
+        javax.swing.JOptionPane.showMessageDialog(this, "Prontuário atualizado com sucesso!");
+        habilitarCamposProntuario(false); // Trava os campos novamente após salvar
+        
+    } catch (Exception ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Erro ao atualizar: " + ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalvarProntuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -280,10 +388,8 @@ public class FrProntuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnApagarProntuario;
     private javax.swing.JButton btnCriarProntuario;
     private javax.swing.JButton btnEnviar;
-    private javax.swing.JButton btnLimparProntuario;
     private javax.swing.JButton btnSalvarProntuario;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;

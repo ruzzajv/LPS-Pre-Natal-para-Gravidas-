@@ -13,7 +13,10 @@ import javax.swing.JOptionPane;
 public class FrCadUsuario extends javax.swing.JFrame {
 
     private javax.swing.JFrame telaAnterior;
+    private String perfilUsuarioLogado;
     private Long idUsuarioEdicao = null;
+    
+    
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
@@ -23,12 +26,41 @@ public class FrCadUsuario extends javax.swing.JFrame {
     /**
      * Creates new form FrCadUsauario
      */
-    public FrCadUsuario() {
+    public FrCadUsuario(String perfilUsuarioLogado) {
+        this.perfilUsuarioLogado = perfilUsuarioLogado;
         initComponents();
+        aplicarPermissoes();
     }
 
+    private void aplicarPermissoes() {
+     
+        btnUsuarioTipoGestante.setVisible(false);
+        btnUsuarioTipoMedico.setVisible(false);
+        btnUsuarioTipoAtendente.setVisible(false);
+        btnUsuarioTipoGerente.setVisible(false);
 
-    private void limparFormulario() {
+        if (this.perfilUsuarioLogado == null) {
+            return;
+        }
+
+     
+        switch (this.perfilUsuarioLogado.toUpperCase()) {
+            case "ATENDENTE":
+          
+                btnUsuarioTipoGestante.setVisible(true);
+                btnUsuarioTipoGestante.setSelected(true); 
+                break;
+                
+            case "GERENTE":
+             
+                btnUsuarioTipoAtendente.setVisible(true);
+                btnUsuarioTipoMedico.setVisible(true);
+                btnUsuarioTipoGerente.setVisible(true);
+                break;
+        }
+    }
+
+   private void limparFormulario() {
         txtNome.setText("");
         txtCpf.setText("");
         txtIdade.setText("");
@@ -38,7 +70,6 @@ public class FrCadUsuario extends javax.swing.JFrame {
         txtContato.setText("");
         txtDataNascimento.setText("");
 
-
         btnUsuarioTipoGestante.setSelected(false);
         btnUsuarioTipoMedico.setSelected(false);
         btnUsuarioTipoAtendente.setSelected(false);
@@ -46,6 +77,9 @@ public class FrCadUsuario extends javax.swing.JFrame {
 
         idUsuarioEdicao = null;
         txtCpf.setEnabled(true);
+        
+        // Re-aplica as seleções padrões com base no perfil
+        aplicarPermissoes();
     }
 
 
@@ -540,7 +574,7 @@ public class FrCadUsuario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrCadUsuario().setVisible(true);
+                new FrCadUsuario("GERENTE").setVisible(true);
             }
         });
     }

@@ -1,5 +1,7 @@
 package views;
 
+import controller.UsuarioController;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -22,7 +24,10 @@ public class FrMedico extends javax.swing.JFrame {
      */
     public FrMedico() {
         initComponents();
+        setLocationRelativeTo(null);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -135,11 +140,29 @@ FrExame telaRegistrarExame = new FrExame();
     }//GEN-LAST:event_btnRegistrarExamesActionPerformed
 
     private void btnAcessarPronturariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarPronturariosActionPerformed
-FrProntuario telaProntuario = new FrProntuario();
-        telaProntuario.setTelaAnterior(this);
-        telaProntuario.setLocationRelativeTo(null);
-        telaProntuario.setVisible(true);
-        this.setVisible(false);        // TODO add your handling code here:
+String cpfDigitado = javax.swing.JOptionPane.showInputDialog(this, 
+        "Digite o CPF da paciente:", 
+        "Buscar Prontuário", 
+        javax.swing.JOptionPane.QUESTION_MESSAGE);
+
+    if (cpfDigitado != null && !cpfDigitado.trim().isEmpty()) {
+        try {
+            // 2. Verifica se a paciente existe no banco (opcional, mas recomendado)
+            UsuarioController controller = new UsuarioController();
+            entidades.Usuario paciente = controller.buscarPorCpf(cpfDigitado.trim());
+            
+           
+            FrProntuario telaProntuario = new FrProntuario(paciente.getCpf());
+            telaProntuario.setTelaAnterior(this);
+            telaProntuario.setLocationRelativeTo(null); // Centraliza a tela
+            telaProntuario.setVisible(true);
+            this.dispose();
+            
+        } catch (Exception ex) {
+            // Se o CPF não existir, avisa o médico
+            javax.swing.JOptionPane.showMessageDialog(this, "Paciente não encontrada: " + ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }    // TODO add your handling code here:
     }//GEN-LAST:event_btnAcessarPronturariosActionPerformed
 
     /**

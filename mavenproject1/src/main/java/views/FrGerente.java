@@ -36,7 +36,6 @@ public class FrGerente extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        btnCadastrarMedico = new javax.swing.JButton();
         btnCadastrarAtendente = new javax.swing.JButton();
         btnVizualizarExtrato = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -48,10 +47,7 @@ public class FrGerente extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 255));
 
-        btnCadastrarMedico.setText("CADASTRAR MEDICO");
-        btnCadastrarMedico.addActionListener(this::btnCadastrarMedicoActionPerformed);
-
-        btnCadastrarAtendente.setText("CADASTRAR ATENDENTE");
+        btnCadastrarAtendente.setText("CADASTRAR DE FUNCIONARIOS");
         btnCadastrarAtendente.addActionListener(this::btnCadastrarAtendenteActionPerformed);
 
         btnVizualizarExtrato.setText("VIZUALIZAR EXTRATO");
@@ -65,16 +61,13 @@ public class FrGerente extends javax.swing.JFrame {
                 .addGap(70, 70, 70)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCadastrarAtendente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCadastrarMedico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnVizualizarExtrato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(btnCadastrarMedico)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(72, 72, 72)
                 .addComponent(btnCadastrarAtendente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnVizualizarExtrato)
@@ -100,7 +93,7 @@ public class FrGerente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,18 +128,8 @@ public class FrGerente extends javax.swing.JFrame {
         telaLogin.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void btnCadastrarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarMedicoActionPerformed
-        FrCadUsuario telaCadastro = new FrCadUsuario();
-        telaCadastro.setTelaAnterior(this);
-        telaCadastro.pack();
-        telaCadastro.setLocationRelativeTo(null);
-        telaCadastro.setResizable(false);
-        telaCadastro.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnCadastrarMedicoActionPerformed
-
     private void btnCadastrarAtendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarAtendenteActionPerformed
-        FrCadUsuario telaCadastro = new FrCadUsuario();
+        FrCadUsuario telaCadastro = new FrCadUsuario("GERENTE");
 
         telaCadastro.setTelaAnterior(this);
         telaCadastro.setTelaAnterior(this);
@@ -193,7 +176,6 @@ public class FrGerente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrarAtendente;
-    private javax.swing.JButton btnCadastrarMedico;
     private javax.swing.JButton btnVizualizarExtrato;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;

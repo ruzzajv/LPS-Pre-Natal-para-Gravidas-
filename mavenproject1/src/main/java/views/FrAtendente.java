@@ -148,7 +148,7 @@ public class FrAtendente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGerarPagamentoActionPerformed
 
     private void btnCadastrarGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarGestanteActionPerformed
-    FrCadUsuario telaCadastro = new FrCadUsuario();
+    FrCadUsuario telaCadastro = new FrCadUsuario("ATENDENTE");
     telaCadastro.setTelaAnterior(this);
     telaCadastro.pack();
     telaCadastro.setLocationRelativeTo(null);
