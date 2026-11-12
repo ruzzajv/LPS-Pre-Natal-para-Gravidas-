@@ -120,6 +120,7 @@ public class FrGestante extends javax.swing.JFrame {
 
     private void btnEntrarComunidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarComunidadeActionPerformed
         views.FrComunidade telaComunidade = new views.FrComunidade();
+        telaComunidade.setTipoUsuario("GESTANTE");
         telaComunidade.setTelaAnterior(this);
         telaComunidade.setLocationRelativeTo(null);
         telaComunidade.setVisible(true);

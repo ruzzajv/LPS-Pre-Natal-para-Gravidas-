@@ -106,16 +106,12 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="txtTema" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" alignment="0" pref="458" max="32767" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="btnCiarPost" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                      <Component id="BtnEditarPost" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="BtnApagarPost" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="32" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Component id="btnSalvarPost" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                                       <Component id="btnLimparPost" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -137,8 +133,6 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnCiarPost" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="BtnEditarPost" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="BtnApagarPost" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnSalvarPost" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnLimparPost" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -168,18 +162,8 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="CRIAR"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="BtnEditarPost">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="EDITAR"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="BtnApagarPost">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="APAGAR"/>
-              </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnApagarPostActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCiarPostActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnSalvarPost">
@@ -194,6 +178,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="LIMPAR"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimparPostActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>

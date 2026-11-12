@@ -14,10 +14,15 @@ public class FrComunidade extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrComunidade.class.getName());
     private javax.swing.JFrame telaAnterior;
 
+    private String tipoUsuarioAtual;
+
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
     }
-
+    
+    public void setTipoUsuario(String tipo) {
+        this.tipoUsuarioAtual = tipo;
+    }
     /**
      * Creates new form FrComunidade
      */
@@ -138,7 +143,11 @@ public class FrComunidade extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarNaAbaDeInformacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarNaAbaDeInformacoesActionPerformed
-views.FrComunidadeInfo telaInfo = new views.FrComunidadeInfo();
+        if ("GESTANTE".equalsIgnoreCase(tipoUsuarioAtual)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Acesso Negado! Apenas Atendentes podem cadastrar informações.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return; 
+        }
+        views.FrComunidadeInfo telaInfo = new views.FrComunidadeInfo();
         telaInfo.setTelaAnterior(this);
         telaInfo.setLocationRelativeTo(null);
         telaInfo.setVisible(true);
@@ -147,7 +156,14 @@ views.FrComunidadeInfo telaInfo = new views.FrComunidadeInfo();
     }//GEN-LAST:event_btnEntrarNaAbaDeInformacoesActionPerformed
 
     private void btnEntrarNoForumDeApoioDasGestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarNoForumDeApoioDasGestanteActionPerformed
-views.FrComunidadeMural telaForum = new views.FrComunidadeMural();
+        // COLE ESTE BLOCO:
+        if ("ATENDENTE".equalsIgnoreCase(tipoUsuarioAtual)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Acesso Negado! Apenas Gestantes podem criar tópicos.", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return; 
+        }
+        
+        // (Mantenha aqui embaixo o código que você já tinha para abrir a tela)
+        views.FrComunidadeMural telaForum = new views.FrComunidadeMural();
         telaForum.setTelaAnterior(this);
         telaForum.setLocationRelativeTo(null);
         telaForum.setVisible(true);

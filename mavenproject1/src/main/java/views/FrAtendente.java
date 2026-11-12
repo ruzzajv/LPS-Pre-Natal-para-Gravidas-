@@ -160,6 +160,7 @@ public class FrAtendente extends javax.swing.JFrame {
 
     private void btnGerenciarComunidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarComunidadeActionPerformed
         FrComunidade telaComunidade = new FrComunidade();
+        telaComunidade.setTipoUsuario("ATENDENTE");
         telaComunidade.setTelaAnterior(this);
         telaComunidade.setLocationRelativeTo(null);
         telaComunidade.setVisible(true);

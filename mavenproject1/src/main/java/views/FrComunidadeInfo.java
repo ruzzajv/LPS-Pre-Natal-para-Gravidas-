@@ -11,6 +11,7 @@ package views;
 public class FrComunidadeInfo extends javax.swing.JFrame {
 
     private javax.swing.JFrame telaAnterior;
+    private Long idInfoEmEdicao = null; // A VARIÁVEL DEVE FICAR AQUI FORA!
 
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
@@ -20,12 +21,53 @@ public class FrComunidadeInfo extends javax.swing.JFrame {
     /**
      * Creates new form FrComunidade
      */
-    public FrComunidadeInfo() {
+public FrComunidadeInfo() {
         initComponents();
         setLocationRelativeTo(null);
+        
+        // Transforma o painel num visualizador HTML interativo (Igual ao Mural)
+        painelDePosts.setContentType("text/html");
         painelDePosts.setEditable(false);
+
+        painelDePosts.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
+            @Override
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent e) {
+                if (e.getEventType() == javax.swing.event.HyperlinkEvent.EventType.ACTIVATED) {
+                    processarCliqueAcao(e.getDescription());
+                }
+            }
+        });
+
         habilitarCampos(false);
         carregarInformacoes();
+    }
+    private void processarCliqueAcao(String comando) {
+        try {
+            if (comando.startsWith("edit_")) {
+                Long id = Long.parseLong(comando.replace("edit_", ""));
+
+                // Carrega a informação para edição (Ajuste o nome do seu DAO/Controller se necessário)
+                // Exemplo: entidades.Informacoes info = new dao.InformacoesDAO().buscar(id);
+                // this.idInfoEmEdicao = info.getId(); // Ajuste o getter do ID
+                // txtTema.setText(info.getTema());
+                // txtTitulo.setText(info.getTituloAviso());
+                // txtTextoPost.setText(info.getConteudoTecnico());
+                
+                habilitarCampos(true);
+
+            } else if (comando.startsWith("del_")) {
+                Long id = Long.parseLong(comando.replace("del_", ""));
+
+                int resposta = javax.swing.JOptionPane.showConfirmDialog(this, "Tem certeza que deseja APAGAR esta informação?", "Atenção", javax.swing.JOptionPane.YES_NO_OPTION);
+                if (resposta == javax.swing.JOptionPane.YES_OPTION) {
+                    // new dao.InformacoesDAO().excluir(id); // Ajuste para o seu DAO
+                    javax.swing.JOptionPane.showMessageDialog(this, "Informação apagada com sucesso!");
+                    carregarInformacoes();
+                }
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao processar ação: " + e.getMessage());
+        }
     }
 
     /**
@@ -41,8 +83,6 @@ public class FrComunidadeInfo extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         btnCiarPost = new javax.swing.JButton();
-        BtnEditarPost = new javax.swing.JButton();
-        BtnApagarPost = new javax.swing.JButton();
         btnSalvarPost = new javax.swing.JButton();
         btnLimparPost = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -65,16 +105,13 @@ public class FrComunidadeInfo extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
         btnCiarPost.setText("CRIAR");
-
-        BtnEditarPost.setText("EDITAR");
-
-        BtnApagarPost.setText("APAGAR");
-        BtnApagarPost.addActionListener(this::BtnApagarPostActionPerformed);
+        btnCiarPost.addActionListener(this::btnCiarPostActionPerformed);
 
         btnSalvarPost.setText("SALVAR");
         btnSalvarPost.addActionListener(this::btnSalvarPostActionPerformed);
 
         btnLimparPost.setText("LIMPAR");
+        btnLimparPost.addActionListener(this::btnLimparPostActionPerformed);
 
         jLabel2.setText("TITULO:");
 
@@ -110,16 +147,12 @@ public class FrComunidadeInfo extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtTema))
-                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(btnCiarPost)
-                                .addGap(26, 26, 26)
-                                .addComponent(BtnEditarPost)
-                                .addGap(18, 18, 18)
-                                .addComponent(BtnApagarPost)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnSalvarPost)
-                                .addGap(18, 18, 18)
+                                .addGap(114, 114, 114)
                                 .addComponent(btnLimparPost))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(82, 82, 82)
@@ -134,8 +167,6 @@ public class FrComunidadeInfo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCiarPost)
-                    .addComponent(BtnEditarPost)
-                    .addComponent(BtnApagarPost)
                     .addComponent(btnSalvarPost)
                     .addComponent(btnLimparPost))
                 .addGap(35, 35, 35)
@@ -201,10 +232,6 @@ public class FrComunidadeInfo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnApagarPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnApagarPostActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnApagarPostActionPerformed
-
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.dispose();
 
@@ -214,18 +241,33 @@ public class FrComunidadeInfo extends javax.swing.JFrame {
 
     private void btnSalvarPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarPostActionPerformed
         try {
-
+            // Nota: Se this.idInfoEmEdicao != null, seu controller precisará saber disso para dar UPDATE no banco em vez de INSERT.
             new controller.ComunidadeController().salvarPostInformacao(txtTema.getText(), txtTitulo.getText(), txtTextoPost.getText());
 
             javax.swing.JOptionPane.showMessageDialog(this, "Informação publicada com sucesso!");
+            
             limparCampos();
             habilitarCampos(false);
-            carregarInformacoes();
+            this.idInfoEmEdicao = null; // Limpa o estado de edição
+            carregarInformacoes(); // Recarrega os posts na tela
 
         } catch (Exception ex) {
             javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
+    
     }//GEN-LAST:event_btnSalvarPostActionPerformed
+
+    private void btnCiarPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCiarPostActionPerformed
+        limparCampos();
+        habilitarCampos(true);
+        this.idInfoEmEdicao = null;        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCiarPostActionPerformed
+
+    private void btnLimparPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparPostActionPerformed
+        limparCampos();
+        habilitarCampos(false);
+        this.idInfoEmEdicao = null;        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimparPostActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,19 +275,44 @@ public class FrComunidadeInfo extends javax.swing.JFrame {
     private void carregarInformacoes() {
         try {
             java.util.List<entidades.Informacoes> lista = new controller.ComunidadeController().listarInformacoes();
-            StringBuilder sb = new StringBuilder();
+            StringBuilder html = new StringBuilder();
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-            for (entidades.Informacoes i : lista) {
-                sb.append("Data: ").append(sdf.format(i.getDataPublicacao())).append("\n");
-                sb.append("TÍTULO: ").append(i.getTituloAviso()).append("\n");
+            html.append("<html><body style='font-family: Tahoma, sans-serif; margin: 10px; background-color: #eaeded;'>");
 
-                sb.append(i.getConteudoTecnico()).append("\n");
-                sb.append("--------------------------------------------------\n\n");
+            for (entidades.Informacoes i : lista) {
+                html.append("<div style='background-color: #ffffff; border: 1px solid #cccccc; border-radius: 5px; margin-bottom: 8px; padding: 10px;'>");
+
+                // Cabeçalho (Data e Título)
+                html.append("<div style='color: #787c7e; font-size: 10px; margin-bottom: 5px;'>")
+                    .append("Data: ").append(sdf.format(i.getDataPublicacao()))
+                    .append("</div>");
+                
+                html.append("<div style='color: #1a1a1b; font-size: 14px; font-weight: bold; margin-bottom: 5px;'>")
+                    .append(i.getTituloAviso())
+                    .append("</div>");
+
+                // Corpo do texto
+                html.append("<div style='color: #333333; font-size: 12px; margin-bottom: 8px;'>")
+                    .append(i.getConteudoTecnico().replace("\n", "<br>"))
+                    .append("</div>");
+
+                // Botões de Editar e Apagar - ATENÇÃO: Ajuste "i.getId()" para o nome correto do ID na sua entidade Informacoes
+                html.append("<div>")
+                    //.append("<a href='edit_").append(i.getId()).append("' style='color: #0079d3; text-decoration: none; font-size: 11px; font-weight: bold;'>[ Editar ]</a>")
+                    //.append("&nbsp;&nbsp;&nbsp;")
+                    //.append("<a href='del_").append(i.getId()).append("' style='color: #d93025; text-decoration: none; font-size: 11px; font-weight: bold;'>[ Apagar ]</a>")
+                    .append("</div>");
+
+                html.append("</div>"); // Fecha a caixa branca
             }
 
-            painelDePosts.setText(sb.toString());
+            html.append("</body></html>");
+            painelDePosts.setText(html.toString());
+            painelDePosts.setCaretPosition(0);
+            
         } catch (Exception e) {
+            System.out.println("Erro ao carregar informacoes: " + e.getMessage());
         }
     }
 
@@ -284,8 +351,6 @@ public class FrComunidadeInfo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnApagarPost;
-    private javax.swing.JButton BtnEditarPost;
     private javax.swing.JButton btnCiarPost;
     private javax.swing.JButton btnLimparPost;
     private javax.swing.JButton btnSalvarPost;
