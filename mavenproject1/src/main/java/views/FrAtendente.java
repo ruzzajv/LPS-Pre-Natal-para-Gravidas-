@@ -22,6 +22,7 @@ public class FrAtendente extends javax.swing.JFrame {
      */
     public FrAtendente() {
         initComponents();
+        setLocationRelativeTo(null);
 
     }
 
