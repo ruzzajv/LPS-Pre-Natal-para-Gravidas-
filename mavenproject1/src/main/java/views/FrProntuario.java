@@ -16,25 +16,30 @@ public class FrProntuario extends javax.swing.JFrame {
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
     }
+    
+    public void setCpfPaciente(String cpf) {
+        this.cpfPacienteAtual = cpf;
+        carregarDadosProntuario(); // Busca os dados assim que o CPF é definido
+    }
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrProntuario.class.getName());
 
     /**
      * Creates new form FrProntuario
      */
     public FrProntuario() {
-
         initComponents();
-
+        alternarCampos(false); // Inicia com os campos bloqueados
     }
 
     public FrProntuario(String cpfPaciente) {
         this.cpfPacienteAtual = cpfPaciente;
         initComponents();
-
         carregarDadosProntuario();
     }
 
-    private void habilitarCamposProntuario(boolean habilitar) {
+    // Única função unificada para habilitar ou bloquear todos os campos da tela
+    private void alternarCampos(boolean habilitar) {
         txtTipoSanguineo.setEnabled(habilitar);
         txtAlergias.setEnabled(habilitar);
         txtMedicamentos.setEnabled(habilitar);
@@ -45,26 +50,32 @@ public class FrProntuario extends javax.swing.JFrame {
 
     private void carregarDadosProntuario() {
         try {
-            controller.ProntuarioController controller = new controller.ProntuarioController();
+            if (cpfPacienteAtual == null || cpfPacienteAtual.trim().isEmpty()) {
+                alternarCampos(false);
+                return;
+            }
 
+            controller.ProntuarioController controller = new controller.ProntuarioController();
             entidades.Prontuario p = controller.buscarPorCpfPaciente(this.cpfPacienteAtual);
 
             if (p != null) {
-                txtTipoSanguineo.setText(p.getTipoSanguineo());
-                txtAlergias.setText(p.getAlergias());
-                txtMedicamentos.setText(p.getMedicamentos());
-                txtCondicoesPreExistentes.setText(p.getCondicoesPreExistentes());
-                txtObservacoes.setText(p.getObservacoes());
+                txtTipoSanguineo.setText(p.getTipoSanguineo() != null ? p.getTipoSanguineo() : "");
+                txtAlergias.setText(p.getAlergias() != null ? p.getAlergias() : "");
+                txtMedicamentos.setText(p.getMedicamentos() != null ? p.getMedicamentos() : "");
+                txtCondicoesPreExistentes.setText(p.getCondicoesPreExistentes() != null ? p.getCondicoesPreExistentes() : "");
+                txtObservacoes.setText(p.getObservacoes() != null ? p.getObservacoes() : "");
+                txtObservacoes1.setText(p.getObservacoes1() != null ? p.getObservacoes1() : "");
 
-                txtObservacoes1.setText(p.getObservacoes1());
                 btnCriarProntuario.setEnabled(false);
                 btnSalvarProntuario.setEnabled(true);
             } else {
-             
                 limparCamposProntuario();
                 btnCriarProntuario.setEnabled(true);
                 btnSalvarProntuario.setEnabled(false);
             }
+
+            // Garante que ao carregar, os campos fiquem bloqueados (modo leitura)
+            alternarCampos(false);
 
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this,
@@ -73,7 +84,6 @@ public class FrProntuario extends javax.swing.JFrame {
                     javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
     }
-
     
     private void limparCamposProntuario() {
         txtTipoSanguineo.setText("");
@@ -294,30 +304,17 @@ public class FrProntuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCriarProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarProntuarioActionPerformed
-        try {
-            controller.ProntuarioController controller = new controller.ProntuarioController();
-
-          
-            controller.cadastrar(
-                    this.cpfPacienteAtual,
-                    txtTipoSanguineo.getText(),
-                    txtAlergias.getText(),
-                    txtMedicamentos.getText(),
-                    txtCondicoesPreExistentes.getText(),
-                    txtObservacoes.getText(),
-                    txtObservacoes1.getText()
-            );
-
-            javax.swing.JOptionPane.showMessageDialog(this, "Prontuário criado com sucesso!");
-
-          
-            btnCriarProntuario.setEnabled(false);
-            btnSalvarProntuario.setEnabled(true);
-            habilitarCamposProntuario(false); 
-
-        } catch (Exception ex) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao criar prontuário: " + ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }        // TODO add your handling code here:
+                       
+        // Limpa os campos para um novo cadastro e libera a edição
+        txtTipoSanguineo.setText("");
+        txtAlergias.setText("");
+        txtMedicamentos.setText("");
+        txtCondicoesPreExistentes.setText("");
+        txtObservacoes.setText("");
+        
+        alternarCampos(true); // Libera os campos para digitar
+        javax.swing.JOptionPane.showMessageDialog(this, "Preencha os dados e clique em SALVAR.");
+    
     }//GEN-LAST:event_btnCriarProntuarioActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -329,31 +326,57 @@ public class FrProntuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        habilitarCamposProntuario(true);
-        javax.swing.JOptionPane.showMessageDialog(this, "Campos liberados para edição.");        // TODO add your handling code here:
+        alternarCampos(true); // Libera os campos para alteração
+        javax.swing.JOptionPane.showMessageDialog(this, "Campos liberados para edição. Clique em SALVAR quando terminar.");
+           // TODO add your handling code here:
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void btnSalvarProntuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarProntuarioActionPerformed
-try {
-        controller.ProntuarioController controller = new controller.ProntuarioController();
-        
+        try {
+            if (cpfPacienteAtual == null || cpfPacienteAtual.trim().isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "CPF do paciente não foi informado!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
 
-        controller.atualizar(
-            this.cpfPacienteAtual,
-            txtTipoSanguineo.getText(),
-            txtAlergias.getText(),
-            txtMedicamentos.getText(),
-            txtCondicoesPreExistentes.getText(),
-            txtObservacoes.getText(),
-            txtObservacoes1.getText()
-        );
-        
-        javax.swing.JOptionPane.showMessageDialog(this, "Prontuário atualizado com sucesso!");
-        habilitarCamposProntuario(false); 
-        
-    } catch (Exception ex) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Erro ao atualizar: " + ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
-    }        // TODO add your handling code here:
+            controller.ProntuarioController pc = new controller.ProntuarioController();
+            
+            // Verifica se já existe no banco para decidir se cria ou atualiza
+            entidades.Prontuario p = pc.buscarPorCpfPaciente(cpfPacienteAtual);
+            
+            if (p == null) {
+                // Se não existe, cadastra
+                pc.cadastrar(
+                    cpfPacienteAtual,
+                    txtTipoSanguineo.getText().trim(),
+                    txtAlergias.getText().trim(),
+                    txtMedicamentos.getText().trim(),
+                    txtCondicoesPreExistentes.getText().trim(),
+                    txtObservacoes.getText().trim(),
+                    ""
+                );
+                javax.swing.JOptionPane.showMessageDialog(this, "Prontuário criado com sucesso!");
+            } else {
+                // Se já existe, atualiza
+                pc.atualizar(
+                    cpfPacienteAtual,
+                    txtTipoSanguineo.getText().trim(),
+                    txtAlergias.getText().trim(),
+                    txtMedicamentos.getText().trim(),
+                    txtCondicoesPreExistentes.getText().trim(),
+                    txtObservacoes.getText().trim(),
+                    ""
+                );
+                javax.swing.JOptionPane.showMessageDialog(this, "Prontuário atualizado com sucesso!");
+            }
+            
+            // Após salvar com sucesso, bloqueia os campos novamente (volta para modo leitura)
+            alternarCampos(false);
+            
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    
+    
     }//GEN-LAST:event_btnSalvarProntuarioActionPerformed
 
     /**

@@ -45,6 +45,8 @@ public class FrCredito extends javax.swing.JFrame {
         CheckBox8 = new javax.swing.JCheckBox();
         CheckBox9 = new javax.swing.JCheckBox();
         CheckBox10 = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
         BTNVOLTAR = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,7 +58,7 @@ public class FrCredito extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
-        jLabel2.setText("INSIRA O VALOR: ");
+        jLabel2.setText("VALOR: ");
 
         txtValor.addActionListener(this::txtValorActionPerformed);
 
@@ -85,6 +87,8 @@ public class FrCredito extends javax.swing.JFrame {
 
         CheckBox10.setText("10 VEZES");
 
+        jLabel3.setText("NOME:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -98,21 +102,25 @@ public class FrCredito extends javax.swing.JFrame {
                             .addComponent(CheckBox9)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(CheckBox1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CheckBox2, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(CheckBox3, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(CheckBox4, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(CheckBox5, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(CheckBox6, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(CheckBox7, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CheckBox8, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(CheckBox8, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CheckBox2, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(CheckBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                                    .addComponent(txtValor)))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
+                        .addGap(61, 61, 61)
                         .addComponent(BtnEnviar)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,7 +129,11 @@ public class FrCredito extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(2, 2, 2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(CheckBox1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CheckBox2)
@@ -172,8 +184,8 @@ public class FrCredito extends javax.swing.JFrame {
                         .addGap(17, 17, 17)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -195,7 +207,59 @@ public class FrCredito extends javax.swing.JFrame {
     }//GEN-LAST:event_txtValorActionPerformed
 
     private void BtnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEnviarActionPerformed
-        // TODO add your handling code here:
+    try {
+        // 1. Pega o nome e o valor
+        String nome = txtNome.getText().trim();
+        String valorTexto = txtValor.getText().replace(",", ".").trim();
+        
+        if (nome.isEmpty() || valorTexto.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Preencha o nome e o valor!", "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        double valor = Double.parseDouble(valorTexto);
+        
+        // 2. Descobre quantas parcelas foram selecionadas (CheckBox1 até CheckBox10)
+        int parcelas = 1; // Padrão caso nenhuma esteja marcada
+        
+        if (CheckBox1.isSelected()) parcelas = 1;
+        else if (CheckBox2.isSelected()) parcelas = 2;
+        else if (CheckBox3.isSelected()) parcelas = 3;
+        else if (CheckBox4.isSelected()) parcelas = 4;
+        else if (CheckBox5.isSelected()) parcelas = 5;
+        else if (CheckBox6.isSelected()) parcelas = 6;
+        else if (CheckBox7.isSelected()) parcelas = 7;
+        else if (CheckBox8.isSelected()) parcelas = 8;
+        else if (CheckBox9.isSelected()) parcelas = 9;
+        else if (CheckBox10.isSelected()) parcelas = 10;
+        
+        // 3. Salva no banco usando o CreditoController
+        controller.CreditoController creditoController = new controller.CreditoController();
+        creditoController.registrarPagamentoCredito(nome, valor, parcelas, "Padrao");
+        
+        // 4. Sucesso e limpeza dos campos
+        javax.swing.JOptionPane.showMessageDialog(this, "Pagamento no Crédito de " + nome + " (" + parcelas + "x) registrado com sucesso!");
+        
+        txtNome.setText("");
+        txtValor.setText("");
+        
+        // Desmarca todos os checkboxes
+        CheckBox1.setSelected(false);
+        CheckBox2.setSelected(false);
+        CheckBox3.setSelected(false);
+        CheckBox4.setSelected(false);
+        CheckBox5.setSelected(false);
+        CheckBox6.setSelected(false);
+        CheckBox7.setSelected(false);
+        CheckBox8.setSelected(false);
+        CheckBox9.setSelected(false);
+        CheckBox10.setSelected(false);
+        
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Digite um valor numérico válido.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Erro ao salvar no banco: " + e.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_BtnEnviarActionPerformed
 
     private void CheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBox1ActionPerformed
@@ -255,7 +319,9 @@ public class FrCredito extends javax.swing.JFrame {
     private javax.swing.JPanel btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }

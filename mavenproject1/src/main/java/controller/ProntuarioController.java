@@ -3,10 +3,6 @@ package controller;
 import dao.ProntuarioDAO;
 import entidades.Prontuario;
 
-/**
- *
- * @author jruza
- */
 public class ProntuarioController {
 
     private ProntuarioDAO dao;
@@ -14,13 +10,11 @@ public class ProntuarioController {
     public ProntuarioController() {
         this.dao = new ProntuarioDAO(); 
     }
-
     
     public Prontuario buscarPorCpfPaciente(String cpf) throws Exception {
         if (cpf == null || cpf.trim().isEmpty()) {
-            throw new Exception("CPF da paciente não informado.");
+            throw new Exception("CPF do paciente não informado.");
         }
-        
         return dao.buscarPorCpfPaciente(cpf.trim());
     }
 
@@ -28,12 +22,11 @@ public class ProntuarioController {
                           String medicamentos, String condicoes, String observacoes, String observacoes1) throws Exception {
         
         if (cpfPaciente == null || cpfPaciente.trim().isEmpty()) {
-            throw new Exception("O CPF da paciente é obrigatório para criar o prontuário.");
+            throw new Exception("O CPF do paciente é obrigatório para criar o prontuário.");
         }
 
-
         if (dao.buscarPorCpfPaciente(cpfPaciente) != null) {
-            throw new Exception("Já existe um prontuário cadastrado para esta paciente.");
+            throw new Exception("Já existe um prontuário cadastrado para este paciente.");
         }
 
         Prontuario novoProntuario = new Prontuario();
@@ -48,14 +41,12 @@ public class ProntuarioController {
         dao.salvar(novoProntuario);
     }
 
-
     public void atualizar(String cpfPaciente, String tipoSanguineo, String alergias, 
                           String medicamentos, String condicoes, String observacoes, String observacoes1) throws Exception {
         
         if (cpfPaciente == null || cpfPaciente.trim().isEmpty()) {
-            throw new Exception("O CPF da paciente é obrigatório para atualizar o prontuário.");
+            throw new Exception("O CPF do paciente é obrigatório para atualizar o prontuário.");
         }
-
       
         Prontuario prontuario = dao.buscarPorCpfPaciente(cpfPaciente);
         
@@ -67,18 +58,18 @@ public class ProntuarioController {
             prontuario.setObservacoes(observacoes);
             prontuario.setObservacoes1(observacoes1);
 
-            
             dao.editar(prontuario);
         } else {
             throw new Exception("Não foi possível encontrar o prontuário para atualizar.");
         }
     }
+
     public void adicionarExameAoProntuario(String cpfPaciente, String resumoExame) throws Exception {
         if (cpfPaciente == null || cpfPaciente.trim().isEmpty()) {
-            throw new Exception("CPF da paciente não informado.");
+            throw new Exception("CPF do paciente não informado.");
         }
 
-        entidades.Prontuario prontuario = dao.buscarPorCpfPaciente(cpfPaciente);
+        Prontuario prontuario = dao.buscarPorCpfPaciente(cpfPaciente);
         
         if (prontuario != null) {
             String historicoAtual = prontuario.getObservacoes1();

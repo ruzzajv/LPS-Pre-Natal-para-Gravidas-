@@ -1,5 +1,10 @@
 package views;
-
+import entidades.Pagamento;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.table.DefaultTableModel;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -18,12 +23,63 @@ public class FrExtrato extends javax.swing.JFrame {
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
     }
+    
 
     /**
      * Creates new form FrExtrato
      */
     public FrExtrato() {
         initComponents();
+        carregarHistorico();
+    }
+    
+    private void carregarHistorico() {
+        try {
+            DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+            
+            // Define as colunas (incluindo a de status/parcelas que fizemos antes)
+            modelo.setColumnIdentifiers(new Object[]{"ID", "Nome", "Valor (R$)", "Forma", "Data", "Status / Detalhes"});
+            
+            modelo.setRowCount(0);
+            
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mycompany_mavenproject1_jar_1.0-SNAPSHOTPU");
+            EntityManager em = emf.createEntityManager();
+            
+            // Altere a query para incluir o "ORDER BY p.idPagamento ASC" no final
+            List<Pagamento> lista = em.createQuery("SELECT p FROM Pagamento p ORDER BY p.idPagamento ASC", Pagamento.class).getResultList();
+            em.close();
+            emf.close();
+            
+            // 1. CRIAR O FORMATADOR DE DATA PARA O PADRÃO BRASILEIRO
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            
+            for (Pagamento p : lista) {
+                
+                String statusDetalhes = "Concluído"; 
+                if (p instanceof entidades.Credito) {
+                    entidades.Credito credito = (entidades.Credito) p;
+                    statusDetalhes = credito.getParcelas() + "x (Parcelado)";
+                }
+                
+                // 2. CONVERTER A DATA DO BANCO PARA TEXTO FORMATADO EM PORTUGUÊS
+                String dataFormatada = "";
+                if (p.getDataPagamento() != null) {
+                    dataFormatada = sdf.format(p.getDataPagamento());
+                }
+                
+                modelo.addRow(new Object[]{
+                    p.getIdPagamento(),
+                    p.getNomePaciente(),
+                    String.format("%.2f", p.getValor()),
+                    p.getFormaPagamento(),
+                    dataFormatada, // <--- 3. USAR A DATA FORMATADA AQUI NO LUGAR DA VARIÁVEL PURO 'p.getDataPagamento()'
+                    statusDetalhes 
+                });
+            }
+            
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao carregar o histórico: " + e.getMessage());
+        }
     }
 
     /**
@@ -41,11 +97,6 @@ public class FrExtrato extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         TabelaDoExtrato = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        btnMostrarLucroMensal = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtLucroMensal = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
-        btnGerarRelatorio = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -81,17 +132,6 @@ public class FrExtrato extends javax.swing.JFrame {
         ));
         TabelaDoExtrato.setViewportView(jTable2);
 
-        btnMostrarLucroMensal.setText("MOSTRAR LUCRO MENSAL ");
-
-        txtLucroMensal.setColumns(20);
-        txtLucroMensal.setRows(5);
-        jScrollPane2.setViewportView(txtLucroMensal);
-
-        jLabel2.setFont(new java.awt.Font("Bitstream Charter", 3, 18)); // NOI18N
-        jLabel2.setText("HISTORICO");
-
-        btnGerarRelatorio.setText("GERAR RELATORIO POR ARQUIVO ");
-
         btnVoltar.setText("VOLTAR");
         btnVoltar.addActionListener(this::btnVoltarActionPerformed);
 
@@ -107,19 +147,10 @@ public class FrExtrato extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(72, 72, 72)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnMostrarLucroMensal, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
-                                    .addComponent(btnGerarRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(149, 149, 149)
-                                .addComponent(jLabel2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(137, 137, 137)
                                 .addComponent(jLabel1))
                             .addComponent(btnVoltar))
-                        .addGap(0, 82, Short.MAX_VALUE)))
+                        .addGap(0, 135, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -129,16 +160,7 @@ public class FrExtrato extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(btnMostrarLucroMensal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnGerarRelatorio)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TabelaDoExtrato, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addComponent(TabelaDoExtrato, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -193,16 +215,11 @@ public class FrExtrato extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane TabelaDoExtrato;
-    private javax.swing.JButton btnGerarRelatorio;
-    private javax.swing.JButton btnMostrarLucroMensal;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextArea txtLucroMensal;
     // End of variables declaration//GEN-END:variables
 }

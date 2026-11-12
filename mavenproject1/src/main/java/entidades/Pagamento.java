@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Pagamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,6 +25,9 @@ public class Pagamento implements Serializable {
     private String status;
 
     private String formaPagamento;
+    
+    // Campo de texto livre para o nome (para facilitar a apresentação)
+    private String nomePaciente;
 
     @OneToOne
     @JoinColumn(name = "id_consulta")
@@ -32,13 +36,13 @@ public class Pagamento implements Serializable {
     public Pagamento() {
     }
 
-   
     public void processarPagamento() {}
     public void cancelarCobranca() {}
     public void gerarComprovante() {}
     public void verificarAtraso() {}
 
-   
+    // --- GETTERS E SETTERS ---
+
     public Long getIdPagamento() {
         return idPagamento;
     }
@@ -85,6 +89,14 @@ public class Pagamento implements Serializable {
 
     public void setFormaPagamento(String formaPagamento) {
         this.formaPagamento = formaPagamento;
+    }
+
+    public String getNomePaciente() {
+        return nomePaciente;
+    }
+
+    public void setNomePaciente(String nomePaciente) {
+        this.nomePaciente = nomePaciente;
     }
 
     public Consulta getConsulta() {

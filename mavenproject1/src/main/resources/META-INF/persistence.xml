@@ -15,6 +15,11 @@
         <class>entidades.Mural</class>
         <class>entidades.Informacoes</class>
         <class>entidades.Comunidade</class>
+        <class>entidades.Pix</class>
+        <class>entidades.Dinheiro</class>
+        <class>entidades.Credito</class>
+        <class>entidades.Debito</class>
+        
         <properties>
             <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>      
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pre_natal?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

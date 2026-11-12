@@ -15,7 +15,6 @@ public class FrFormaPagamento extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrFormaPagamento.class.getName());
     private javax.swing.JFrame telaAnterior;
 
-    
     public void setTelaAnterior(javax.swing.JFrame tela) {
         this.telaAnterior = tela;
     }

@@ -12,7 +12,6 @@ public class Prontuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProntuario;
     
-   
     @Column(nullable = false, unique = true)
     private String cpfPaciente; 
 
@@ -35,7 +34,6 @@ public class Prontuario implements Serializable {
     public Prontuario() {
     }
 
-    // Métodos do diagrama UML (geralmente a lógica vai pro Controller, mas pode manter aqui se o professor pedir)
     public void criarProntuario() {}
     public void atualizarProntuario() {}
     public void deletarProntuario() {}

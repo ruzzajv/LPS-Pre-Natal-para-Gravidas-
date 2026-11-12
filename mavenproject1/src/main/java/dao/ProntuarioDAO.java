@@ -11,7 +11,6 @@ public class ProntuarioDAO {
     private static final String PU = "com.mycompany_mavenproject1_jar_1.0-SNAPSHOTPU";
     private EntityManagerFactory emf;
 
-
     public ProntuarioDAO() {
         this.emf = Persistence.createEntityManagerFactory(PU);
     }
